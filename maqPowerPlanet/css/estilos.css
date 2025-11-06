@@ -103,6 +103,7 @@ main section{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-around;
 }
 main section article{
     border: 1px solid black;
@@ -110,15 +111,89 @@ main section article{
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
-    flex-basis: 25%;
+    flex-basis: 20%; /*alto o ancho segun el flex-direction del padre*/
+    position: relative;
+    
+    border-radius: 14px;
+    box-shadow: 0 4px 12px;
+}
+main section article p{
+    color: red;
+}
+/*Si hay algun padre con position relative, el top y left del elemento */
+main section article .badge{
+    position: absolute; /*Uso particular:efectos especiales*/
+    top: 5px;
+    left:5px;
+    background-color: #bd2f6f;
+    color: whitesmoke;
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    width: 40%;
+    z-index: 10; /* profundidad atras/adelant*/
+}
+main section article .nombre{
+    color: blue;
 }
 main section article figure{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     height: 150px;
+    position: relative;
 }
 main section article figure img{
+    border: 1px solid black;
     height: 100%;
+    position: absolute;
+    top: 0px;
 }
-
+main section article p{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100% ;
+}
+main section article .nombre{
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+main section article p .star i{
+    font-size: 10px;
+    color: yellow;
+}
+main section article p .valoracion{
+    font-size: 10px;
+    color: red;
+    margin-right: 3px;
+}
+main section article p .opiniones{
+    font-size: 10px;
+    color: green;
+}
+main section article div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+main section article div .dto{
+    background-color: green;
+    color: black;
+    padding: 2px;
+    border-radius: 7px;
+    font-size: 12px;
+}
+main section article div .precios{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+main section article div .pvr
 footer{
     background-color: black;
     flex-basis: 30%;
@@ -126,6 +201,8 @@ footer{
     flex-direction: row ;   
     flex-wrap: wrap;
 }
+    
+
 footer nav#sociales{
     border:1px solid black;
     flex-basis: 50%;
