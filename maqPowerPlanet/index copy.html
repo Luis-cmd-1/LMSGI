@@ -146,3 +146,26 @@
         </footer>
 </body>
 </html>
+<script>
+    fetch('data/productos.json')
+      .then(response => response.json()))
+      .then(productos => {
+        const contenedor = document.getElementById('catalogo');
+        productos.forEach (producto =>{
+
+        })
+        productos.forEach( => {
+          const card = document.createElement('article');
+        //   card.className = 'producto';
+          tarjeta.innerHTML = 
+          `
+            <p class="badge">Envio gratis</p>
+            <figure>
+                <img src="img/portatil.png" alt=""Producto 1"}" />
+            </figure>
+            <p class= "nombre">${nombre}":</p>
+          `;
+          contenedor.appendChild(tarjeta)
+        })
+      })
+  </script>
