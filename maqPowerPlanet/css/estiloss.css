@@ -282,7 +282,7 @@ footer nav#sociales a { /* estado reposo fotograma */
 footer nav#sociales a:hover {
     /* fecto de transformacion */
     transform: translate(0px, -10px);
-    transform: rotate(360deg);
+    /* transform: rotate(360deg); */
 }
 /* footer nav#sociales a:nth-child(1) {
     margin-left: 30px;
