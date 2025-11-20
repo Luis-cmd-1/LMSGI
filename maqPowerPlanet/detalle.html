@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PowerPlanet</title>
-    <link rel="stylesheet" href="css/estiloss.css">
+    <link rel="stylesheet" href="/MIO/maqPowerPlanet/css/detalles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body>
@@ -28,11 +27,20 @@
             <i class="fa-solid fa-cart-shopping"></i>
             <i class="fa-solid fa-user"></i>
         </div>
-    </header> 
+    </header>
     <main>
-        <h2>Lista de Productos que provienen de la API (BD)</h2>
-        <section id="catalogo">
-            
+        <nav>
+            - Informatica 
+        </nav>
+        <section id="producto">
+            <div id="imagen">
+                <figure>
+                    <img src="img/chuwi_corebook_x_gris_1_l.png" alt="">
+                </figure>
+            </div>
+            <div>
+                <p>sdjhsdjk</p>
+            </div>
         </section>
 
     </main>
@@ -113,66 +121,3 @@
         </article>
         
     </footer>
-</body>
-</html>
-<script>
-    //Manipular el HMTL(usuario) <--> DOM (navegador) 
-    //fectch es un funcion JS para leer un archivo JSON o
-    //hacer una peticion http a una API
-    fetch('data/productos.json') //idem peticion a la api (BD)
-        .then(response => response.json())
-        .then(productos => {
-            //codigo js
-            const contenedor = document.getElementById('catalogo');
-            /* 
-                productos tiene todo el array de objetos json
-            */
-            // iterar RECORRER todos los productos del array
-            // se ejecutara tantas veces como productos (obejtos) haya en el array
-            // JS --> JS Moderno (EmacsScript 6)
-            //el array productos se recorre con un buble forEach
-            productos.forEach (producto => {
-                //crear un objeto (nodo en html) <article>
-                //el objeto document (JS) y sirve para que JS acceda L/W al DOM del HTML
-                const tarjeta = document.createElement('article'); //crea un nodo html --> <article> </article>
-                //contenedor.innerHTML = `Catalogo de Productos`;
-                //con innerHTML escribo el contenido del nodo <article> creado anteriormente
-                tarjeta.innerHTML = 
-                `
-                    <p class="badge">Envio gratis</p>
-                    <figure>
-                        <img src="${producto.imagen}" alt="Producto 1" />
-                    </figure>
-                    <p class="nombre">${producto.nombre}</p>
-                    <p class="features">
-                        <span>${producto.caracteristicas.cpu}</span>
-                        <span>${producto.caracteristicas.ram}</span> 
-                        <span>${producto.caracteristicas.disco}</span>
-                    </p>
-                    <p class="valoraciones">
-                        <span class="star">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        </span>
-                        <span class="valoracion">${producto.valoracion} </span>
-                        <span class="opiniones">${producto.opiniones} </span>   
-                    </p>
-                    <div class="preciospadre">
-                        <span class="dto">-${producto.descuento}%</span>
-
-                        <div class"precios>
-                        <span class="pvr">PVR<s>${producto.precioOriginal}€</s></span>
-                        <span class="pvp">${producto.precio}€</span> 
-                        </div>
-                    </div>
-                    <p class="envio">
-                        <i class="fa-solid fa-rocket"></i>Recibelo el Lunes, 13 Oct.
-                    </p>
-                `;
-                contenedor.appendChild(tarjeta)
-            })
-        })
-</script>

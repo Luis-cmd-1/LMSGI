@@ -154,7 +154,7 @@ main section article .nombre{
 }
 
 main section article figure{
-    border: 0px solid red;
+    /* border: 0px solid red; */
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -173,9 +173,9 @@ main section article .nombre{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 main section article .features{
-    margin top: 3px;
+    margin-top: 3px;
     /* border: 1px solid red; */
-    font-size: ;
+    /* font-size: 1; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -252,9 +252,7 @@ main section article div .precios{
     flex-direction: row;     
     border: px solid black
 }
-main section article div .precios .pvr {
-    
-}
+
 main section article div .precios .pvp {
     font-size: 20px;
     font-weight: bold;
@@ -351,4 +349,8 @@ footer article nav a i{
 
 footer article nav a span {
     font-size: 18px;
+}
+main section div #imagen{
+    
+    height: 50%;
 }
