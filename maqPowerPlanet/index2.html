@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,6 +148,7 @@
                         <span>${producto.caracteristicas.cpu}</span>
                         <span>${producto.caracteristicas.ram}</span> 
                         <span>${producto.caracteristicas.disco}</span>
+                    </p>
                     <p class="valoraciones">
                         <span class="star">
                         <i class="fa-solid fa-star"></i>
@@ -158,9 +160,17 @@
                         <span class="valoracion">${producto.valoracion} </span>
                         <span class="opiniones">${producto.opiniones} </span>   
                     </p>
-                    <p class" 
-                    
+                    <div class="preciospadre">
+                        <span class="dto">-${producto.descuento}%</span>
 
+                        <div class"precios>
+                        <span class="pvr">PVR<s>${producto.precioOriginal}€</s></span>
+                        <span class="pvp">${producto.precio}€</span> 
+                        </div>
+                    </div>
+                    <p class="envio">
+                        <i class="fa-solid fa-rocket"></i>Recibelo el Lunes, 13 Oct.
+                    </p>
                 `;
                 contenedor.appendChild(tarjeta)
             })
