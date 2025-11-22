@@ -159,14 +159,17 @@
                         <span class="valoracion">${producto.valoracion} </span>
                         <span class="opiniones">${producto.opiniones} </span>   
                     </p>
-                    <p class="precio">
-                        <span class="dto">${producto.descuento}</span>
-                        <div>
-                        <span class="pvp">${producto.precio}</span>
-                        <span class="pvr">${producto.precioOriginal}</span> 
-                        </div>
-                    </p>
+                    <div class="preciospadre">
+                        <span class="dto">-${producto.descuento}%</span>
 
+                        <div class="precios">
+                        <span class="pvr">PVR<s>${producto.precioOriginal}</s>€</span>
+                        <span class="pvp">${producto.precio}€</span>
+                         
+                        </div>
+                    </div>
+                    <p class="envio"> <i class="fa-solid fa-rocket"></i> Recíbelo el Lunes,13 Oct.
+                    </p>
                 `;
                 contenedor.appendChild(tarjeta)
             })

@@ -39,7 +39,7 @@ header figure{
     background-color: rosybrown;
     color: white;
     /* flex-basis: 20%; */
-    height: 100%; 
+    height: 100%;
 }
 header figure img{
     height: 100%;
@@ -83,10 +83,10 @@ header nav a:hover{
 header #carrito{
     /* border: 1px solid white; */
     color: white;
-    flex-basis: 10%; 
+    flex-basis: 10%;
     display: flex;
     flex-direction: row; /* ejej principal */
-    flex-wrap: nowrap;   
+    flex-wrap: nowrap;
     justify-content: space-around; /* alineacion en eje principal */
     align-items: center; /* alineacion en eje secundario */
 }
@@ -102,7 +102,7 @@ main{
     background-color: white;
     flex-basis: 65%;
     /* height: 75vh; */
-    
+
     border: 2px solid black;
 }
 main section{ /* contenedor  */
@@ -118,10 +118,10 @@ main section article{ /* item */
     display: flex; /* contenedor */
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center; 
-    align-items: center;  
+    justify-content: center;
+    align-items: center;
     position: relative;
-  
+
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(0,0,0,.1);
     padding: 20px;
@@ -184,10 +184,10 @@ main section article .features span{
     /* border: 1px solid red; */
     font-size: 12px;
     text-align: center;
-    
+
 }
 main section article p {
-    border: 1px solid black;
+    border: 0px solid black;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -197,44 +197,72 @@ main section article p {
 main section article p .star i {
     font-size: 10px;
     color: yellow;
-    margin-right: 10px;
+    margin-right: 0px;
 }
 main section article p .valoracion {
     font-size: 10px;
     color: red;
     margin-right: 10px;
+    margin-left: 10px;
 }
 main section article p .opiniones{
     font-size: 10px;
     color: green;
 }
+main section article .preciospadre{
+    border: 0px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* main section article .dto{
+    margin-left: 10px;
+
+} */
+main section article .pvr{
+    font-size: 10px ;
+    color: gray;
+}
+main section article .pvp{
+    font-weight: bold;
+}
 main section article div {
     margin: 5px 0px 5px 0px;
-    border: 0px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: row;
     justify-content: space-between  ;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
 }
 main section article div .dto{
+    /* border: 1px solid black; */
     background-color: rgb(183,67,139);
-    color: black;
+    color: white;
     padding: 2px;
     border-radius: 7px;
-    font-size: 12px;
-    height: 50%;
+    font-size: 10px;
+    height: 35%;
+    text-align: center;
+    margin-top: 12px;
 }
 main section article div .precios{
     display: flex;
     flex-direction: column;
-    border: 0px solid black
+    /* border: 1px solid black; */
+    text-align: right;
 }
-main section article div .precion .pvr {
-    
+main section article div .precio .pvr {
+
 }
 main section article div .precios .pvp {
     font-size: 20px;
+    font-weight: bold;
+}
+main section article .envio{
+    /* border: 1px solid black; */
+    font-size: 14px;
+    color: blueviolet;
     font-weight: bold;
 }
 footer{
@@ -246,7 +274,7 @@ footer{
     /* mete todos los hijos en una fila */
     /* flex-wrap: nowrap;  */
     /* mete todos los hijos en varias fila */
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 footer nav#sociales{
@@ -260,22 +288,22 @@ footer nav#sociales{
 }
 footer nav#sociales a { /* estado reposo fotograma */
     text-decoration: none;
-    border: 0px solid black; 
+    border: 0px solid black;
     background-color: lightgreen;
     /* elemento en linea pero con propiedades de bloque */
     display: inline-block;
-    
+
     width: 50px;
     height: 50px;
     border-radius:50px;
     margin-right: 7px;;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    transition: transform 0.3s ease-in-out; 
+
+    transition: transform 0.3s ease-in-out;
 }
 /* estado sobre (fotograma) */
 footer nav#sociales a:hover {
