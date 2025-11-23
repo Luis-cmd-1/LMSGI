@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PowerPlanet</title>
-    <link rel="stylesheet" href="css/estiloss.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body>
@@ -13,8 +12,8 @@
         <div id="menu">
             <i class="fa-solid fa-bars"></i>
         </div>
-        <figure>
-            <img src="img/logo.png" alt="Logo PowerPlanet">    
+        <figure> 
+            <img src="img/logo.png" alt="">
         </figure>
         <form>
             <input type="search" placeholder="Buscar...">
@@ -119,16 +118,18 @@
     //Manipular el HMTL(usuario) <--> DOM (navegador) 
     //fectch es un funcion JS para leer un archivo JSON o
     //hacer una peticion http a una API
+    // fetch('data/productos.json') //idem peticion a la api (BD)
     fetch('data/productos.json') //idem peticion a la api (BD)
+
         .then(response => response.json())
         .then(productos => {
             //codigo js
             const contenedor = document.getElementById('catalogo');
-            /* 
-                productos tiene todo el array de objetos json
-            */
+            //  productos tiene todo el array de objetos json//
+            
+
             // iterar RECORRER todos los productos del array
-            // se ejecutara tantas veces como productos (obejtos) haya en el array
+            // se ejecutara tantas veces como productos (objetos) haya en el array
             // JS --> JS Moderno (EmacsScript 6)
             //el array productos se recorre con un buble forEach
             productos.forEach (producto => {
@@ -148,6 +149,7 @@
                         <span>${producto.caracteristicas.cpu}</span>
                         <span>${producto.caracteristicas.ram}</span> 
                         <span>${producto.caracteristicas.disco}</span>
+                    </p>
                     <p class="valoraciones">
                         <span class="star">
                         <i class="fa-solid fa-star"></i>
@@ -162,13 +164,13 @@
                     <div class="preciospadre">
                         <span class="dto">-${producto.descuento}%</span>
 
-                        <div class="precios">
-                        <span class="pvr">PVR<s>${producto.precioOriginal}</s>€</span>
-                        <span class="pvp">${producto.precio}€</span>
-                         
+                        <div class"precios>
+                        <span class="pvr">PVR<s>${producto.precioOriginal}€</s></span>
+                        <span class="pvp">${producto.precio}€</span> 
                         </div>
                     </div>
-                    <p class="envio"> <i class="fa-solid fa-rocket"></i> Recíbelo el Lunes,13 Oct.
+                    <p class="envio">
+                        <i class="fa-solid fa-rocket"></i>Recibelo el Lunes, 13 Oct.
                     </p>
                 `;
                 contenedor.appendChild(tarjeta)

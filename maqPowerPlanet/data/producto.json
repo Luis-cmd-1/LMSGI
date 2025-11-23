@@ -1,0 +1,15 @@
+  {
+    "id": 8,
+    "nombre": "MacBook Air M2",
+    "precio": 1199.00,
+    "precioOriginal": 1299.00,
+    "descuento": 8,
+    "imagen": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop",
+    "valoracion": 4.9,
+    "opiniones": 210,
+    "caracteristicas": {
+      "cpu": "Apple M2",
+      "ram": "8 GB",
+      "disco": "512 GB SSD"
+    }
+  },
