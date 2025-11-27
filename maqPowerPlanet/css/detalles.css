@@ -397,8 +397,8 @@ main section div #imagen{
 
 
 /*-------- CSS DETALLE.HTML --------*/
-main #iniciopadre {
-    /* border: 1px solid black; */
+main #inicio {
+    border: 1px solid black;
     padding-top: 15px;
     padding-left: 15px;
     /* width: 50%; */
@@ -413,7 +413,7 @@ main #inicio a {
 
 /* EL PADRE DE LOS 3 */
 main #contenedorpadre{
-    /* border: 1px solid black; */
+    border: 1px solid black;
     display: flex;
     /* gap: 30px; */
     margin-top: 30px;
@@ -421,13 +421,13 @@ main #contenedorpadre{
 
 /* -----1º----- */
 main #imagenespadre{
-    /* border: 1px solid black; */
+    border: 1px solid black;
     display: flex;
-    flex-direction: column;
+    flex-direction: column ;
     padding: 50px;
     gap: 10px;
 }
-main #imagenespadre .imagen img{
+main #imagenespadre img{
     /* border: 1px solid; */
     width: 100px;
     height: 100px;
@@ -439,7 +439,7 @@ main #imagenespadre .imagen img{
 
 /* -----2º----- */
 main #imagenpadre{
-    /* border: 1px solid black; */
+    border: 1px solid black;
     position: relative;
 }
 main #imagen-producto img{
@@ -466,7 +466,7 @@ main #imagenpadre .badge{
 
 /* -----3º----- */
 main #informacionpadre{
-    /* border: 1px solid black; */
+    border: 1px solid black;
     width: 40%;
 }
 main #producto-info h1{

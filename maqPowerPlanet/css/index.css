@@ -70,10 +70,9 @@ header nav{
     align-items: center; /* alineacion en eje secundario */
 }
 header nav a{
-        /* border: 1px solid white; */
-    /* display: none; */
+    display: none;
     color: white;
-    /* text-decoration: none; */
+    text-decoration: none;
     font-size: 18px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -142,7 +141,7 @@ main section article .badge{
     border-radius: 7px;
     font-size: 14px;
     font-weight: 600;
-    width: 30%;
+    width: 50%;
     z-index: 10; /* profundidad atras/delante */
     /* margin-top: 5px;
     margin-left: 5px; */
