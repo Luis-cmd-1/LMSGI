@@ -173,7 +173,13 @@
                         <i class="fa-solid fa-rocket"></i>Recibelo el Lunes, 13 Oct.
                     </p>
                 `;
-                contenedor.appendChild(tarjeta)
+                contenedor.appendChild(tarjeta);
+
+                //******** añadimos un enlace a cada producto a su detalle
+                tarjeta.addEventListener('click', () => {
+                    // Creamos el parametro 
+                    window.location.href = `detalle.html?id=${producto.id}`;
+                });
             })
         })
 </script>

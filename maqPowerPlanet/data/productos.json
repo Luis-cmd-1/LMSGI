@@ -1,12 +1,12 @@
 [
-  {
+  { 
     "id": 1,
     "nombre": "Cubot C45 AZUL - Reloj inteligente",
     "precio": 34.99,
     "precioOriginal": 499.99,
     "descuento": 50,
-    "imagen": "https://www.bing.com/th?id=OPEC.nrPJ08RWq4dFuw474C474&o=5&pid=21.1&w=140&h=154&qlt=100&dpr=1,5&o=2",
-    "valoracion": 5.4,
+    "imagen": "https://thumb.pccomponentes.com/w-530-530/articles/1086/10863849/1216-cubot-kingkong-star-2-5g-12-256gb-negro-libre.jpg",
+    "valoracion": 3,
     "opiniones": 0,
     "caracteristicas": {
       "cpu": "Chipset Realtek RTL8762C",
@@ -20,8 +20,8 @@
     "precio": 799.00,
     "precioOriginal": 959.00,
     "descuento": 17,
-    "imagen": "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202409/10/00194612201288____11__1200x1200.jpg?impolicy=Resize&width=820",
-    "valoracion": 5,
+    "imagen": "https://thumb.pccomponentes.com/w-530-530/articles/1085/10855024/117-apple-iphone-16-128gb-azul-ultramar-caracteristicas.jpg",
+    "valoracion": 2,
     "opiniones": 34,
     "caracteristicas": {
       "cpu": "Apple A18 Bionic",
@@ -35,7 +35,7 @@
     "precio": 999.00,
     "precioOriginal": 1180.00,
     "descuento": 15,
-    "imagen": "https://www.backmarket.es/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D750/https://d2e6ccujb3mkqf.cloudfront.net/da463834-3b33-4433-93f3-744e20f92eb7.jpg",
+    "imagen": "https://thumb.pccomponentes.com/w-530-530/articles/1081/10814363/1499-samsung-galaxy-s24-ultra-12-256gb-negro-titanium-libre.jpg",
     "valoracion": 4.9,
     "opiniones": 87,
     "caracteristicas": {
@@ -50,7 +50,7 @@
     "precio": 89.99,
     "precioOriginal": 119.99,
     "descuento": 25,
-    "imagen": "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202206/09/00189060014860____9__1200x1200.jpg",
+    "imagen": "https://images.unsplash.com/photo-1606811841036-d8c7a9c5d3f3?w=500&auto=format&fit=crop",
     "valoracion": 4.6,
     "opiniones": 54,
     "caracteristicas": {
@@ -95,7 +95,7 @@
     "precio": 119.00,
     "precioOriginal": 169.00,
     "descuento": 30,
-    "imagen": "https://th.bing.com/th/id/OIP.QeCd-dobZyAeC9xQMmRsfAHaHa?w=169&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    "imagen": "https://images.unsplash.com/photo-1585386959984-a41552231693?w=500&auto=format&fit=crop",
     "valoracion": 4.5,
     "opiniones": 76,
     "caracteristicas": {
@@ -140,7 +140,7 @@
     "precio": 129.99,
     "precioOriginal": 159.99,
     "descuento": 18,
-    "imagen": "https://muzikercdn.com/uploads/products/426/42679/main_b261ce87.jpg",
+    "imagen": "https://images.unsplash.com/photo-1585386959984-a41552231693?w=500&auto=format&fit=crop",
     "valoracion": 4.6,
     "opiniones": 89,
     "caracteristicas": {

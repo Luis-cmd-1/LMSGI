@@ -34,7 +34,7 @@
             <nav id="inicio">
                 <a href="#"><i class="fa-solid fa-house"></i></a>
                 <i class="fa-solid fa-arrow-right"></i>
-                <a href="#">Smartphones y accesorios</a>
+                <a href="http://127.0.0.1:5500/MIO/maqPowerPlanet/js/index.html">Smartphones y accesorios</a>
                 <i class="fa-solid fa-arrow-right"></i>
                 <a href="#">Móviles libre</a>
                 <i class="fa-solid fa-arrow-right"></i>
@@ -65,12 +65,12 @@
 
             </figure>
 
-            <div id="informacionpadre">
+            <se id="informacionpadre">
 <!-- section -->
 
-                    <h1>Google Pixel 10 Pro</h1> 
+                    <h1 id="nombre">Google Pixel 10 Pro</h1> 
 
-                    <p class="caracteristicas">16GB/128GB Obsidiana</p>
+                    <!-- <p class="caracteristicas">16GB/128GB Obsidiana</p> -->
 
 
                         <span class="star">
@@ -85,7 +85,7 @@
  
                     <div class="preciopadre">
                         <div class="precio">
-                            <span class="descuento">-12%</span>
+                            <span id="descuento">-12%</span>
                             <span class="preciofinal">969,00€</span>
                         </div>
                     </div>
@@ -209,3 +209,27 @@
     </footer>
 </body>
 </html>
+<script>
+    // 1-. Obtener los parametros de la URL
+    const urlParametro = new URLSearchParams(window.location.search);
+    // 2-. Obtener el parametro 'id'
+    const idProducto = parseInt(urlParametro.get('id'))
+    //comprobar que el id llega al detalle.html a traves de la URL
+    console.log ("--->", idProducto)
+
+    const producto = await fetch('../data/productos.json')
+        .then(response => response.json())
+        .then (productos => {
+            //console.log("--1--",producto)
+            //console.log("--2--",producto.nombre)
+
+            producto = productos.find(p => p.id === idProducto);
+            return producto;
+        });
+
+            document.getElementById('nombre').textContent = producto.nombre;
+            document.getElementById('nvaloraciones').textContent=producto.valoracion;
+            document.getElementById('comentarios').textContent=`( ${producto.opiniones}  opiniones )`;
+            document.getElementById('descuento').textContent=`- ${producto.descuento}  % `;
+        
+</script>
