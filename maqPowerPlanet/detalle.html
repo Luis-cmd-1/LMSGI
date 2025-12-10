@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,7 @@
     </header>
     <main>
             <nav id="inicio">
-                <a href="#"><i class="fa-solid fa-house"></i></a>
+                <a href="/MIO/maqPowerPlanet/index.html"><i class="fa-solid fa-house"></i></a>
                 <i class="fa-solid fa-arrow-right"></i>
                 <a href="#">Smartphones y accesorios</a>
                 <i class="fa-solid fa-arrow-right"></i>
@@ -60,17 +59,16 @@
             <figure id="imagenpadre">
 
                 <p class="badge">Envio gratis</p>
-                <div id="imagen-producto"> <img src="https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-1_l.jpg"alt="ImagenProducto">
-                </div>
-
+                <img id="imagen-producto" src="https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-1_l.jpg"alt="ImagenProducto">
+                
             </figure>
 
             <div id="informacionpadre">
 <!-- section -->
 
-                    <h1>Google Pixel 10 Pro</h1> 
+                    <h1 id="nombre">Google Pixel 10 Pro</h1> 
 
-                    <p class="caracteristicas">16GB/128GB Obsidiana</p>
+                    <!-- <p class="caracteristicas">16GB/128GB Obsidiana</p> -->
 
 
                         <span class="star">
@@ -80,17 +78,17 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         </span>
-                        <span class="valoracion">5.00</span>
-                        <span class="opiniones">(1 opiniones)</span>   
+                        <span class="valoracion" id="nvaloraciones">5.00</span>
+                        <span class="opiniones" id="comentarios">(1 opiniones)</span>   
  
                     <div class="preciopadre">
                         <div class="precio">
-                            <span class="descuento">-12%</span>
-                            <span class="preciofinal">969,00€</span>
+                            <span id="descuento">-12%</span>
+                            <span class="preciofinal" id="producto_pvo">969,00€</span>
                         </div>
                     </div>
                     <p class="recomendado">
-                        Precio recomendado: <span class="preciorecomendado">1.099,00€</span>
+                        Precio recomendado: <span class="preciorecomendado" id="producto_pvp">1.099,00€</span>
                     </p>
                     <!--  -->
                     <div class="cuadradoenvio">
@@ -209,3 +207,32 @@
     </footer>
 </body>
 </html>
+<script>
+    // 1-. Obtener los parametros de la URL
+    const urlParametro = new URLSearchParams(window.location.search);
+    // 2-. Obtener el parametro 'id'
+    const idProducto = parseInt(urlParametro.get('id'))
+    //comprobar que el id llega al detalle.html a traves de la URL
+    console.log ("--->", idProducto)
+    fetch ('./data/productos.json')
+    // const producto = await fetch('./data/productos.json') //Lo intente con await y tuve problemas
+        .then(response => response.json())
+        .then (productos => {
+            // console.log("--1--",producto)
+            // console.log("--2--",producto.nombre)
+
+            const producto = productos.find(p => p.id === idProducto);
+        //     return producto;
+        // });
+
+            document.getElementById('nombre').textContent = producto.nombre;
+            document.getElementById('nvaloraciones').textContent=producto.valoracion;
+            document.getElementById('comentarios').textContent=`( ${producto.opiniones}  opiniones )`;
+            document.getElementById('descuento').textContent=`- ${producto.descuento}  % `;
+        
+            document.getElementById('producto_pvo').textContent=`${producto.precio} € `;
+            document.getElementById('producto_pvp').textContent=`Precio Recomendado: ${producto.precioOriginal} €  `;
+
+            document.getElementById('imagen-producto').setAttribute("src", producto.imagen)
+        })
+</script>

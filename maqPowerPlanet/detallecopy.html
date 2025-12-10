@@ -112,18 +112,35 @@
 </body>
 </html>
 <script>
+
+    // 1-. Obtener los parametros de la URL
+    const urlParametro = new URLSearchParams(window.location.search);
+    // 2-. Obtener el parametro 'id' 
+    const idProducto = parseInt(urlParametro.get('id'))
+    // 3-. Comprobar que el id llega al detalle.html a traves de la URL
+    console.log ("--->", idProducto)
+
     //Manipular el HMTL(usuario) <--> DOM (navegador) 
     //fectch es un funcion JS para leer un archivo JSON o
     //hacer una peticion http a una API
     // fetch('data/productos.json') //idem peticion a la api (BD)
-    fetch("../data/producto.json")
+    fetch("../data/productos.json")
 
         .then(response => response.json())
 
-        .then(producto => {
+        .then(productos => {
             //codigo js
+            const producto = productos.find(p.id == idProducto)
 
-            const main = document.querySelector("main");
+            console.log("-1->",producto)
+            console.log("-1->",producto.nombre, producto.precio)
+
+
+            
+        });
+</script>
+
+<!-- const main = document.querySelector("main");
             // selecciona el main para la variable
                         // iterar RECORRER todos los productos del array
                         // se ejecutara tantas veces como productos (objetos) haya en el array
@@ -219,7 +236,5 @@
                     </article>
                 </div>
             </div>
-            `;
-        });
-</script>
+            ` -->
 
