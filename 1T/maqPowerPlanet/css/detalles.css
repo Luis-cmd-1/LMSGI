@@ -36,6 +36,7 @@ header #menu i{
 
 }
 header figure{
+    color: white;
     background-color: rosybrown;
     color: white;
     /* flex-basis: 20%; */
@@ -78,16 +79,16 @@ header nav a:hover{
     color: rgb(218, 253, 111)
 }
 
-header #carrito{
-    /* border: 1px solid white; */
-    color: white;
-    flex-basis: 10%;
-    display: flex;
-    flex-direction: row; /* eje principal */
-    flex-wrap: nowrap;
-    justify-content: space-around; /* alineacion en eje principal */
-    align-items: center; /* alineacion en eje secundario */
-}
+        header #carrito{
+            /* border: 1px solid white; */
+            color: white;
+            flex-basis: 10%;
+            display: flex;
+            flex-direction: row; /* eje principal */
+            flex-wrap: nowrap;
+            justify-content: space-around; /* alineacion en eje principal */
+            align-items: center; /* alineacion en eje secundario */
+        }
 header #carrito i{
     font-size: 25px;
     color: green;
@@ -353,6 +354,7 @@ footer nav#sociales a i {
 }
 footer div#subscribete{
     border: 1px solid black;
+    color: white;
     flex-basis: 50%;
 }
 footer article {
