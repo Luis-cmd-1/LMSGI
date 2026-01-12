@@ -6,17 +6,26 @@
     <title>Responsive Web Design - Mobile First</title>
 
     <!-- Mobile First 1º se carga el CSS para móviles: movil.css -->
-    <link rel="stylesheet" href="css/movil.css" media="screen and (max-width: 767px)">
+    <link rel="stylesheet" href="css/movil.css">
     <!-- 
         Luego se carga el CSS para tablets: tablet.css 
         tablet.css se cargara a traves de la MEDIA QUERY si el medio es una pantalla y
         el ancho de la pantalla es mayor o igual a 768px
     -->
-     <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
+    <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
+    <link rel="stylesheet" href="css/desktop.css" media="screen and (min-width: 1024px)">
+
 </head>
 <body>
     <header> 
-        <h1>Responsive Web Design - Mobile First</h1>
+        <h1>Mi sitio web</h1> 
+        <nav>
+            <a href="#">Inicio</a>  
+            <a href="#">Servicios</a>  
+            <a href="#">Acerca de</a>  
+            <a href="#">Contacto</a>  
+        </nav>
+        <button>Registrarse</button>
     </header>
 </body>
 </html>

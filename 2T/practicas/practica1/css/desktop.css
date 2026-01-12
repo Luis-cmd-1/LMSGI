@@ -1,0 +1,17 @@
+header{
+    flex-wrap: wrap;
+}
+h1{
+    flex-basis: 100%;
+    order:1;
+}
+header nav{
+    flex-basis: 80%;
+    order:3;
+    /* border: 1px solid yellow; */
+    justify-content: flex-end;
+}
+header button{
+    flex-basis: 10%;
+    order:2;
+}
