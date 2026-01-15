@@ -15,3 +15,7 @@ header button{
     flex-basis: 10%;
     order:2;
 }
+
+header figure{
+    display:block;s
+} 

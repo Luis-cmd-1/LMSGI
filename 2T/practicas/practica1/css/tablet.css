@@ -15,3 +15,7 @@ header nav a{
 
     border-radius: 5px;
 }
+
+header figure{
+    display: none;
+}

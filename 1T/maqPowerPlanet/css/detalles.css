@@ -79,15 +79,15 @@ header nav a:hover{
     color: rgb(218, 253, 111)
 }
 
-        header #carrito{
-            /* border: 1px solid white; */
-            color: white;
-            flex-basis: 10%;
-            display: flex;
-            flex-direction: row; /* eje principal */
-            flex-wrap: nowrap;
-            justify-content: space-around; /* alineacion en eje principal */
-            align-items: center; /* alineacion en eje secundario */
+header #carrito{
+    /* border: 1px solid white; */
+    color: white;
+    flex-basis: 10%;
+    display: flex;
+    flex-direction: row; /* eje principal */
+    flex-wrap: nowrap;
+    justify-content: space-around; /* alineacion en eje principal */
+     align-items: center; /* alineacion en eje secundario */
         }
 header #carrito i{
     font-size: 25px;
