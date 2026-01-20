@@ -1,0 +1,476 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 300vh;
+}
+header{
+    background-color: black;
+    display: flex;
+    flex-direction: wrap;
+    flex-wrap: nowrap;
+    height: 20vh;
+    justify-content: space-around;
+}
+header figure{
+<<<<<<< HEAD:maqPowerPlanet/css/detalles.css
+    flex-basis: 10%;
+    height: 100%;
+}
+header figure #logo{
+    height: 100%;
+}
+
+header h1{
+    flex-basis: 35%;
+    /* border:1px solid white; */
+=======
+    color: white;
+    background-color: rosybrown;
+>>>>>>> b75025b9d03e96928d9091c9af74b6dbc290a011:1T/maqPowerPlanet/css/detalles.css
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-weight: bold;
+    margin-left: 30px;
+}
+header nav{
+    /* border: 1px solid white; */
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+header nav button{
+    color: white;
+    font-size: 15px;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 15px;
+    cursor: pointer;
+
+    
+}
+
+<<<<<<< HEAD:maqPowerPlanet/css/detalles.css
+header nav button:hover{
+    color: rgb(229, 255, 152);
+    transform: translateY(-2px);
+
+}
+main {
+    flex-basis: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main section{ 
+    border: 1px solid black;
+=======
+        header #carrito{
+            /* border: 1px solid white; */
+            color: white;
+            flex-basis: 10%;
+            display: flex;
+            flex-direction: row; /* eje principal */
+            flex-wrap: nowrap;
+            justify-content: space-around; /* alineacion en eje principal */
+            align-items: center; /* alineacion en eje secundario */
+        }
+header #carrito i{
+    font-size: 25px;
+    color: green;
+}
+
+
+main{
+    background-color: white;
+    flex-basis: 30%;
+    /* height: 75vh; */
+
+    border: 2px solid black;
+}
+main section{ /* contenedor  */
+>>>>>>> b75025b9d03e96928d9091c9af74b6dbc290a011:1T/maqPowerPlanet/css/detalles.css
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    flex-basis: 80%;
+    width: 80%;
+
+
+} 
+
+
+main #catalogo article{ 
+    flex-basis: 20%;
+    /* border: 1px solid black; */
+    display: flex; 
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    position: relative;
+    border-radius: 14px;
+    padding: 20px;
+    transform: translateY(-2px);
+
+}
+
+
+main #catalogo article:hover{
+    background-color: rgb(204, 246, 200);;
+    /* color: rgb(229, 255, 152); */
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+
+
+}
+
+
+main section article .badge{
+    position: absolute; 
+    top: 5px;
+    left: 5px;
+    background-color: rgb(165, 1, 102);
+    color: whitesmoke;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    width: 50%;
+}
+main section article figure img{
+    height: 300px;
+}
+main #catalogo article p.titulo{
+    margin-top: 10px;
+    font-size:20px;
+    font-weight: bold;
+
+}
+main #catalogo article p{
+    font-size:20px;
+
+}
+
+main #catalogo article div{
+    display: flex;
+    margin-top: 10px;
+    font-size:20px;
+    font-weight: bold;
+
+}
+main #catalogo article div button{
+    color: white;
+<<<<<<< HEAD:maqPowerPlanet/css/detalles.css
+    background-color: green;
+=======
+    padding: 2px;
+    border-radius: 7px;
+    font-size: 10px;
+    height: 35%;
+    text-align: center;
+    margin-top: 12px;
+}
+main section article div .precios{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    text-align: right;
+}
+main section article div .precio .pvr {
+
+    font-weight: bold;
+    padding: 2px;
+    border-radius: 7px;
+    font-size: 11px;
+    height: 38%;
+    margin-top: 13px;
+}
+main section article div .precios{
+    display: flex;
+    flex-direction: row;     
+    /* border: px solid black */
+}
+
+main section article div .precios .pvp {
+    font-size: 20px;
+    font-weight: bold;
+}
+main section article .envio{
+    /* border: 1px solid black; */
+    font-size: 14px;
+    color: blueviolet;
+    font-weight: bold;
+}
+footer{
+    background-color: black;
+    flex-basis: 30%;
+    /* height: 20vh; */
+    display: flex;
+    flex-direction: row;
+    /* mete todos los hijos en una fila */
+    /* flex-wrap: nowrap;  */
+    /* mete todos los hijos en varias fila */
+    flex-wrap: wrap;
+}
+
+footer nav#sociales{
+    border: 1px solid black;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 30px;
+}
+footer nav#sociales a { /* estado reposo fotograma */
+    text-decoration: none;
+    border: 0px solid black;
+    background-color: lightgreen;
+    /* elemento en linea pero con propiedades de bloque */
+    display: inline-block;
+
+    width: 50px;
+    height: 50px;
+    border-radius:50px;
+    margin-right: 7px;;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: transform 0.3s ease-in-out;
+}
+/* estado sobre (fotograma) */
+footer nav#sociales a:hover {
+    /* fecto de transformacion */
+    transform: translate(0px, -10px);
+    /* transform: rotate(360deg); */
+}
+/* footer nav#sociales a:nth-child(1) {
+    margin-left: 30px;
+} */
+
+footer nav#sociales a i {
+    font-size: 30px;
+    color: white;
+}
+footer div#subscribete{
+    border: 1px solid black;
+    color: white;
+    flex-basis: 50%;
+}
+footer article {
+    border: 1px solid black;
+    flex-basis: 33%;
+    padding-top: 20px;
+}
+footer article h3 {
+    color: whitesmoke;
+    text-transform: uppercase;
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+footer article nav{
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+}
+footer article nav a{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    height: 30px;
+    align-items: center;
+    text-decoration: none;
+    color: whitesmoke;
+}
+footer article nav a i{
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+footer article nav a span {
+    font-size: 18px;
+}
+main section div #imagen{
+    
+    height: 50%;
+}
+
+
+/*-------- CSS DETALLE.HTML --------*/
+main #inicio {
+    border: 1px solid black;
+    padding-top: 15px;
+    padding-left: 15px;
+    /* width: 50%; */
+}
+main #inicio a {
+    /* border:1px solid black ; */
+    font-size: 17px;
+    padding-inline: 15px;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* EL PADRE DE LOS 3 */
+main #contenedorpadre{
+    border: 1px solid black;
+    display: flex;
+    /* gap: 30px; */
+    margin-top: 30px;
+}
+
+/* -----1º----- */
+main #imagenespadre{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column ;
+    padding: 50px;
+    gap: 10px;
+}
+main #imagenespadre img{
+    /* border: 1px solid; */
+    width: 100px;
+    height: 100px;
+
+}
+/* -----1º----- */
+
+
+
+/* -----2º----- */
+main #imagenpadre{
+    border: 1px solid black;
+    position: relative;
+}
+main #imagen-producto {
+    /* border: 1px solid black; */
+    width: 700px;   
+}
+main #imagenpadre .badge{
+    position: absolute; /* Uso particular: efectos especiales */
+    top: 5px;
+    left: 5px;
+    background-color: rgb(183,67,139);
+    color: whitesmoke;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 20px;
+    font-weight: 600;
+    width: 20%;
+    text-align: center;
+    z-index: 10; /*profundidad atras/delante*/
+}
+
+/* -----2º----- */
+
+
+/* -----3º----- */
+main #informacionpadre{
+    border: 1px solid black;
+    width: 40%;
+}
+main h1{
+    /* border: 1px solid black; */
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+main  .caracteristicas{
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 3px;
+}
+
+main .star{
+    margin-top: 5px;
+    color: gold;
+    font-size: 10px;
+}
+main .preciopadre{
+    margin-top: 5px;
+}
+main #opciones .titulos{
+    /* color: white; */
+    font-size: 18px;
+    font-weight: bold;
+}
+main .preciopadre .precio{
+    /* border: 1px solid black; */
+    display: flex;
+    /* margin: 10px; */
+    align-items: center;
+}
+main .preciopadre .precio #descuento{
+    font-size: 15px;
+    background-color: fuchsia;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 10px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+main .preciopadre .precio .preciofinal{
+    font-size: 30px;
+    font-weight: bold;
+}
+main .recomendado{
+    font-size: 16px;
+    color: grey;
+>>>>>>> b75025b9d03e96928d9091c9af74b6dbc290a011:1T/maqPowerPlanet/css/detalles.css
+    padding: 5px;
+    font-size:20px;
+    margin-left: 100px;
+    flex-basis: 50%;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+
+footer{
+    flex-basis:10%;
+    background-color: black;
+    text-align: center;
+
+}
+footer #redes{
+    /* height: 100%; */
+    margin-top: 25px;
+    margin-bottom: 25px;
+    /* border:1px solid white; */
+    align-items: center;
+    
+    
+}
+footer p{    
+    font-size: 20px;
+    color:white;
+    margin-bottom: 5px;
+}
+footer a{
+    font-size: 20px;
+    margin: 10px;
+    color: white
+}

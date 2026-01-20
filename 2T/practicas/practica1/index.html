@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web Design - Mobile First</title>
+
+    <!-- Mobile First 1º se carga el CSS para móviles: movil.css -->
+    <link rel="stylesheet" href="css/movil.css" media="screen and (max-width: 767px)">
+    <!-- 
+        Luego se carga el CSS para tablets: tablet.css 
+        tablet.css se cargara a traves de la MEDIA QUERY si el medio es una pantalla y
+        el ancho de la pantalla es mayor o igual a 768px
+    -->
+     <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
+</head>
+<body>
+    <header> 
+        <h1>Responsive Web Design - Mobile First</h1>
+    </header>
+</body>
+</html>
