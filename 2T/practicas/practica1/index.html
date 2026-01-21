@@ -6,17 +6,84 @@
     <title>Responsive Web Design - Mobile First</title>
 
     <!-- Mobile First 1º se carga el CSS para móviles: movil.css -->
-    <link rel="stylesheet" href="css/movil.css" media="screen and (max-width: 767px)">
+    <link rel="stylesheet" href="css/movil.css">
     <!-- 
         Luego se carga el CSS para tablets: tablet.css 
         tablet.css se cargara a traves de la MEDIA QUERY si el medio es una pantalla y
         el ancho de la pantalla es mayor o igual a 768px
     -->
-     <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
+    <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
+    <link rel="stylesheet" href="css/desktop.css" media="screen and (min-width: 1024px)">
+
 </head>
 <body>
+    
     <header> 
-        <h1>Responsive Web Design - Mobile First</h1>
+        <!-- <figure>
+            <img src="img/pngegg.png">
+        </figure> -->
+        <h1>Mi sitio web</h1> 
+        <nav>
+            <a href="#">Inicio</a>  
+            <a href="#">Servicios</a>  
+            <a href="#">Acerca de</a>  
+            <a href="#">Contacto</a>  
+        </nav>
+        <button>Registrarse</button>
     </header>
+    <main>
+        <nav>
+            <h2 id="menu">Menú Lateral</h2>
+            <a href="#">Categoria 1</a>
+            <a href="#">Categoria 2</a>
+            <a href="#">Categoria 3</a>
+            <a href="#">Categoria 4</a>
+            <a href="#">Configuracion</a>
+        </nav>
+        <section>
+            <h2 id="contenido">Contenido Principal</h3>
+            <p><b>Responsive Web Design con Mobile First</b> </p>
+            <p>Este diseño adapta su estructura según el tamaña de la pantalla</p>
+                <ul>
+                    <li><b> Móvil</b> : Layout vertical, todo en columna </li>
+                    <li><b>Tablet</b>  : Grid 2 columnas, menú lateral + contenido/aside apilados </li>
+                    <li><b>Desktop</b> : Grid 3 columnas, todas visibles simultáneamente </li>
+                </ul>
+            <p>Los estilos se cargan en cascada: primero móvil (base), luego tablet, finalmente desktop</p>
+            <p>Esta estructura utiliza tres archivos CSS separados en la carpeta css/:</p>
+                <ul>
+                    <li>movil.css - Estilos base para todos los dispositivos</li>
+                    <li>tablet.css - Estilos adicionales para tablets (>768px)
+                    <li>desktop.css - Estilos adicionales para escritorio (>1024px)</li>
+                    </li>
+                </ul>
+
+        </section>
+        <aside id=" informarcion">
+            <h2>Información Adicional</h4>
+            <p>Esto es el área de contenido complementario que puede contener:</p>
+            <ul>
+                <li>Publicidad</li>
+                <li>Enlaces relacionados</li>
+                <li>Widgets</li>
+                <li>Noticias destacadas</li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <h2 id="siguenos">Síguenos</h5>
+        <nav>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">Linkedin</a>
+        </nav>
+        <h2 id="contacto">Contacto</h2>
+        <ul>
+            <li>info@misitio.com</li>
+            <li>+34 123 456 789</li>
+            <li>Madrid, España</li>
+        </ul>
+    </footer>
 </body>
 </html>

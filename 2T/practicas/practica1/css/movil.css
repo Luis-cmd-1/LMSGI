@@ -5,11 +5,132 @@
 }
 
 header{
-    background-color: yellow;
-    color: red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    background-color: #333;
+    color: white;
+    padding: 10px;
     text-align: center;
 }
+header nav{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+header nav a {
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    text-decoration: none;
+    /* border: 1px solid black; */
+}
+header nav a:hover{
+    text-decoration: underline;
+    background-color: black;
+}
+header button{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
 
-h1{
+/* header figure{
+    display: none;
+} */
+main{
+    display: grid;
+    /* grid-template-columns: ; */
+    /* border:1px solid black; */
+    padding: 10px;
+}
+main nav{
+    background-color: lightgrey;
+    display: grid;
+    /* border:1px solid black; */
+    padding: 10px;
+    margin: 5px;
+    gap: 10px;
+
+}
+main nav h2{
+    color:rgb(31, 54, 77)
+}
+main nav a{
+    text-decoration: none;
+    color:black
+}
+main nav a:hover{
+    border-radius: 15px;
+    background-color: rgb(206, 190, 186);
+}
+main section{
+    /* border:1px solid black; */
+    display: grid;
+    padding: 10px;
+    gap:15px
+}
+main section h2{
+    color:rgb(1, 54, 77)
+
+}
+main section ul li{
+margin-left: 30px;
+}
+main aside {
+    background-color: rgb(59, 165, 235);
+    border-radius: 6px;
+    color: white;
+    margin: 5px;
+    padding: 15px;
+
+}
+main aside p{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+main aside ul{
+    
+    margin-left: 20px;
+
+}
+main aside ul li{
+    padding-top: 2px;
+    padding-bottom: 2px;    
+}
+
+footer{
+    /* display: grid; */
+    background-color: #333;
+    color:white;
+    /* gap:5px; */
+    padding: 5px;
     text-align: center;
+    justify-content: space-between;
+}
+footer h2 {
+    
+    margin: 10px;
+}
+footer nav a{
+    /* border: 1px solid black; */
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #686868;
+    text-decoration: none;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+}
+footer nav a:hover{
+    text-decoration: underline;
+    background-color: black;
+}
+
+footer ul li{
+    margin: 5px;
 }

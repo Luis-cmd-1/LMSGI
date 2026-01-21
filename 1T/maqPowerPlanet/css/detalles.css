@@ -64,6 +64,7 @@ header nav button{
     
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD:maqPowerPlanet/css/detalles.css
 header nav button:hover{
     color: rgb(229, 255, 152);
@@ -89,6 +90,17 @@ main section{
             flex-wrap: nowrap;
             justify-content: space-around; /* alineacion en eje principal */
             align-items: center; /* alineacion en eje secundario */
+=======
+header #carrito{
+    /* border: 1px solid white; */
+    color: white;
+    flex-basis: 10%;
+    display: flex;
+    flex-direction: row; /* eje principal */
+    flex-wrap: nowrap;
+    justify-content: space-around; /* alineacion en eje principal */
+     align-items: center; /* alineacion en eje secundario */
+>>>>>>> ae784b202a0d2f0c4b3b5e1b77a0d91a397512cd
         }
 header #carrito i{
     font-size: 25px;
