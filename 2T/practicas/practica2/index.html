@@ -4,14 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    <!-- Mobile First 1º se carga el CSS para móviles: movil.css -->
+    <link rel="stylesheet" href="css/movil.css">
+    <!-- 
+        Luego se carga el CSS para tablets: tablet.css 
+        tablet.css se cargara a traves de la MEDIA QUERY si el medio es una pantalla y
+        el ancho de la pantalla es mayor o igual a 768px
+    -->
+    <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
+    <link rel="stylesheet" href="css/desktop.css" media="screen and (min-width: 1024px)">
+
 </head>
 <body>
-    <div>
-        <header>
-            <figure>
-                <h1></h1>
-            </figure>
-        </header>
-    </div>
+    <header>
+            <div class="oferta">Oferta</div>
+                <figure>
+                    logo
+                </figure>
+                <h1>
+                    titulo
+                </h1>
+                <div id="registro">
+                    registro
+                </div>
+                <nav>
+                    menu ppal
+                </nav>
+    </header>
 </body>
 </html>
