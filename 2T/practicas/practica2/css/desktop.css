@@ -2,12 +2,12 @@ header{
     background-color: grey;
     /* display: grid; */
     grid-template-areas: 
-        "logo titulo titulo titulo registro"
-        "logo navppal navppal oferta oferta";
-    grid-template-columns: 2fr 3fr 3fr 2fr 2fr;
+        "logo titulo titulo registro"
+        "logo navppal oferta  oferta";
+    grid-template-columns: 2fr 6fr 2fr 2fr;
     grid-template-rows: 100px 100px;
-    /* gap: 5px; */
-    /* padding: 5px; */
+    gap: 5px;
+    padding: 5px;
 }
 
 header div.oferta{
@@ -18,6 +18,7 @@ header div.oferta{
 }
 
 header figure{
+    
     background-color: orange;
     grid-area: logo;
 }
