@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <!-- Mobile First 1º se carga el CSS para móviles: movil.css -->
     <link rel="stylesheet" href="css/movil.css">
-    <!-- 
-        Luego se carga el CSS para tablets: tablet.css 
-        tablet.css se cargara a traves de la MEDIA QUERY si el medio es una pantalla y
-        el ancho de la pantalla es mayor o igual a 768px
-    -->
     <link rel="stylesheet" href="css/tablet.css" media="screen and (min-width: 768px)">
     <link rel="stylesheet" href="css/desktop.css" media="screen and (min-width: 1024px)">
 
@@ -20,39 +15,63 @@
 <body>
     <header>
         <nav class="redes">
-            <a href="#">P</a>
-            <a href="#">G</a>
-            <a href="#">F</a>
-            <a href="#">T</a>
+            <a href="#">
+                <i class="fa-brands fa-pinterest-p"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-google-plus-g"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#"><i class="fa-brands fa-twitter"></i>
+            </a>
         </nav>
 
-        <div class="login">
-            <a href="#">629 76 03 03 Te llamanos</a>
-            <a href="#">Login</a>
+        <div class="telefono">
+            <span>
+                <i class="fa-solid fa-phone"></i>
+            </span>
+            <span> 629 76 03 03</span>
+            <a href="#" class="tellamamos">Te llamamos</a>
         </div>
+            
+        <nav class="login">
+            <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+            <a href="#">Login</a>
+        </nav>
 
         <figure>
-            <img scr="logo" alt="imagen">
+            <img src="img/logo.png" alt="imagen">
+            <!-- <span> La casa de tus sueños </spaN> -->
         </figure>
 
         <nav class="info">
             <div class="lugar">
-                123 Quicksale Street Chicago, IL 60606
+                <span>123 Quicksale Street Chicago, IL 60606</span>
             </div>
             <div class="correo">
-                123-456-7890 info@yoursite.com
+                <span>123-456-7890 info@yoursite.com</span>
             </div>
-            <a class="menu">Menu</a>
+            <a href="" class="menu">
+                <i class="fa-solid fa-bars"></i>
+            </a>
         </nav>
         
         <nav class="seccion">
-            <a>Home
-                <i > </i>
-                <i class="fa-brands fa-twitter"></i>
+            <a href="#">Home
+                <i class="fa-solid fa-angle-down"></i>
             </a>
-            <a>Viviendas</a>
-            <a>Noticias</a>
-            <a>Presupuestos</a>            
+            <a href="#">Viviendas
+                <i class="fa-solid fa-angle-down"></i>
+            </a>
+            <a href="#">Noticias
+                <i class="fa-solid fa-angle-down"></i>
+            </a>
+            <a href="#">Presupuestos
+                <i class="fa-solid fa-angle-down"></i>
+            </a>            
         </nav>
     </header>
     <main>
