@@ -1,0 +1,32 @@
+
+{
+    "id": "1",
+    "nombre": "Google Pixel 10 Pro",
+    "subtitulo": "16GB / 128GB Obsidiana",
+
+    "imagenPrincipal": "https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-1_l.jpg",
+
+    "img1": "https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-1_l.jpg",
+    "img2": "https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana2_ad_l.jpg",
+    "img3": "https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-5_ad_l.jpg",
+    "img4": "https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-4_ad_l.jpg",
+    "img5": "https://www.powerplanetonline.com/cdnassets/products/98011/google-pixel-10-pro-128-gb-obsidiana-7_ad_l.jpg",
+
+    "valoracion": 5.0,
+    "opiniones": 1,
+    "descuento": 12,
+    "precioFinal": 969,
+    "precioOriginal": 1099,
+
+    "disponibilidad": "¡En stock!",
+    "garantia": 3,
+    "envio": 0,
+
+    "cap1": "128GB",
+    "cap2": "256GB",
+    "cap3": "512GB",
+
+    "color1": "Obsidiana",
+    "color2": "Porcelana",
+    "color3": "Piedra Lunar"
+}

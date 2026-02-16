@@ -1,0 +1,60 @@
+
+header{
+    background-color: rgb(209, 202, 245);
+    gap: 0px;
+}
+nav.redes{
+    /* border:1px solid rgb(0, 0, 0); */
+    flex-basis: 40%;
+}
+
+div.telefono {
+    /* border: 1px solid black; */
+    flex-basis: 30%;
+    margin-left: 0px;
+    padding-left: 45px;
+
+}
+nav.login {
+    flex-basis: 30%;
+}
+
+figure {
+    flex-basis: 30%;
+}
+figure img{
+    /* border: 1px solid black; */
+    width: 100%;
+}
+nav.info {
+    /* border: 1px solid black; */
+    flex-basis: 50%;
+}
+a.menu {
+    display: none;
+}
+
+nav.seccion{
+    /* border: 1px solid black; */
+    flex-basis: 20%;
+    margin: 0px;
+    padding-left: 20px;
+}
+nav.redes { 
+    order: 3; 
+}
+nav.login { 
+    order: 2; 
+}
+.telefono { 
+    order: 1; 
+}
+figure{ 
+    order: 4; 
+}
+nav.info { 
+    order: 5; 
+}
+nav.seccion { 
+    order: 6; 
+}
