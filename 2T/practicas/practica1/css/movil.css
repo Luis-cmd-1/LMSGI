@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 1fr; 
+    background-color: #34485e;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+header nav{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+header nav a {
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+    padding: 5px;
+    text-decoration: none;
+    /* border: 1px solid black; */
+}
+header nav a:hover{
+    text-decoration: underline;
+    background-color: black;
+    border-radius: 5px;
+}
+header button{
+    margin-top: 10px;
+    padding: 10px;
+    background-color:red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/* header figure{
+    display: none;
+} */
+main{
+    /* display: grid;
+    grid-template-rows: repeat(3, 1fr); */
+    /* border:1px solid black; */
+    padding: 10px;
+    gap:10px
+}
+main nav{
+    background-color: #ecf0f1;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 10px;
+    /* border:1px solid black; */
+    padding: 10px;
+    margin: 5px;
+    gap: 10px;
+
+}
+main nav h2{
+    color:rgb(31, 54, 77)
+}
+main nav a{
+    text-decoration: none;
+    color:black
+}
+main nav a:hover{
+    border-radius: 15px;
+    background-color: rgb(206, 190, 186);
+    padding: 0px;
+}
+main section{
+    /* border:1px solid black; */
+    display: grid;
+    padding: 10px;
+    gap:15px
+}
+main section h2{
+    color:rgb(1, 54, 77)
+
+}
+main section ul li{
+margin-left: 30px;
+}
+main aside {
+    background-color: #3498db;
+    border-radius: 6px;
+    color: white;
+    margin: 5px;
+    padding: 15px;
+
+}
+main aside p{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+main aside ul{
+    
+    margin-left: 20px;
+
+}
+main aside ul li{
+    padding-top: 2px;
+    padding-bottom: 2px;    
+}
+
+footer{
+    /* display: grid; */
+    background-color: #34485e;
+    color:white;
+    /* gap:5px; */
+    padding: 5px;
+    text-align: center;
+    justify-content: space-between;
+}
+footer h2 {
+    margin: 10px;
+}
+footer nav a{
+    /* border: 1px solid black; */
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #2c3e50;
+    text-decoration: none;
+    color: white;
+    margin: 5px;
+    padding: 8px;
+}
+footer nav a:hover{
+    text-decoration: underline;
+    background-color: black;
+}
+
+footer ul li{
+    margin: 5px;
+}

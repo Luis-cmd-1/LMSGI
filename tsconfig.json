@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
@@ -41,4 +42,11 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   }
+=======
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+>>>>>>> c260bcf4b199e136300259a930cfc3abec21121d
 }
