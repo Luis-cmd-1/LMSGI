@@ -14,12 +14,13 @@ const opciones = [
   { title: 'Contacto', href: '#Contacto', current: false },
 
 ]
-
+// EL COMPONENTE {function} .tsx = TS + html
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Header() {
+  // Codigo JS o TS
   return (
     <Disclosure
       as="nav"
