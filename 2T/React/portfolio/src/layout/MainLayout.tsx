@@ -1,9 +1,12 @@
+import Footer from "../components/main/Footer"
 import Header from "../components/main/Header"
 import Contacto from "../sections/Contacto"
 import Formacion from "../sections/Formacion"
 import QSomos from "../sections/QSomos1"
 import Servicios from "../sections/Servicios"
 import Trabajos from "../sections/Trabajos"
+
+
 
 export const MainLayout = () => {
     return (
@@ -15,7 +18,9 @@ export const MainLayout = () => {
                 <Servicios/>
                 <Trabajos/>
                 <Contacto/>
+                
             </main>
+                <Footer/>
         </div>
     )
 } 
