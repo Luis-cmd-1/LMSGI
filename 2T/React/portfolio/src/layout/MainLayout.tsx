@@ -3,7 +3,7 @@ import Header from "../components/main/Header"
 import Contacto from "../sections/Contacto"
 import Formacion from "../sections/Formacion"
 import QSomos from "../sections/QSomos1"
-import Servicios from "../sections/Servicios"
+// import Servicios from "../sections/Servicios"
 import Trabajos from "../sections/Trabajos"
 
 
@@ -15,7 +15,7 @@ export const MainLayout = () => {
             <main>
                 <QSomos/>
                 <Formacion/>
-                <Servicios/>
+                {/* <Servicios/> */}
                 <Trabajos/>
                 <Contacto/>
                 
