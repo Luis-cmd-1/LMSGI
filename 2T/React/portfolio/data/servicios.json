@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "titulo": "Fusión de Fibra",
+        "categoria":"Redes de Comunicaciones",
+        "descripción":"La Fusión de fibra optica es un proceso que consiste en unir dos fibras opticas",
+        "imagen":"",
+        "tecnologias": ["Fusión de fibra","Redes de comunicaciones" ,"Fujikura 3105"]
+    },
+    {
+        "id": 2,
+        "titulo": "Configuración de Routers Cisco",
+        "categoria":"Redes de Comunicaciones",
+        "descripción":"La Fusión de fibra optica es un proceso que consiste en unir dos fibras opticas",
+        "imagen":"",
+        "tecnologias": ["Router","Redes de comunicaciones" ,"Cisco ISR 400 Series"]
+    },
+
+        {
+        "id": 3,
+        "titulo": "Desarrollo de Aplicaciones web Microservicios",
+        "categoria":"Redes de Comunicaciones",
+        "descripción":"La Fusión de fibra optica es un proceso que consiste en unir dos fibras opticas",
+        "imagen":"",
+        "tecnologias": ["Microservicios","NestJSs" ,"Redes Nats"]
+    }
+]

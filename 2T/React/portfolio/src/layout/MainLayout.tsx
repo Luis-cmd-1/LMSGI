@@ -3,9 +3,8 @@ import Header from "../components/main/Header"
 import Contacto from "../sections/Contacto"
 import Formacion from "../sections/Formacion"
 import QSomos from "../sections/QSomos1"
-// import Servicios from "../sections/Servicios"
+import Servicios from "../sections/Servicios"
 import Trabajos from "../sections/Trabajos"
-import { Button } from "@/components/ui/button"
 
 
 export const MainLayout = () => {
@@ -13,10 +12,9 @@ export const MainLayout = () => {
         <div className="min-h-screen w-full bg-slate-900 text-white">
             <Header/>
             <main>
-                <Button>Click me</Button>
                 <QSomos/>
                 <Formacion/>
-                {/* <Servicios/> */}
+                <Servicios/>
                 <Trabajos/>
                 <Contacto/>
                 
