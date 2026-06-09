@@ -24,3 +24,27 @@ export const insertFormacion = async (formacion: IFormacion) => {
     return "Formación insertada correctamente";
 
 }
+
+export const deleteFormacion = async (formacion_id: string) => {
+    const { error } = await supabase
+                    .from('formaciones')
+                    .delete()
+                    .eq('formacion_id', formacion_id);
+    if (error) {
+        console.error(error)
+        throw error
+    }
+    return "Formación eliminada correctamente";
+}
+
+export const updateFormacion = async (formacion_id: string, formacionData: Partial<IFormacion>) => {
+    const { error } = await supabase
+                    .from('formaciones')
+                    .update(formacionData)
+                    .eq('formacion_id', formacion_id);
+    if (error) {
+        console.error(error)
+        throw error
+    }
+    return "Formación actualizada correctamente";
+}

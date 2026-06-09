@@ -1,4 +1,4 @@
-# Explicación Técnica del Portfolio de Luis Miguel
+# Explicación Técnica del Portfolio
 
 > Documento pensado para que puedas explicar tu proyecto ante un tribunal, aunque no sepa nada de programación.
 
@@ -6,11 +6,11 @@
 
 ## 1. ¿Qué es este proyecto?
 
-Es una **página web personal (portfolio)** que he creado para mostrar mis estudios, servicios, cursos y trabajos como estudiante de ASIR (Administración de Sistemas Informáticos en Red).
+Es una **página web personal (portfolio)** que he creado para mostrar mis estudios, servicios, cursos y proyectos como estudiante de ASIR (Administración de Sistemas Informáticos en Red).
 
-La web funciona como un **catálogo online** donde cualquiera puede ver mi formación y lo que sé hacer, y además incluye un **panel de administración oculto** donde yo puedo añadir, modificar o eliminar contenido sin tocar una línea de código — todo desde formularios en la propia web.
+La web funciona como un **catálogo online** donde cualquiera puede ver mi perfil técnico, los cursos que he realizado, los servicios que ofrezco y los proyectos en los que he trabajado. Toda la información se carga desde Supabase (una base de datos en la nube), pero el proyecto incluye un sistema **mock** que genera datos ficticios realistas para que la web funcione aunque no haya conexión a la base de datos real.
 
-Está construida con **React** (una librería moderna de JavaScript para hacer interfaces de usuario), **TypeScript** (un "superconjunto" de JavaScript que evita errores), **Vite** (una herramienta que hace que el desarrollo sea muy rápido) y se conecta a **Supabase** (una base de datos en la nube).
+Está construida con **React** (una librería moderna de JavaScript para hacer interfaces de usuario), **TypeScript** (un "superconjunto" de JavaScript que evita errores), **Vite** (una herramienta que hace que el desarrollo sea muy rápido) y se conecta a **Supabase** (base de datos en la nube). Para los estilos usa **Tailwind CSS** y para animaciones **Framer Motion**.
 
 ---
 
@@ -29,7 +29,8 @@ Cuando alguien escribe la URL de la web, el servidor envía el archivo `index.ht
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>portfolio-luis</title>
+    <title>Aaron - Full Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
@@ -38,7 +39,7 @@ Cuando alguien escribe la URL de la web, el servidor envía el archivo `index.ht
 </html>
 ```
 
-**Explicación:** Es un HTML mínimo. Lo importante está en la línea 10: hay un `<div id="root">` vacío, y en la línea 11 se carga un archivo JavaScript (`main.tsx`). Ese archivo es el que va a construir toda la página desde cero.
+**Explicación:** Es un HTML mínimo. Lo importante es que hay un `<div id="root">` vacío, y al final se carga un archivo JavaScript (`main.tsx`). Ese archivo es el que va a construir toda la página desde cero.
 
 #### 2. `main.tsx` — El punto de entrada
 
@@ -47,7 +48,7 @@ Cuando alguien escribe la URL de la web, el servidor envía el archivo `index.ht
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { App } from './App.tsx'
+import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -61,24 +62,39 @@ createRoot(document.getElementById('root')!).render(
 - `.render(<App />)` — Le dice a React: "dentro de ese div, renderiza (pinta) el componente `App`".
 - `<StrictMode>` — Es un modo de desarrollo que ayuda a detectar errores. No afecta a la web final.
 
-#### 3. `App.tsx` — El componente principal
+#### 3. `App.tsx` — El componente principal y el enrutador
 
 ```tsx
 // src/App.tsx
-import { AppRouter } from "./router/AppRouter"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+// ... importaciones de páginas ...
 
-export const App = () => {
-   return(
-      <AppRouter/>
-   )
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+        <Navbar />
+        <main className="grow pt-20">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sobre-mi" element={<SobreMi />} />
+            <Route path="/servicios" element={<Servicios />} />
+            <Route path="/proyectos" element={<Proyectos />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/servicios/:id" element={<ServicioDetalle />} />
+            <Route path="/cursos" element={<Cursos />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 ```
 
-**Explicación:** `App` es el componente raíz. Lo único que hace es cargar `AppRouter`, que es el sistema de rutas. Piensa en `AppRouter` como el "director de tráfico" que decide qué página mostrar según la URL.
-
-#### 4. El router decide qué página pintar
-
-`AppRouter` usa `react-router-dom`, una librería que permite que la web tenga múltiples "páginas" (vistas) sin recargar el navegador. Cuando cambias de URL, el router detecta el cambio y renderiza el componente correspondiente.
+**Explicación:** `App` es el componente raíz. Define el enrutador (`BrowserRouter`) y dentro de él coloca el `Navbar` (arriba), las rutas (en el medio) y el `Footer` (abajo). Cuando cambias de URL, React Router detecta el cambio y renderiza el componente correspondiente dentro de `<Routes>`, sin recargar toda la página.
 
 ---
 
@@ -88,72 +104,21 @@ export const App = () => {
 
 Imagina que tu web es un **edificio de varias habitaciones**. El router es el **índice de puertas** que hay en la entrada: te dice qué hay detrás de cada puerta y te lleva allí sin tener que salir del edificio. En una web sin router, cada vez que cambias de página el navegador recarga todo. Con React Router, solo se cambia la parte que toca — es más rápido y suave.
 
-### Archivo: `src/router/AppRouter.tsx`
+### Rutas definidas en `App.tsx`
 
-```tsx
-export const AppRouter = () => {
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route element={<MainLayout />} >
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/Formacion" element={<Formacion/>}/>
-                    <Route path="/servicios" element={<Servicios/>}/>
-                    <Route path="/cursos" element={<Cursos/>}/>
-                    <Route path="/contacto" element={<Contacto/>}/>
-                    <Route path="/Trabajos" element={<Trabajos/>}/>
-                    <Route path="*" element={<NotFound />} />                
-                </Route>
+A diferencia de otros proyectos que separan las rutas en un archivo aparte (`AppRouter.tsx`), aquí las rutas están directamente en `App.tsx`:
 
-                <Route path="/admin" element={<BackendLayout/>}>
-                    <Route path="/admin/Cursos" element={<AdminCursos/>}/>
-                    <Route path="/admin/Formacion" element={<AdminFormacion/>}/>
-                    <Route path="/admin/Servicios" element={<AdminServicios/>}/>
-                    <Route path="/admin/Trabajos" element={<AdminTrabajos/>}/>
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    )
-}
-```
+| Ruta | Componente | ¿Qué muestra? |
+|------|-----------|---------------|
+| `/` | `Home` | Página principal con héroe, marquee de tecnologías y pilares estratégicos |
+| `/sobre-mi` | `SobreMi` | Perfil técnico, formación y stack tecnológico en diseño Bento |
+| `/servicios` | `Servicios` | Lista de servicios ofrecidos (desde Supabase) |
+| `/servicios/:id` | `ServicioDetalle` | Detalle de un servicio concreto (desde Supabase) |
+| `/proyectos` | `Proyectos` | Proyectos realizados (desde Supabase) |
+| `/cursos` | `Cursos` | Cursos y certificaciones (desde Supabase) |
+| `/contacto` | `Contacto` | Formulario de contacto e información de contacto (desde Supabase) |
 
-**Explicación línea por línea:**
-
-- `<BrowserRouter>` — Es el "contenedor" del router. Le dice a la app: "a partir de aquí, funciona con rutas de navegador".
-- `<Routes>` — Es el "director de tráfico". Mira la URL actual y busca una ruta que coincida.
-- **Rutas públicas (envueltas en `MainLayout`)**: Home (`/`), Formación (`/Formacion`), Servicios (`/servicios`), Cursos (`/cursos`), Contacto (`/contacto`), Trabajos (`/Trabajos`).
-- `<Route path="*" element={<NotFound />} />` — El comodín `*` captura **cualquier URL que no coincida con las anteriores**. Es la página de error 404.
-- **Rutas de admin (envueltas en `BackendLayout`)**: `/admin/Cursos`, `/admin/Formacion`, `/admin/Servicios`, `/admin/Trabajos` — todas empiezan con `/admin`, lo que las hace "inaccesibles" desde la navegación normal (no hay enlaces públicos a ellas, solo aparecen en el menú del panel de administración).
-
-### ¿Qué es un Layout?
-
-Un Layout es como una **plantilla** que envuelve a las páginas. `MainLayout` añade el `Header` (barra de navegación) y el `Footer` (pie de página) a todas las páginas públicas, y `BackendLayout` añade la barra lateral del panel de administración.
-
-### El `Outlet` — ¿dónde se pinta la página?
-
-```tsx
-// src/layouts/MainLayout.tsx (fragmento)
-<main className="flex-1 relative z-10">
-    <Outlet />
-</main>
-```
-
-`Outlet` es como un **hueco** en la plantilla. Cuando entras a `/servicios`, el router mete el componente `Servicios` dentro de ese hueco. El Header y el Footer se quedan fijos alrededor.
-
-### ¿Qué pasa si la URL no existe?
-
-El `path="*"` atrapa cualquier ruta no definida y muestra el componente `NotFound`:
-
-```tsx
-// src/pages/NotFound.tsx
-<h1 className="mt-4 text-8xl font-semibold text-white tracking-tight">404</h1>
-<p className="mt-4 font-mono text-sm text-[#5a8fa8] tracking-wide">Página no encontrada</p>
-<Link to="/">← Volver al inicio</Link>
-```
-
-Muestra un "404" grande y un botón para volver a la página principal.
-
-✅ **Bien implementado:** Uso correcto de Layouts con Outlet, ruta comodín para 404, separación clara entre rutas públicas y de admin.
+**Nota:** La ruta comodín `path="*"` (página 404) **no está implementada**. Si se navega a una URL que no existe, React Router no encontrará ninguna ruta y no se mostrará nada en el `<main>`, pero la página no se rompe.
 
 ---
 
@@ -162,842 +127,375 @@ Muestra un "404" grande y un botón para volver a la página principal.
 ### 4.1. Home (`src/pages/Home.tsx`) — Página principal
 
 **¿Qué muestra?**
-- El nombre "Luis Miguel" destacado en azul cyan.
-- Un indicador de disponibilidad ("DISPONIBLE · ESPAÑA" con un punto verde parpadeante).
-- Una descripción: "Estudiante de Administración de Sistemas Informáticos en Red".
-- Dos botones: "Ver proyectos" y "Contactar".
-- Una sección de **Stack técnico** con 10 tecnologías (Linux, Cisco, Docker, etc.) mostradas como tarjetas pequeñas.
-- Una sección de **Stats** con 3 indicadores: "2° Año ASIR", "12+ Prácticas", "5+ Proyectos".
+- Una sección **Hero** con el nombre "AARON" animado con efecto de máquina de escribir (`typewriter-effect`).
+- Un indicador "Status: System Online" con un punto rojo parpadeante.
+- Una descripción: "Estudiante de 1º ASIR enfocado en la gestión de infraestructuras críticas..."
+- Dos botones: "Explorar Proyectos" (enlaza a `/proyectos`) y "Ver Certificaciones" (enlaza a `/cursos`).
+- Una **imagen decorativa** (`/cyber_server_red.png`) con un overlay técnico que simula un monitor de red (Status: Red Segura, Ping: 14ms).
+- Un **marquee infinito** con tecnologías (Linux, Windows Server, Cisco, Virtualización, Docker, Ciberseguridad...).
+- Una sección de **3 Pilares Estratégicos** en diseño Bento (Infraestructura, Seguridad, Soporte).
+- Un **mini-dashboard** con 4 stats (1º Año ASIR, 5+ Proyectos, 8+ Tecnologías, 100% Motivación).
 
 **¿Qué datos usa?**
-- Los datos del stack técnico están escritos **directamente en el código** (no vienen de base de datos):
+- Todos los datos están escritos **directamente en el código** (hardcodeados). No hay llamadas a Supabase.
+- Las animaciones usan **Framer Motion** para las transiciones y **Typewriter** para el efecto de escritura.
+- El marquee usa una **animación CSS personalizada** (`@keyframes marquee`).
 
-```tsx
-{[
-  { label: "Linux", highlight: false },
-  { label: "Cisco", highlight: true },
-  ...
-].map(({ label, highlight }) => (
-  // pinta una tarjeta por cada tecnología
-))}
-```
-
-- Los stats también están escritos directamente en el código.
-- Los botones no tienen funcionalidad real (no redirigen a nada).
-
-✅ **Bien:** Diseño visual atractivo con efecto de rejilla y animaciones.
-⚠️ **A mejorar:** Los botones "Ver proyectos" y "Contactar" no redirigen a las páginas reales; el logo del header usa una imagen de placeholder de Tailwind.
-
----
-
-### 4.2. Formación (`src/pages/formacion/Formacion.tsx`)
+### 4.2. Sobre Mí (`src/pages/SobreMi.tsx`)
 
 **¿Qué muestra?**
-- Cabecera, stats (2+ años, 1+ certificaciones, 5+ cursos) y una cuadrícula de **4 tarjetas de formación**.
-- Cada tarjeta tiene: tipo (FP Superior / Certificación / Curso), título, subtítulo, centro, ubicación, período, estado (En curso / Completado), una descripción expandible, y etiquetas de habilidades.
-
-**¿Qué datos usa y de dónde vienen?**
-Los datos están definidos **directamente en el código** como un array de objetos. Por ejemplo:
-
-```tsx
-const formacion: FormacionItem[] = [
-  {
-    id: 1,
-    tipo: "FP Superior",
-    titulo: "Técnico Superior en ASIR",
-    ...
-    color: "cyan",
-  },
-  // ... 3 más
-]
-```
-
-Cada tarjeta tiene un color distinto (cyan, azul, verde, naranja) que se asigna con un `colorMap`.
-
-**Lógica especial:**
-- El componente `FormacionCard` tiene un estado `expanded` (expandido/contraído). Al hacer clic en "[ + ver más ]" se despliega la descripción; al hacer clic en "[ — ocultar ]" se contrae. Esto se consigue cambiando la clase CSS `max-h-0` (altura máxima 0) a `max-h-40` (altura máxima 40).
-
-✅ **Bien:** Diseño visual consistente, cada tarjeta tiene código de color propio, descripción expandible.
-⚠️ **A mejorar:** Los datos están hardcodeados, no vienen de Supabase como en Cursos y Trabajos.
-
----
-
-### 4.3. Servicios (`src/pages/servicios/Servicios.tsx`)
-
-**¿Qué muestra?**
-- Cabecera, stats (6 servicios, 4 disponibles, 2+ años exp.) y 6 tarjetas de servicios.
-- Cada tarjeta tiene: código (SRV-01, SRV-02...), título, descripción, etiquetas de habilidades y un indicador de disponibilidad (Disponible / Próximamente).
-- Los servicios no disponibles se ven atenuados (más opacos).
+- Un diseño **Bento Grid** de 4 paneles:
+  1. **Perfil Técnico** (2 columnas): Descripción personal con mención a ASIR y botón de descarga de CV.
+  2. **Formación** (1 columna): Línea temporal con "Técnico Superior en ASIR".
+  3. **Stack Tecnológico** (2 columnas): 6 tarjetas con iconos (Linux, Win Server, Redes Cisco, Virtualización, Bases de Datos, Frontend).
+  4. **Métricas** (1 columna): Stats (1º ASIR, +5 Proyectos, +8 Tecnologías, 100% Motivación).
 
 **¿Qué datos usa?**
-Datos hardcodeados directamente en el archivo, igual que Formación.
+- Todos hardcodeados en el propio componente. No hay llamadas a Supabase.
+- Los iconos son de la librería `react-icons` (FaServer, FaNetworkWired, FaLinux, etc.).
 
-✅ **Bien:** Distinción visual clara entre servicios disponibles y no disponibles.
-⚠️ **A mejorar:** Datos hardcodeados, no vienen de Supabase.
+**¿Qué hace el botón "Descargar CV"?**
+- Descarga el archivo `/CV_Aaron_Cruz_Medrano.pdf` que está en la carpeta `public/` del proyecto.
 
----
-
-### 4.4. Cursos (`src/pages/cursos/Curso.tsx`)
+### 4.3. Servicios (`src/pages/Servicios.tsx`)
 
 **¿Qué muestra?**
-- Cabecera con título "Cursos" y descripción. Si hay cursos en la base de datos, los pinta con `CursosCard`. Si no hay, muestra "No hay cursos disponibles".
+- Una cuadrícula de tarjetas de servicio, cada una con:
+  - Imagen del servicio.
+  - Nombre del servicio.
+  - Descripción breve.
+  - Botón "Ver más detalles" que enlaza a `/servicios/:id`.
 
 **¿Qué datos usa y de dónde vienen?**
-Esta página **sí obtiene datos de Supabase**:
 
 ```tsx
-const [cursos, setCursos] = useState([]);       // Estado para guardar los cursos
-const obtenerCursos = async () => {
-    const data = await getCursos()               // Llama a Supabase
-    setCursos(data)                              // Guarda los datos en el estado
-}
+useEffect(() => {
+  const fetchServicios = async () => {
+    const { data } = await supabase.from('Servicios').select('*');
+    if (data) setServicios(data);
+    setLoading(false);
+  };
+  fetchServicios();
+}, []);
+```
+
+**Explicación:** Al cargar la página, se ejecuta `useEffect` que llama a Supabase para obtener todos los servicios de la tabla `Servicios`. Mientras carga, muestra un spinner animado. Si no hay datos, se muestra una cuadrícula vacía.
+
+### 4.4. ServicioDetalle (`src/pages/ServicioDetalle.tsx`)
+
+**¿Qué muestra?**
+- La página de detalle de un servicio individual. Recibe el `id` del servicio desde la URL (ej: `/servicios/1`).
+- Muestra: nombre, descripción entre comillas, detalles técnicos en un recuadro destacado, imagen a tamaño completo.
+
+**¿Qué datos usa y de dónde vienen?**
+
+```tsx
+const { id } = useParams<{ id: string }>();
 
 useEffect(() => {
-    obtenerCursos();                             // Se ejecuta al montar la página
-}, [])
+  const fetchServicio = async () => {
+    const { data, error } = await supabase
+      .from('Servicios')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (!error) setServicio(data);
+  };
+  fetchServicio();
+}, [id]);
 ```
 
-El patrón típico es: 1) Al cargar la página (`useEffect`), 2) Llamar a Supabase (`getCursos`), 3) Guardar los datos en el estado (`setCursos`), 4) Pintar los datos.
+**Explicación:** Usa `useParams` para obtener el `id` de la URL. Luego consulta Supabase filtrando por ese ID con `.eq('id', id).single()`. Como el resultado se espera que sea un único objeto (no un array), se usa `.single()`. Mientras carga, muestra "Cargando especificaciones...".
 
----
-
-### 4.5. Trabajos (`src/pages/trabajos/Trabajos.tsx`)
+### 4.5. Proyectos (`src/pages/Proyectos.tsx`)
 
 **¿Qué muestra?**
-- Cabecera, y si hay trabajos en Supabase los pinta con `TrabajosCard`. Si no, muestra "Proximamente...".
+- Una cuadrícula de tarjetas de proyecto, cada una con:
+  - Imagen de fondo a pantalla completa.
+  - Nombre del proyecto.
+  - Descripción.
+  - Botón "Ver proyecto" que abre el enlace en una pestaña nueva.
 
-**¿Qué datos usa?**
-Mismo patrón que Cursos: llama a `getTrabajos()` de Supabase, guarda en estado, renderiza.
+**¿Qué datos usa y de dónde vienen?**
 
----
-
-### 4.6. Contacto (`src/pages/Contacto.tsx`)
-
-**¿Qué muestra?**
-- Un formulario de contacto con campos: Nombre, Apellido, Email, Mensaje.
-- Tiene un botón "Enviar mensaje →".
-
-**¿Qué datos usa?**
-Usa estado local para manejar el formulario:
+Usa el **service layer** (`proyectoService.ts`):
 
 ```tsx
-const [form, setForm] = useState({ nombre: '', apellido: '', email: '', mensaje: '' })
-const [agreed, setAgreed] = useState(false)
+// src/services/proyectoService.ts
+export const obtenerProyectos = async () => {
+  const { data, error } = await supabase.from('Proyectos').select('*');
+  if (error) throw error;
+  return { data, error: null };
+};
 ```
 
-Cada vez que el usuario escribe en un campo, se llama a `handleChange` que actualiza el estado:
+La página llama a `obtenerProyectos()` y maneja el error:
 
 ```tsx
-const handleChange = (e) => {
-  setForm({ ...form, [e.target.name]: e.target.value })
+const { data, error } = await obtenerProyectos();
+if (error) {
+  console.error("Error de conexión:", error.message || error);
+} else {
+  setProyectos(data || []);
 }
 ```
 
-**⚠️ IMPORTANTE:** El botón de enviar **no envía realmente nada**. El código tiene un `TODO`:
+Si no hay proyectos (error o datos vacíos), muestra: "No hay proyectos disponibles en la base de datos. Revisa el RLS en Supabase".
+
+### 4.6. Cursos (`src/pages/Cursos.tsx`)
+
+**¿Qué muestra?**
+- Una cuadrícula de tarjetas de curso con diseño **glassmorphism** (efecto de cristal esmerilado).
+- Cada tarjeta tiene: badge de medalla, logo de la institución, nombre de la institución, fecha, nombre del curso, descripción entre comillas, y botón "Validar Credencial" con efecto de relleno.
+- Animaciones con **Framer Motion**: las tarjetas aparecen con escalado y retardo progresivo.
+
+**¿Qué datos usa y de dónde vienen?**
 
 ```tsx
-const handleSubmit = () => {
-  // TODO: integrar Formspree / EmailJS aquí
-  console.log('Enviando...', form)
-}
+// src/services/cursoService.ts
+export const obtenerCursos = async () => {
+  const { data, error } = await supabase
+    .from('Cursos')
+    .select('*')
+    .order('id', { ascending: false });
+  if (error) throw error;
+  return { data, error: null };
+};
 ```
 
-Además, el botón de enviar se deshabilita si no se ha marcado el checkbox de privacidad, pero **el checkbox está comentado** (no visible), por lo que el botón siempre está deshabilitado y no se puede enviar.
+Usa `.order('id', { ascending: false })` para mostrar los cursos más recientes primero.
 
-⚠️ **A mejorar:** El formulario de contacto no es funcional — no envía correos, y el botón siempre está deshabilitado porque el checkbox de privacidad está comentado.
+### 4.7. Contacto (`src/pages/Contacto.tsx`)
 
----
+**¿Qué muestra?**
+- Un formulario de contacto completo con campos: Nombre, Email, Asunto (desplegable con 4 opciones), y Mensaje.
+- Si se selecciona "Reserva de Cita", aparecen campos adicionales de Fecha y Hora.
+- Información de contacto obtenida de Supabase: email personal con enlace a Gmail, dirección con mapa de Google Maps embebido.
 
-### 4.7. NotFound (`src/pages/NotFound.tsx`)
+**¿Qué datos usa y de dónde vienen?**
 
-Página de error 404 para URLs no existentes. Muestra "404" grande, "Página no encontrada" y un enlace "← Volver al inicio".
+**Lectura (información de contacto):**
+```tsx
+const { data, error } = await supabase
+  .from('Informacion_Contacto')
+  .select('*')
+  .single();
+```
+
+**Escritura (guardar mensaje):**
+```tsx
+const { error } = await supabase
+  .from('Mensaje_Contacto')
+  .insert([{ nombre, email, mensaje: mensajeFinal }]);
+```
+
+Además, después de guardar el mensaje en Supabase, envía una **alerta a Telegram** usando la API de Telegram:
+
+```tsx
+await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ chat_id: chatId, text: telegramText })
+});
+```
+
+**Nota:** El envío a Telegram requiere las variables de entorno `VITE_TELEGRAM_BOT_TOKEN` y `VITE_TELEGRAM_CHAT_ID`. Si no están configuradas, simplemente se registra una advertencia en consola pero el mensaje se guarda igualmente en Supabase.
 
 ---
 
 ## 5. Los componentes reutilizables
 
-### 5.1. Header (`src/components/main/Header.tsx`)
+### 5.1. Navbar (`src/components/Navbar.tsx`)
 
-**¿Para qué sirve?** Barra de navegación superior. Aparece en todas las páginas públicas.
+**¿Para qué sirve?** Barra de navegación superior. Aparece en todas las páginas.
 
 **¿Qué hace?**
-- Muestra 6 enlaces de navegación: Home, Formación, Servicios, Trabajos, Cursos y Contacto.
-- Resalta con color azul el enlace de la página actual (gracias a `useLocation()` que detecta la URL).
-- En móvil, los enlaces se ocultan y aparece un botón de "hamburguesa" (tres rayas) que despliega un menú vertical.
-- Tiene un avatar a la derecha que, al hacer clic, muestra un menú desplegable con un enlace a "Ajustes" (que lleva a `/admin`, el panel de administración).
+- Muestra 6 enlaces de navegación: Inicio, Sobre mi, Cursos, Servicios, Proyectos y Contacto.
+- Resalta con color rojo el enlace de la página actual (gracias a `useLocation()`).
+- En móvil, los enlaces se ocultan y aparece un botón de "hamburguesa" que despliega un menú animado con Framer Motion.
+- Tiene un logo con icono de terminal y el nombre "AaronMCM" con el texto "SysAdmin · Dev".
+- Botón "Descargar CV" para escritorio.
+- El logo tiene un punto verde parpadeante que simula "servidor activo".
 
-**Analogía:** Es como el **menú de navegación de cualquier web** — está siempre visible y te lleva a las secciones principales.
+### 5.2. Footer (`src/components/Footer.tsx`)
 
-### 5.2. Footer (`src/components/main/Footer.tsx`)
+**¿Para qué sirve?** Pie de página que aparece en todas las páginas.
 
-**¿Para qué sirve?** Pie de página que muestra el año actual y "Mi Portfolio".
-
-```tsx
-<p>© {new Date().getFullYear()} — <span>Mi Portfolio </span></p>
-```
-
-Usa `new Date().getFullYear()` para mostrar el año automáticamente.
-
-### 5.3. CursosCard + CursoCard (`src/components/cursos/`)
-
-**CursosCard** recibe un array de cursos (prop `cursos`) y los recorre con `.map()` pintando un `CursoCard` por cada uno.
-
-**CursoCard** recibe un solo curso (prop `curso`) y pinta:
-- Una tarjeta con categoría, título, academia, precio y un botón "[ + VER MÁS ]" (que no hace nada, es decorativo).
-
-```tsx
-interface Props {
-    curso: ICurso;
-}
-// ICurso tiene: curso_id, titulo, categoria, academia, precio
-```
-
-### 5.4. TrabajosCard + TrabajoCard (`src/components/trabajos/`)
-
-**TrabajoCard** recibe un trabajo y pinta:
-- Imagen (si tiene), empresa, título, fecha, descripción expandible, tecnologías como etiquetas, y un enlace "→ VISITAR" (si tiene enlace).
-
-```tsx
-interface Props {
-    trabajo: ITrabajos;
-}
-```
-
-Tiene un estado `expanded` para la descripción expandible, igual que FormacionCard.
-
-### 5.5. FormacionCard (`src/components/formacion/FormacionCard.tsx`)
-
-Misma estructura que TrabajoCard pero para datos de formación: categoría, título, autor, fecha, descripción expandible.
-
-### 5.6. ServicioCard (`src/components/servicios/ServicioCard.tsx`)
-
-Muestra tipo, nombre, descripción expandible, características y precio.
-
-### 5.7. Componentes "Wrapper" (`CursosCard`, `TrabajosCard`, `FormacionesCard`, `ServiciosCard`)
-
-Estos componentes son "contenedores" que reciben un array de datos y los distribuyen en una cuadrícula de 2 columnas. Su única responsabilidad es recibir `props` y pasarlas a los componentes individuales.
-
-### 5.8. Componentes UI de shadcn (`src/components/ui/`)
-
-Hay 23 componentes UI (Button, Card, Input, Select, Sidebar, Table, Tabs, etc.). Son componentes prediseñados de **shadcn/ui** que se han copiado al proyecto. No están instalados como librería externa, sino que sus archivos fuente están dentro del proyecto. Cada uno es personalizable y usa las variables CSS del tema.
+**¿Qué muestra?**
+- Marca con logo de terminal y nombre.
+- Enlaces rápidos a Proyectos, Cursos y Contacto.
+- Iconos de redes sociales: GitHub (`https://github.com/AaronCM2705`), LinkedIn y Email.
+- Copyright con año dinámico: `© 2026 Aaron Cruz Medrano`.
+- Texto: "1º ASIR - Lenguaje de Marcas".
 
 ---
 
-## 6. Los `.map()` explicados uno a uno ⭐
-
-Aquí están **todos** los `.map()` del proyecto, en orden de aparición:
-
-### 6.1. Home.tsx — Stack técnico (línea 85)
-
-```tsx
-{[...].map(({ label, highlight }) => (
-  <div key={label} className={...}>
-    {label}
-  </div>
-))}
-```
-
-- **Array recorrido:** Un array de 10 objetos, cada uno con `label` (nombre de tecnología) y `highlight` (si debe destacarse).
-- **Qué devuelve cada iteración:** Un `<div>` con el nombre de la tecnología. Cisco aparece destacado.
-- **Analogía:** "Es como tener una lista de 10 tecnologías que sé usar, y por cada una pinto una tarjeta con su nombre. Si es Cisco, la tarjeta se ve más brillante."
-- **Datos reales:** Linux, Cisco (destacado), Windows Server, Docker, Bash, Python, VMware, Active Directory, SQL, Tailwind.
-
-### 6.2. Home.tsx — Stats (línea 113)
-
-```tsx
-{[...].map(({ num, label }) => (
-  <div key={label} className={...}>
-    <div>{num}</div>
-    <div>{label}</div>
-  </div>
-))}
-```
-
-- **Array recorrido:** 3 objetos con `num` (número/valor) y `label` (descripción).
-- **Qué devuelve:** Una tarjeta con el número grande y la etiqueta debajo.
-- **Datos reales:** "2°" → "Año ASIR", "12+" → "Prácticas", "5+" → "Proyectos".
-
-### 6.3. Formacion.tsx — Stats (línea 231)
-
-Mismo patrón que Home, pero con datos de formación: "2+" → "Años formación", "1+" → "Certificaciones", "5+" → "Cursos".
-
-### 6.4. Formacion.tsx — Tarjetas de formación (línea 252)
-
-```tsx
-{formacion.map((item) => (
-  <FormacionCard key={item.id} item={item} />
-))}
-```
-
-- **Array recorrido:** `formacion`, un array de 4 objetos con datos de formación.
-- **Qué devuelve:** Un `FormacionCard` por cada elemento.
-- **Analogía:** "Tengo 4 elementos en mi historial académico (ASIR, CCNA, Linux, Docker). Por cada uno, pinto una tarjeta con su información."
-
-### 6.5. Formacion.tsx — Skills dentro de cada tarjeta (línea 163)
-
-```tsx
-{item.skills.map((s) => (
-  <span key={s} className={...}>{s}</span>
-))}
-```
-
-- **Array recorrido:** El array `skills` de cada formación (ej: `["Linux", "Windows Server", "Cisco", ...]`).
-- **Qué devuelve:** Pequeñas etiquetas con cada habilidad.
-- **Datos reales (primer item):** Linux, Windows Server, Cisco, Docker, VMware, Active Directory, SQL, Python, Bash.
-
-### 6.6. Servicios.tsx — Stats (línea 118)
-
-Mismo patrón: "6" → "Servicios", "4" → "Disponibles", "2+" → "Años exp."
-
-### 6.7. Servicios.tsx — Tarjetas de servicios (línea 140)
-
-```tsx
-{servicios.map((srv) => (
-  <div key={srv.id} className={...}>
-    ...
-  </div>
-))}
-```
-
-- **Array recorrido:** `servicios`, 6 objetos de servicio.
-- **Analogía:** "Tengo 6 servicios que ofrezco, y por cada uno dibujo una tarjeta. Si no está disponible, la tarjeta se ve más apagada."
-
-### 6.8. Servicios.tsx — Skills dentro de cada tarjeta (línea 186)
-
-```tsx
-{srv.skills.map((s) => (
-  <span key={s} className={...}>{s}</span>
-))}
-```
-
-Mismo patrón que en Formación.
-
-### 6.9. CursosCard.tsx — (línea 11)
-
-```tsx
-{cursos.map((curso) => (
-  <CursoCard key={curso.curso_id} curso={curso} />
-))}
-```
-
-- **Array recorrido:** `cursos`, que viene de Supabase (vienen de la base de datos).
-- **Analogía:** "Tengo una lista de cursos guardados en la nube, y por cada curso pinto una tarjeta."
-
-### 6.10. TrabajosCard.tsx — (línea 11)
-
-```tsx
-{trabajos.map((trabajo) => (
-  <TrabajoCard key={trabajo.trabajo_id} trabajo={trabajo} />
-))}
-```
-
-Mismo patrón que Cursos.
-
-### 6.11. TrabajoCard.tsx — Tecnologías (línea 52)
-
-```tsx
-{trabajo.tecnologias && trabajo.tecnologias.map((tech) => (
-  <span key={tech} className={...}>{tech}</span>
-))}
-```
-
-- **Array recorrido:** `trabajo.tecnologias`, que es un array de strings (ej: `["React", "Node.js", "TypeScript"]`).
-- **Nota:** `trabajo.tecnologias &&` es una comprobación de seguridad — solo hace el `.map()` si `tecnologias` existe y no es `null/undefined`.
-
-### 6.12. FormacionesCard.tsx — (línea 11)
-
-```tsx
-{formaciones.map((formacion) => (
-  <FormacionCard key={formacion.formacion_id} formacion={formacion} />
-))}
-```
-
-### 6.13. ServiciosCard.tsx — (línea 11)
-
-```tsx
-{servicios.map((servicio) => (
-  <ServicioCard key={servicio.servicio_id} servicio={servicio} />
-))}
-```
-
-### 6.14. Header.tsx — Enlaces de navegación (línea 57 y 131)
-
-```tsx
-{opciones.map((item) => (
-  <Link key={item.title} to={item.to} ...>{item.title}</Link>
-))}
-```
-
-- **Array recorrido:** `opciones` = `[{title: 'Home', to: '/'}, {title: 'Formación', to: '/Formacion'}, ...]`
-- **Qué devuelve:** Un enlace `<Link>` por cada opción del menú.
-- **Aparece DOS VECES:** Una para el menú de escritorio (visible en pantallas grandes) y otra para el menú móvil (oculto en escritorio, visible en móvil).
-
-### 6.15. DeleteCursoForm.tsx — Lista de cursos en el select (línea 68)
-
-```tsx
-{cursos.map(curso => (
-  <option key={curso.curso_id} value={curso.curso_id}>
-    {curso.titulo} — {curso.academia}
-  </option>
-))}
-```
-
-- **Array recorrido:** `cursos`, obtenidos de Supabase.
-- **Qué devuelve:** Opciones de un `<select>` desplegable para que el admin elija qué curso eliminar.
-
-### 6.16. UpdateCursoForm.tsx — Tabla de cursos (línea 193)
-
-```tsx
-{cursos.map((curso) => (
-  <tr key={curso.curso_id} className={...}>
-    <td>{curso.titulo}</td>  // más columnas...
-    <td><Button onClick={() => seleccionarCurso(curso)}>Editar</Button></td>
-  </tr>
-))}
-```
-
-- **Array recorrido:** `cursos` de Supabase.
-- **Qué devuelve:** Filas de una tabla HTML con los datos de cada curso y un botón "Editar".
-
-### 6.17. NavMain.tsx — Items del menú lateral (línea 45)
-
-```tsx
-{items.map((item) => (
-  <SidebarMenuItem key={item.title}>
-    // ...
-  </SidebarMenuItem>
-))}
-```
-
-### 6.18. NavSecondary.tsx — Items secundarios (línea 27)
-
-```tsx
-{items.map((item) => (
-  <SidebarMenuItem key={item.title}>
-    // ...
-  </SidebarMenuItem>
-))}
-```
-
-### 6.19. NavDocuments.tsx — Items de documentos (línea 35)
-
-```tsx
-{items.map((item) => (
-  <SidebarMenuItem key={item.name}>
-    // ...
-  </SidebarMenuItem>
-))}
-```
-
----
-
-## 7. La conexión con Supabase (la "base de datos") ⭐
+## 6. La conexión con Supabase y el sistema Mock ⭐⭐
 
 ### ¿Qué es Supabase?
 
-Imagina que tienes una **hoja de cálculo de Excel guardada en la nube**, pero con superpoderes: en lugar de tener que abrir Excel y editarla manualmente, tu web puede **leer, escribir, modificar y borrar datos** mediante simples llamadas desde el código. Eso es Supabase.
-
-Es una alternativa gratuita a Firebase que usa PostgreSQL como base de datos y ofrece una API REST automática para cada tabla.
+Imagina que tienes una **hoja de cálculo de Excel guardada en la nube**, pero con superpoderes: en lugar de tener que abrir Excel y editarla manualmente, tu web puede **leer y escribir datos** mediante simples llamadas desde el código. Eso es Supabase.
 
 ### ¿Cómo se inicializa el cliente?
 
 ```tsx
-// src/model/utils/supabase.ts
-import {createClient} from '@supabase/supabase-js';
+// src/supabase/supabaseClient.ts
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// ... (sistema Mock explicado abajo) ...
+
+export const supabase =
+  supabaseUrl && supabaseKey
+    ? createClient(supabaseUrl, supabaseKey)
+    : createMockClient();
 ```
 
-- `VITE_SUPABASE_URL` es la URL del proyecto en Supabase (ej: `https://onnvhasyttydbbxqtlwl.supabase.co`).
-- `VITE_SUPABASE_PUBLISHABLE_KEY` es la clave pública (se puede compartir).
-- `createClient` crea un objeto `supabase` que usaremos en todas las llamadas.
+### El sistema Mock (simulador de base de datos)
 
-Ambos valores están en el archivo `.env` (que no se sube a GitHub porque está en `.gitignore`).
+**¿Qué es un Mock?** Es un simulacro. En lugar de depender de una base de datos real en internet (que puede no estar disponible), he creado un sistema que **finge** tener los datos. Así la web funciona aunque no haya conexión a Supabase.
 
-### Tablas en Supabase
+**¿Cómo funciona?** El `supabaseClient.ts` comprueba si existen las variables de entorno `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`:
+- Si **existen**: usa el cliente real de Supabase (se conecta a la base de datos en la nube).
+- Si **no existen**: usa un cliente simulado (mock) que devuelve datos ficticios.
 
-El proyecto usa **4 tablas** en Supabase:
+### Datos ficticios incluidos en el Mock
 
-| Tabla | Qué guarda | API file |
-|-------|-----------|---------|
-| `cursos` | Cursos online | `apiCursos.ts` |
-| `formaciones` | Formación académica | `apiFormacion.ts` |
-| `servicios` | Servicios ofrecidos | `apiServicios.ts` |
-| `trabajos` | Proyectos/trabajos | `apiTrabajos.ts` |
+He creado datos realistas para que la web se vea completa aunque se ejecute sin conexión. Todos los datos están en español y tienen coherencia temática con ASIR:
 
-### Cada llamada a Supabase explicada
+#### Tabla `Proyectos` — 3 proyectos
+| id | nombre | descripción |
+|----|--------|-------------|
+| 1 | Sistema de Gestión de Incidencias ASIR | Plataforma web con React y Node.js |
+| 2 | Monitor de Redes con SNMP | Monitoreo de infraestructura de red |
+| 3 | Dashboard de Ciberseguridad | Panel de análisis de seguridad |
 
-#### 7.1. Cursos — Leer todos (`apiCursos.ts`, línea 5)
+#### Tabla `Cursos` — 3 cursos
+| id | nombre | institución |
+|----|--------|-------------|
+| 1 | Administración de Sistemas Linux | Cisco Networking Academy |
+| 2 | Seguridad en Redes Empresariales | Google Skill Boost |
+| 3 | Fundamentos de Ciberseguridad | Universidad Politécnica de Madrid |
+
+#### Tabla `Servicios` — 3 servicios
+| id | nombre |
+|----|--------|
+| 1 | Consultoría en Ciberseguridad |
+| 2 | Despliegue de Infraestructura Cloud |
+| 3 | Soporte Técnico Especializado ASIR |
+
+#### Tabla `Informacion_Contacto` — 1 registro
+| email | dirección |
+|-------|-----------|
+| aaron.cruz@example.com | C/ Tecnología, 42 · 28001 Madrid, España |
+
+#### Tabla `Mensaje_Contacto` — Operación Insert simulada
+Cuando alguien envía el formulario de contacto, el mock responde como si el mensaje se hubiera guardado correctamente, sin almacenar nada realmente.
+
+### Cómo funciona el Mock por dentro
+
+El mock implementa una **API fluida (fluent API)** que imita el comportamiento de Supabase. Esto significa que soporta el encadenamiento de métodos como `.from().select().eq().single()`:
 
 ```tsx
-export const getCursos = async (): Promise<ICurso[]> => {
-    const { data, error} = await supabase
-                    .from('cursos')
-                    .select();
-    if (error) {
-        console.log(error);
-    }
-    return data as ICurso[];
-}
+// El Mock interpreta cadenas como esta:
+supabase.from('Servicios').select('*').eq('id', 1).single()
+
+// Y las convierte internamente a:
+// 1. Busca la tabla "Servicios" en los datos locales
+// 2. Filtra las filas donde id == 1
+// 3. Devuelve un solo objeto en lugar de un array
+```
+
+**Métodos soportados por el Mock:**
+- `.select('*')` — Selecciona todos los campos
+- `.eq('columna', valor)` — Filtra donde columna sea igual a valor
+- `.order('columna', { ascending: true/false })` — Ordena los resultados
+- `.single()` — Espera un único resultado
+- `.insert([...])` — Simula una inserción
+
+**Analogía:** Es como tener un **diccionario** con todos los datos dentro del propio programa. Cuando haces una pregunta ("dame todos los servicios"), el mock consulta el diccionario en lugar de preguntar a la base de datos real.
+
+### ¿Qué ventajas tiene este sistema?
+
+1. **La web funciona sin internet** o sin tener configurada Supabase.
+2. **Se puede mostrar el portfolio en clase** sin necesidad de credenciales ni conexión.
+3. **Es transparente**: los componentes que usan Supabase no saben si están usando el cliente real o el mock, porque ambos tienen la misma interfaz.
+4. **Fácil de depurar**: los datos son predecibles y no cambian.
+
+---
+
+## 7. Cada llamada a Supabase explicada
+
+### 7.1. Proyectos — Leer todos (`src/services/proyectoService.ts`)
+
+```tsx
+await supabase.from('Proyectos').select('*')
 ```
 
 - **Operación:** SELECT (lectura)
-- **Tabla:** `cursos`
-- **Qué hace:** Pide "dame todos los cursos que hay en Supabase". Si hay error, lo imprime en consola. Devuelve los datos como un array de objetos `ICurso`.
-- **Cómo llega a la pantalla:** La página `Cursos.tsx` llama a `getCursos()` dentro de un `useEffect`, guarda el resultado en el estado `cursos`, y luego `CursosCard` los renderiza.
+- **Tabla:** `Proyectos`
+- **Qué hace:** Pide "dame todos los proyectos de la base de datos". Devuelve un array de objetos con los campos: `id`, `nombre`, `descripcion`, `imagen_url`, `link`.
+- **Si falla:** Imprime el error en consola y devuelve `{ data: null, error }`.
 
-#### 7.2. Cursos — Insertar (`apiCursos.ts`, línea 15)
+### 7.2. Cursos — Leer todos ordenados (`src/services/cursoService.ts`)
 
 ```tsx
-export const insertCurso = async (curso: ICurso) => {
-    const { data, error} = await supabase
-                    .from('cursos')
-                    .insert(curso);
-    if (error) {
-        console.error(error)
-        return[]
-    }
-    return "Curso insertado correctamente";
-}
+await supabase.from('Cursos').select('*').order('id', { ascending: false })
 ```
 
-- **Operación:** INSERT (escritura)
-- **Tabla:** `cursos`
-- **Qué hace:** Recibe un objeto `curso` y lo añade como nueva fila en la tabla. Si falla, devuelve array vacío. Si funciona, devuelve un mensaje de éxito.
-- **Cómo se usa:** El formulario `NewCursoForm` recoge los datos del usuario y llama a `insertCurso`.
+- **Operación:** SELECT con ordenación
+- **Tabla:** `Cursos`
+- **Qué hace:** Pide todos los cursos ordenados por ID de forma descendente (del más reciente al más antiguo).
+- **Devuelve:** Array de objetos con: `id`, `nombre`, `institucion`, `descripcion`, `fecha`, `certificado_url`, `imagen_logo`.
 
-#### 7.3. Cursos — Eliminar (`apiCursos.ts`, línea 28)
+### 7.3. Servicios — Leer todos (`src/pages/Servicios.tsx`)
 
 ```tsx
-export const deleteCurso = async (curso_id: string) => {
-    const { error } = await supabase
-                    .from('cursos')
-                    .delete()
-                    .eq('curso_id', curso_id);
-    if (error) {
-        console.error(error)
-        throw error
-    }
-    return "Curso eliminado correctamente";
-}
+await supabase.from('Servicios').select('*')
 ```
 
-- **Operación:** DELETE (borrado)
-- **Filtro:** `.eq('curso_id', curso_id)` — solo borra la fila cuyo `curso_id` coincida.
-- **Analogía:** "Es como decirle a Supabase: borra la fila de la tabla 'cursos' donde el ID sea exactamente este."
+- **Operación:** SELECT
+- **Tabla:** `Servicios`
+- **Devuelve:** Array de objetos con: `id`, `nombre`, `descripcion`, `detalles`, `imagen_url`.
 
-#### 7.4. Cursos — Obtener por ID (`apiCursos.ts`, línea 41)
+### 7.4. Servicios — Leer uno por ID (`src/pages/ServicioDetalle.tsx`)
 
 ```tsx
-export const getCursoById = async (curso_id: string): Promise<ICurso | null> => {
-    const { data, error } = await supabase
-                    .from('cursos')
-                    .select()
-                    .eq('curso_id', curso_id)
-                    .single();
-    // ...
-}
+await supabase.from('Servicios').select('*').eq('id', id).single()
 ```
 
 - **Operación:** SELECT con filtro
-- **`.single()`** — Indica que esperamos un solo resultado, no un array.
+- **Filtro:** `.eq('id', id)` — solo devuelve el servicio cuyo `id` coincida con el de la URL.
+- **`.single()`** — Indica que esperamos un solo objeto, no un array.
+- **Analogía:** "Es como buscar en una lista de servicios y decir: 'solo quiero el que tiene el número 2'."
 
-#### 7.5. Cursos — Actualizar (`apiCursos.ts`, línea 54)
-
-```tsx
-export const updateCurso = async (curso_id: string, cursoData: Partial<ICurso>) => {
-    const { data, error } = await supabase
-                    .from('cursos')
-                    .update(cursoData)
-                    .eq('curso_id', curso_id);
-    // ...
-}
-```
-
-- **Operación:** UPDATE (modificación)
-- **`Partial<ICurso>`** — Significa que solo necesita enviar los campos que cambian, no el objeto completo.
-
-#### 7.6. Formaciones — Leer todas (`apiFormacion.ts`)
+### 7.5. Información de Contacto — Leer (`src/pages/Contacto.tsx`)
 
 ```tsx
-export const getFormaciones = async (): Promise<IFormacion[]> => {
-    const { data, error} = await supabase.from('formaciones').select();
-    return data as IFormacion[];
-}
+await supabase.from('Informacion_Contacto').select('*').single()
 ```
 
-#### 7.7. Formaciones — Insertar (`apiFormacion.ts`, línea 15)
+- **Operación:** SELECT con `.single()`
+- **Tabla:** `Informacion_Contacto`
+- **Devuelve:** Un solo objeto con: `email_personal`, `direccion_texto`, `google_maps_url`.
+- **Analogía:** "Como una tabla de una sola fila que guarda la configuración de contacto."
 
-Mismo patrón que `insertCurso` pero con la tabla `formaciones`.
+### 7.6. Mensaje de Contacto — Insertar (`src/pages/Contacto.tsx`)
 
-#### 7.8. Servicios — Leer todas (`apiServicios.ts`)
+```tsx
+await supabase.from('Mensaje_Contacto').insert([{ nombre, email, mensaje: mensajeFinal }])
+```
 
-Mismo patrón, tabla `servicios`.
-
-#### 7.9. Servicios — Insertar (`apiServicios.ts`, línea 15)
-
-Mismo patrón.
-
-#### 7.10. Trabajos — Leer todos (`apiTrabajos.ts`)
-
-Mismo patrón, tabla `trabajos`.
-
-#### 7.11. Trabajos — Insertar (`apiTrabajos.ts`, línea 15)
-
-Mismo patrón.
-
-### ¿Qué pasa si Supabase falla?
-
-En todas las funciones:
-- Si hay error, se imprime en la consola con `console.error(error)`.
-- Las funciones de lectura devuelven los datos como si nada hubiera pasado (con `as ICurso[]`), lo que significa que si hay error, devuelven `undefined` y la página se muestra vacía o con el mensaje "No hay cursos disponibles".
-- Las funciones de escritura devuelven un mensaje de error que los formularios muestran al usuario en un recuadro rojo.
-
-⚠️ **A mejorar:** No hay manejo de errores visible para el usuario en las lecturas (solo en las escrituras). Si la base de datos falla, las páginas de cursos y trabajos se verían vacías sin que el usuario sepa por qué.
+- **Operación:** INSERT (escritura)
+- **Tabla:** `Mensaje_Contacto`
+- **Qué hace:** Toma los datos del formulario (nombre, email, mensaje) y los guarda como una nueva fila en Supabase.
+- **Nota:** En el mock, esta operación siempre "funciona" y devuelve éxito, pero no guarda nada realmente.
 
 ---
 
-## 8. El panel de administración (Admin CRUD)
-
-### ¿Qué es CRUD?
-
-CRUD son las 4 operaciones básicas que se pueden hacer con datos: **C**reate (Crear), **R**ead (Leer), **U**pdate (Actualizar), **D**elete (Eliminar).
-
-**Analogía:** Es como el panel de control de un blog. Desde ahí puedes escribir un nuevo artículo (Create), ver los que tienes (Read), modificar uno existente (Update) o borrarlo (Delete).
-
-### 8.1. Admin Cursos (`/admin/Cursos`) — El más completo
-
-**Componentes que usa:**
-1. `NewCursoForm` — Crear cursos
-2. `DeleteCursoForm` — Eliminar cursos
-3. `EditCursoForm` — Modificar cursos
-
-#### NewCursoForm — Insertar un nuevo curso
-
-**Cómo funciona paso a paso:**
-
-1. El usuario ve un formulario con campos: Título, Categoría, Academia, Precio.
-2. Rellena los campos y hace clic en "Insertar Curso".
-3. Cuando hace clic, se ejecuta la función `onSubmit`:
-
-```tsx
-const onSubmit = async (data) => {
-    setLoading(true)           // Muestra "Insertando..."
-    setMessage(null)           // Borra mensajes anteriores
-    try {
-      await insertCurso(data)  // Envía los datos a Supabase
-      setMessage({ type: 'success', text: '✓ Curso insertado correctamente' })
-      reset()                  // Limpia el formulario
-    } catch (error) {
-      setMessage({ type: 'error', text: '✗ Error al insertar el curso.' })
-    } finally {
-      setLoading(false)
-    }
-}
-```
-
-4. Si funciona, se muestra un mensaje verde de éxito. Si falla, un mensaje rojo de error.
-5. Después de 5 segundos, el mensaje desaparece automáticamente (`setTimeout`).
-
-#### DeleteCursoForm — Eliminar un curso
-
-1. Al cargar el componente, se ejecuta `useEffect` que llama a `getCursos()` para llenar un desplegable con todos los cursos.
-2. El usuario selecciona un curso del desplegable.
-3. Hace clic en "Eliminar Curso".
-4. Se llama a `deleteCurso(selectedId)` que borra el curso en Supabase.
-5. Se actualiza la lista local con `setCursos(prev => prev.filter(c => c.curso_id !== selectedId))` — esto quita el curso eliminado de la lista visible sin tener que recargar.
-
-**Detalle importante:** El botón de eliminar se deshabilita si no hay un curso seleccionado (`disabled={loading || !selectedId}`).
-
-#### EditCursoForm — Modificar un curso existente
-
-**Cómo funciona paso a paso:**
-
-1. Al cargar, obtiene todos los cursos de Supabase y los muestra en una tabla.
-2. El usuario hace clic en "Editar" junto al curso que quiere modificar.
-3. Se ejecuta `seleccionarCurso(curso)` que carga los datos del curso en el formulario de edición.
-4. El usuario modifica los campos y hace clic en "Guardar Cambios".
-5. Se llama a `updateCurso(cursoSeleccionado.curso_id, camposActualizados)` que envía los cambios a Supabase.
-6. El formulario se limpia y la tabla de cursos se refresca.
-
-**Patrón interesante:** Usa `const { curso_id, ...camposActualizados } = data` para separar el ID (que no se modifica) de los campos a actualizar. Esto se llama **destructuring** en JavaScript.
-
-### 8.2. Admin Formación (`/admin/Formacion`)
-
-Solo tiene `NewFormacionForm` — un formulario para insertar formación. **No tiene formularios de eliminar ni modificar**.
-
-### 8.3. Admin Servicios (`/admin/Servicios`)
-
-Solo tiene `NewServicioForm` — formulario para insertar servicios. **No tiene ni eliminar ni modificar**.
-
-### 8.4. Admin Trabajos (`/admin/Trabajos`)
-
-Solo tiene `NewTrabajoForm` — formulario para insertar trabajos. **No tiene ni eliminar ni modificar**.
-
-✅ **Bien implementado:** El CRUD de cursos es completo y funcional (Crear, Leer, Actualizar, Eliminar).
-⚠️ **A mejorar:** Las demás entidades (Formación, Servicios, Trabajos) solo tienen formulario de inserción, no de modificación ni eliminación. El CRUD está incompleto para ellas.
-
-### El panel lateral del admin
-
-El `BackendLayout` utiliza `SidebarProvider`, `AppSidebar` y `SidebarInset` para crear una interfaz de administración con:
-- **Sidebar izquierdo** con enlaces a Formación, Servicios, Trabajos, Cursos.
-- **Sección de Ajustes/Ayuda/Salir** en la parte inferior.
-- **Header superior** con título "Documentos".
-- **Avatar de usuario** con menú desplegable.
-
-⚠️ **A mejorar:** El panel de admin **no tiene autenticación**. Cualquiera que sepa la URL `/admin` puede acceder. Los componentes de admin contienen varios placeholder visuales (secciones de "Documentos", "Quick Create", "Inbox") que parecen ser restos de una plantilla de shadcn y no tienen funcionalidad real.
-
----
-
-## 9. El sistema de estado con useState y useEffect ⭐
-
-### ¿Qué es el "estado" en React?
-
-**Analogía:** El estado es como la **memoria a corto plazo** de un componente. Cuando cambias algo en la pantalla (escribes en un input, abres una descripción, cargas datos...), esos cambios se guardan en el "estado". React vigila el estado, y cuando cambia, React vuelve a pintar automáticamente el componente para reflejar los cambios.
-
-### Todos los `useState` del proyecto
-
-Los listaré por archivo, explicando qué guarda cada uno y cuándo cambia:
-
-#### En `Formacion.tsx` (componente FormacionCard)
-```tsx
-const [expanded, setExpanded] = useState(false);
-```
-- **Qué guarda:** Si la descripción está expandida (`true`) o contraída (`false`).
-- **Cuándo cambia:** Al hacer clic en "[ + ver más ]" o "[ — ocultar ]".
-
-#### En `Contacto.tsx`
-```tsx
-const [agreed, setAgreed] = useState(false)          // Checkbox de privacidad
-const [form, setForm] = useState({ nombre: '', apellido: '', email: '', mensaje: '' })
-```
-- **Qué guarda:** `agreed` guarda si el usuario aceptó la política de privacidad; `form` guarda los datos del formulario.
-- **Cuándo cambia:** Cada vez que el usuario escribe en un input (cambio en `form`) o marca el checkbox (cambio en `agreed`).
-
-#### En `Curso.tsx`
-```tsx
-const [cursos, setCursos] = useState([]);
-```
-- **Qué guarda:** La lista de cursos obtenidos de Supabase.
-
-#### En `Trabajos.tsx`
-```tsx
-const [trabajos, setTrabajos] = useState([]);
-```
-- **Qué guarda:** La lista de trabajos obtenidos de Supabase.
-
-#### En `TrabajoCard.tsx`, `FormacionCard.tsx`, `ServicioCard.tsx`
-```tsx
-const [expanded, setExpanded] = useState(false);
-```
-- **Qué guarda:** Si la descripción está expandida o no.
-
-#### En `NewCursoForm.tsx`
-```tsx
-const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
-const [loading, setLoading] = useState(false)
-```
-- **Qué guarda:** `message` guarda el mensaje de feedback (éxito/error) o `null` si no hay mensaje; `loading` indica si se está procesando una operación.
-
-#### En `DeleteCursoForm.tsx`
-```tsx
-const [cursos, setCursos] = useState<ICurso[]>([])
-const [selectedId, setSelectedId] = useState<string>("")
-const [message, setMessage] = useState(...)
-const [loading, setLoading] = useState(false)
-```
-- `cursos`: Lista de cursos para el desplegable.
-- `selectedId`: ID del curso seleccionado para eliminar.
-
-#### En `UpdateCursoForm.tsx`
-```tsx
-const [cursos, setCursos] = useState<ICurso[]>([])
-const [cursoSeleccionado, setCursoSeleccionado] = useState<ICurso | null>(null)
-const [message, setMessage] = useState(...)
-const [loading, setLoading] = useState(false)
-const [loadingLista, setLoadingLista] = useState(true)
-```
-- `cursoSeleccionado`: El curso que se está editando actualmente (o `null` si no hay ninguno).
-
-#### En `use-mobile.ts`
-```tsx
-const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
-```
-- **Qué guarda:** Si la pantalla es móvil o no.
-
-### Todos los `useEffect` del proyecto
-
-#### En `Curso.tsx`
-```tsx
-useEffect(() => {
-    obtenerCursos();
-}, [])
-```
-- **Qué hace:** Llama a `obtenerCursos()` (que fetchea datos de Supabase) **cuando el componente se monta por primera vez**.
-- **¿Por qué el `[]` vacío?** El array vacío significa "ejecútame solo una vez, al cargar". Sin él, se ejecutaría cada vez que el componente se actualiza, creando un bucle infinito.
-
-#### En `Trabajos.tsx`
-```tsx
-useEffect(() => {
-    obtenerTrabajos();
-}, [])
-```
-- Mismo patrón que Cursos.
-
-#### En `DeleteCursoForm.tsx`
-```tsx
-useEffect(() => {
-    getCursos().then(setCursos)
-}, [])
-```
-- Carga la lista de cursos al montar el formulario.
-
-#### En `UpdateCursoForm.tsx`
-```tsx
-useEffect(() => {
-    cargarCursos()
-}, [])
-```
-- Carga los cursos al montar el componente de edición.
-
-#### En `use-mobile.ts`
-```tsx
-React.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: 767px)`)
-    const onChange = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    mql.addEventListener("change", onChange)
-    setIsMobile(window.innerWidth < 768)
-    return () => mql.removeEventListener("change", onChange)
-}, [])
-```
-- **Qué hace:** Detecta si la pantalla es menor de 768px (móvil/tablet). Se ejecuta al cargar y cada vez que la ventana cambia de tamaño. Devuelve una función de limpieza (elimina el listener) para evitar fugas de memoria.
-
-### El patrón típico: "Cargo datos al montar el componente"
-
-Este es el patrón más importante del proyecto y se repite en Cursos y Trabajos:
-
-```
-1. useState([])          → Creo un "cajón vacío" para guardar los datos
-2. async function fn()   → Defino una función que va a buscar datos a Supabase
-3.   const data = await getX()   → Llamo a la API
-4.   setX(data)                  → Meto los datos en el cajón
-5. useEffect(() => { fn() }, []) → Cuando el componente se muestra, ejecuto la función
-6. {datos.map(...)}      → Pinto los datos con un map
-```
-
-**Por qué funciona:** React llama a `useEffect` automáticamente cuando el componente aparece en pantalla. Eso dispara la función que obtiene los datos. Cuando los datos llegan, `setX` actualiza el estado, y React vuelve a pintar el componente con los datos ya cargados.
-
-✅ **Bien implementado:** Uso correcto de `useEffect` con dependencias vacías para carga inicial, estados de loading y feedback para el usuario en los formularios.
-⚠️ **A mejorar:** No hay estado de "cargando" en las páginas públicas (Cursos, Trabajos) — mientras los datos llegan de Supabase, se ve la página vacía o el mensaje "No hay cursos disponibles" durante un instante.
-
----
-
-## 10. TypeScript: los tipos e interfaces
+## 8. TypeScript: los tipos e interfaces
 
 ### ¿Qué es TypeScript y por qué ayuda?
 
@@ -1005,149 +503,224 @@ Este es el patrón más importante del proyecto y se repite en Cursos y Trabajos
 
 ### Interfaces del proyecto
 
-#### ICurso
+La interfaz más importante es la del `MockQueryBuilder`, que es el corazón del sistema mock. Define cómo se comporta el simulador de base de datos:
+
 ```tsx
-export interface ICurso {
-    curso_id:   string;     // Identificador único del curso
-    titulo:     string;     // Nombre del curso
-    categoria:  string;     // Categoría (ej: "Programación", "Redes")
-    academia:   string;     // Institución que lo imparte
-    precio:     number;     // Precio en euros
+class MockQueryBuilder {
+  private tableName: string;
+  private isSingle: boolean = false;
+  private filterColumn: string | null = null;
+  private filterValue: unknown = null;
+  // ... más propiedades de estado
+
+  select(_columns = '*'): this { ... }
+  order(column: string, options?: { ascending?: boolean }): this { ... }
+  eq(column: string, value: unknown): this { ... }
+  single(): this { ... }
+  insert(rows: any[]): this { ... }
+  then(onfulfilled?, onrejected?): Promise<any> { ... }
 }
 ```
 
-#### IFormacion
-```tsx
-export interface IFormacion {
-    formacion_id:   string;     // ID único
-    titulo:         string;     // Título de la formación
-    subtitulo:      string;     // Subtítulo
-    descripcion:    string;     // Descripción larga
-    centro:         string;     // Centro educativo
-    estado:         string;     // "En curso" / "Completado"
-    fecha:          string;     // Fecha
-    imagen:         string;     // URL de imagen
-    categoria:      string;     // Categoría
-    autor_nombre:   string;     // Nombre del autor/profesor
-}
-```
+Además, cada tabla tiene su propia interfaz implícita definida por los datos que contiene:
 
-#### IServicio
-```tsx
-export interface IServicio {
-    servicio_id:     string;     // ID único
-    nombre:          string;     // Nombre del servicio
-    descripcion:     string;     // Descripción
-    tipo:            string;     // Tipo de servicio
-    precio:          string;     // Precio (es string, no number)
-    caracteristicas: string;     // Características (separadas por coma)
-    icono:           string;     // Nombre del icono
-}
-```
-
-#### ITrabajo
-```tsx
-export interface ITrabajo {
-    trabajo_id:  string;     // ID único
-    titulo:      string;     // Título del proyecto
-    descripcion: string;     // Descripción
-    empresa:     string;     // Empresa/cliente
-    fecha:       string;     // Fecha
-    tecnologias: string[];   // Array de tecnologías (ej: ["React", "Node.js"])
-    enlace:      string;     // URL del proyecto
-    imagen:      string;     // URL de la imagen
-}
-```
-
-### ¿Por qué empezar con `I`?
-
-La `I` inicial es una convención de nomenclatura que indica "Interface". No es obligatoria, pero ayuda a identificar rápidamente que es un tipo, no un valor.
-
-### ⚠️ Inconsistencias encontradas
-
-Algunos componentes importan nombres en plural (`IServicios`, `ITrabajos`) cuando las interfaces exportadas son singular (`IServicio`, `ITrabajo`). Esto podría causar errores de compilación:
-
-- `NewServicioForm.tsx` y `ServicioCard.tsx` importan `IServicios` pero la interface exportada es `IServicio`
-- `NewTrabajoForm.tsx` y `TrabajoCard.tsx` importan `ITrabajos` pero la interface exportada es `ITrabajo`
+| Tabla | Campos |
+|-------|--------|
+| `Proyectos` | `id: number, nombre: string, descripcion: string, imagen_url: string, link: string` |
+| `Cursos` | `id: number, nombre: string, institucion: string, descripcion: string, fecha: string, certificado_url: string, imagen_logo: string` |
+| `Servicios` | `id: number, nombre: string, descripcion: string, detalles: string, imagen_url: string` |
+| `Informacion_Contacto` | `email_personal: string, direccion_texto: string, google_maps_url: string` |
+| `Mensaje_Contacto` | `nombre: string, email: string, mensaje: string` |
 
 ---
 
-## 11. El diseño visual: Tailwind CSS y shadcn/ui
+## 9. El diseño visual: Tailwind CSS
 
 ### ¿Qué es Tailwind CSS?
 
 **Analogía:** Normalmente, para dar estilo a una web, escribes CSS a medida para cada elemento. Tailwind es como tener **un enorme juego de piezas de LEGO pre-hechas**: en lugar de construir cada adorno desde cero, simplemente eliges piezas que ya existen. Por ejemplo, en lugar de escribir `font-size: 14px; color: blue; margin-top: 10px;`, escribes `text-sm text-blue-500 mt-2.5`.
 
-Todo el diseño del portfolio usa **clases de Tailwind directamente en el HTML**. No hay archivos CSS personalizados (salvo las variables de tema y las configuraciones de shadcn).
-
-### ¿Qué es shadcn/ui?
-
-No es una librería que se instala como dependencia, sino un conjunto de **componentes copiados al proyecto**. Cada componente (Button, Card, Input, Sidebar, etc.) está en `src/components/ui/` y es totalmente editable. La ventaja es que tienes el control total del código de cada componente.
+Todo el diseño del portfolio usa **clases de Tailwind directamente en el HTML**.
 
 ### El tema oscuro
 
-El proyecto usa un **tema oscuro personalizado** con esta paleta:
-- **Fondo principal:** `#050d1a` (azul muy oscuro, casi negro)
-- **Color de acento (cyan):** `#00c8ff` (azul eléctrico brillante)
-- **Texto claro:** `#c9d8f0` / `#e8f4ff`
-- **Texto secundario:** `#5a8fa8` / `#7fa8c0` (azules grisáceos)
+El proyecto usa un **tema oscuro** con esta paleta:
+- **Fondo principal:** `#0a0a0a` (negro carbón)
+- **Color de acento:** `#e63946` (rojo vivo)
+- **Texto principal:** `#ffffff` (blanco)
+- **Texto secundario:** `#71717a` (gris zinc)
 
-### El sistema de variables CSS
+### Efectos visuales destacados
 
-En `src/App.css` y `src/index.css` se definen variables CSS para el tema, usando el formato `oklch` (un espacio de color moderno):
+- **Glassmorphism:** Efecto de cristal esmerilado con `backdrop-blur-xl`, `bg-zinc-900/30` y bordes semitransparentes. Se usa en las tarjetas de Cursos, Sobre Mí y Home.
+- **Animaciones de hover:** Las tarjetas se elevan (`hover:-translate-y-1`), cambian de borde a rojo y tienen sombras brillantes (`hover:shadow-[0_0_30px_rgba(230,57,70,0.15)]`).
+- **Marquee infinito:** Barra de tecnologías que se desplaza horizontalmente sin fin usando `@keyframes marquee`.
+- **Tipografía:** Usa **Inter** para textos generales y **JetBrains Mono** para textos técnicos/monospace, cargadas desde Google Fonts.
+- **Spinner de carga:** Animación de círculo giratorio mientras se cargan datos de Supabase.
 
-```css
-:root {   /* Modo claro */
-    --background: oklch(1 0 0);   /* Blanco */
-    --foreground: oklch(0.145 0 0);  /* Casi negro */
-    --primary: oklch(0.205 0 0);
-    /* ... más variables ... */
-}
-
-.dark {   /* Modo oscuro (activo por defecto en el portfolio) */
-    --background: oklch(0.145 0 0);   /* Fondo oscuro */
-    --foreground: oklch(0.985 0 0);   /* Texto claro */
-    --primary: oklch(0.922 0 0);
-    /* ... */
-}
-```
-
-Luego, en `@theme inline` se mapean estas variables a nombres de clase de Tailwind:
+### Archivo de estilos base (`src/index.css`)
 
 ```css
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-primary: var(--primary);
-    /* ... */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  :root {
+    background-color: #050505;
+    color: white;
+  }
 }
 ```
 
-Esto permite usar clases como `bg-background`, `text-foreground`, `border-border`, etc.
+Define las fuentes personalizadas y el fondo/color base.
 
-### Fondo de rejilla y animaciones
+---
 
-Todas las páginas tienen un fondo de **rejilla** (cuadrícula de 40x40px) creado con CSS:
+## 10. Los `.map()` explicados
 
-```tsx
-style={{
-  backgroundImage:
-    "linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px), linear-gradient(90deg, ...)",
-  backgroundSize: "40px 40px",
-}}
-```
+El método `.map()` recorre una lista (array) y ejecuta una función por cada elemento, devolviendo un nuevo array con los resultados.
 
-Y una **línea de barrido** (scan line) que se mueve verticalmente con una animación CSS:
+### 10.1. Proyectos.tsx (línea 35)
 
 ```tsx
-<div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,200,255,0.4)] to-transparent animate-[scan_4s_linear_infinite]" />
+{proyectos.map((p) => (
+  <div key={p.id}>
+    <img src={p.imagen_url} alt={p.nombre} />
+    <h3>{p.nombre}</h3>
+    <p>{p.descripcion}</p>
+    <a href={p.link}>Ver proyecto</a>
+  </div>
+))}
 ```
 
-La animación `scan` recorre la pantalla cada 4 segundos, dando un efecto "cyberpunk/matrix".
+- **Array recorrido:** `proyectos`, que viene de Supabase (o del mock).
+- **Qué devuelve:** Una tarjeta con imagen, nombre, descripción y enlace.
+- **Analogía:** "Tengo una lista de proyectos guardados en la nube, y por cada uno pinto una tarjeta."
 
-### Tipografía
+### 10.2. Cursos.tsx (línea 39)
 
-Se usa la fuente **Geist Variable** (de Vercel), cargada desde el paquete `@fontsource-variable/geist`. Es una fuente sans-serif moderna y elegante.
+```tsx
+{cursos.map((curso, index) => (
+  <motion.div key={curso.id}
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+  >
+    {/* contenido de la tarjeta */}
+  </motion.div>
+))}
+```
+
+- **Array recorrido:** `cursos`, de Supabase/mock.
+- **Particularidad:** Usa `index * 0.1` como retardo para que las tarjetas aparezcan una tras otra (efecto escalonado).
+- **Analogía:** "Cada curso aparece con una pequeña animación, como si las tarjetas entraran en fila."
+
+### 10.3. Servicios.tsx (línea 41)
+
+```tsx
+{servicios.map((s) => (
+  <div key={s.id}>
+    <img src={s.imagen_url} alt={s.nombre} />
+    <h3>{s.nombre}</h3>
+    <p>{s.descripcion}</p>
+    <Link to={`/servicios/${s.id}`}>Ver más detalles</Link>
+  </div>
+))}
+```
+
+- **Array recorrido:** `servicios`, de Supabase/mock.
+- **Particularidad:** El enlace usa una **ruta dinámica**: `` `/servicios/${s.id}` ``. Cada servicio enlaza a su propia página de detalle.
+
+### 10.4. SobreMi.tsx (línea 63 y 70)
+
+Dos `.map()`:
+1. **Stack tecnológico** (6 elementos): Recorre un array de tecnologías y pinta tarjetas con icono, nombre y descripción.
+2. **Métricas** (4 elementos): Recorre un array de stats y pinta el valor grande con la etiqueta debajo.
+
+### 10.5. Navbar.tsx (línea 52)
+
+```tsx
+{links.map((link) => (
+  <Link key={link.path} to={link.path}
+    className={location.pathname === link.path ? 'text-[#e63946]' : 'text-zinc-400'}>
+    {link.name}
+  </Link>
+))}
+```
+
+- **Array recorrido:** 6 objetos con `name` (Inicio, Sobre mi, Cursos...) y `path` (/, /sobre-mi, /cursos...).
+- **Qué hace:** Pinta un enlace de navegación por cada ruta. Si es la página actual, lo resalta en rojo.
+
+---
+
+## 11. El sistema de estado con useState y useEffect
+
+### ¿Qué es el "estado" en React?
+
+**Analogía:** El estado es como la **memoria a corto plazo** de un componente. Cuando cambias algo en la pantalla (escribes en un input, cargas datos, abres una descripción...), esos cambios se guardan en el "estado". React vigila el estado, y cuando cambia, React vuelve a pintar automáticamente el componente para reflejar los cambios.
+
+### Todos los `useState` del proyecto
+
+| Archivo | Estado | ¿Qué guarda? |
+|---------|--------|-------------|
+| `Servicios.tsx` | `servicios: Servicio[]` | Lista de servicios de Supabase |
+| `Servicios.tsx` | `loading: boolean` | Si está cargando los datos |
+| `ServicioDetalle.tsx` | `servicio: Servicio \| null` | El servicio actual o null mientras carga |
+| `Proyectos.tsx` | `proyectos: Proyecto[]` | Lista de proyectos de Supabase |
+| `Proyectos.tsx` | `cargando: boolean` | Si está cargando los datos |
+| `Cursos.tsx` | `cursos: Curso[]` | Lista de cursos de Supabase |
+| `Contacto.tsx` | `info: InfoContacto \| null` | Información de contacto de Supabase |
+| `Contacto.tsx` | `status: string` | Mensaje de estado del formulario (enviando, éxito, error) |
+| `Contacto.tsx` | `cargando: boolean` | Si está cargando la info de contacto |
+| `Contacto.tsx` | `asunto: string` | Valor seleccionado en el desplegable de asunto |
+| `Navbar.tsx` | `isOpen: boolean` | Si el menú móvil está abierto o cerrado |
+
+### Todos los `useEffect` del proyecto
+
+| Archivo | Dependencias | ¿Qué hace? |
+|---------|-------------|------------|
+| `Servicios.tsx` | `[]` | Obtiene servicios de Supabase al montar |
+| `ServicioDetalle.tsx` | `[id]` | Obtiene un servicio por ID (se re-ejecuta si cambia el ID) |
+| `Proyectos.tsx` | `[]` | Obtiene proyectos de Supabase al montar |
+| `Cursos.tsx` | `[]` | Obtiene cursos de Supabase al montar |
+| `Contacto.tsx` | `[]` | Obtiene info de contacto de Supabase al montar |
+
+### El patrón típico: "Cargo datos al montar el componente"
+
+Este es el patrón más importante del proyecto y se repite en Servicios, Proyectos, Cursos y Contacto:
+
+```
+1. useState([])          → Creo un "cajón vacío" para guardar los datos
+2. useState(true)        → Creo un indicador de "cargando"
+3. async function fn()   → Defino una función que va a buscar datos
+4.   const { data } = await supabase.from('X').select('*')  → Llamo a Supabase
+5.   if (data) setX(data)   → Meto los datos en el cajón
+6.   setCargando(false)     → Ya terminó la carga
+7. useEffect(() => { fn() }, []) → Cuando el componente se muestra, ejecuto la función
+8. {cargando ? <Spinner/> : datos.map(...)} → Mientras carga, muestro un spinner; cuando termina, los datos
+```
+
+**Por qué funciona:** React llama a `useEffect` automáticamente cuando el componente aparece en pantalla. Eso dispara la función que obtiene los datos. Cuando los datos llegan, `setX` actualiza el estado, y React vuelve a pintar el componente con los datos ya cargados.
+
+**Ejemplo concreto (Servicios):**
+
+```tsx
+const [servicios, setServicios] = useState<Servicio[]>([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchServicios = async () => {
+    const { data } = await supabase.from('Servicios').select('*');
+    if (data) setServicios(data);
+    setLoading(false);
+  };
+  fetchServicios();
+}, []);
+```
 
 ---
 
@@ -1155,19 +728,19 @@ Se usa la fuente **Geist Variable** (de Vercel), cargada desde el paquete `@font
 
 ### P1: ¿Por qué usaste React y no otra tecnología como HTML+CSS plano?
 
-**Respuesta:** Porque React me permite dividir la web en **componentes reutilizables** (como piezas de LEGO). En lugar de repetir el mismo código en cada página, creo un componente `Header` una vez y lo uso en todas las páginas. Además, React actualiza automáticamente la pantalla cuando los datos cambian, sin tener que recargar la página. También es la tecnología más demandada en el mercado laboral actual para desarrollo frontend.
+**Respuesta:** Porque React me permite dividir la web en **componentes reutilizables** (como piezas de LEGO). En lugar de repetir el mismo código en cada página, creo un componente `Navbar` una vez y lo uso en todas las páginas. Además, React actualiza automáticamente la pantalla cuando los datos cambian, sin tener que recargar la página. También es la tecnología más demandada actualmente para desarrollo frontend.
 
 ### P2: ¿Qué es un componente?
 
-**Respuesta:** Un componente es una **pieza independiente de la interfaz**, como un sello. El Header es un componente, el Footer es otro, cada tarjeta de curso es otro. Cada componente tiene su propio código, su propio estilo y, si lo necesita, su propio "estado" (memoria interna). Los componentes se pueden reutilizar y combinar como piezas de LEGO.
+**Respuesta:** Un componente es una **pieza independiente de la interfaz**, como un sello. El Navbar es un componente, el Footer es otro, cada tarjeta de curso es otro. Cada componente tiene su propio código, su propio estilo y, si lo necesita, su propio "estado" (memoria interna). Los componentes se pueden reutilizar y combinar como piezas de LEGO.
 
-### P3: ¿Cómo funciona el `.map()` de los proyectos?
+### P3: ¿Cómo funciona el `.map()` del proyecto?
 
-**Respuesta:** El `.map()` es como una **cadena de montaje**: cojo un array (una lista) de elementos (por ejemplo, 4 cursos), y por cada uno de ellos ejecuto una función que devuelve un trozo de HTML. El resultado es un array de trozos HTML que React pinta en pantalla. Es como tener una lista de la compra y, por cada artículo, escribir una tarjeta.
+**Respuesta:** El `.map()` es como una **cadena de montaje**: cojo un array (una lista) de elementos (por ejemplo, 3 proyectos), y por cada uno ejecuto una función que devuelve un trozo de HTML. El resultado es un array de trozos HTML que React pinta en pantalla. Es como tener una lista de la compra y, por cada artículo, escribir una tarjeta.
 
 ### P4: ¿Qué pasa si Supabase falla?
 
-**Respuesta:** Si la base de datos falla, las funciones de lectura devuelven `undefined` y la página se muestra vacía o con el mensaje "No hay cursos disponibles". En los formularios de administración, si falla una operación de escritura, se muestra un mensaje de error en rojo al usuario. No tenemos un sistema de notificación al usuario para fallos de lectura, es algo que se podría mejorar.
+**Respuesta:** El proyecto tiene un **sistema Mock** que lo soluciona. Si no hay variables de entorno configuradas (VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY), el sistema automáticamente usa datos ficticios realistas. Esto significa que la web funciona aunque no haya conexión a internet o la base de datos no esté disponible. Es como tener un "simulacro" de la base de datos dentro del propio código.
 
 ### P5: ¿Qué es TypeScript y para qué lo usaste?
 
@@ -1179,72 +752,54 @@ Se usa la fuente **Geist Variable** (de Vercel), cargada desde el paquete `@font
 
 ### P7: ¿Cómo funciona el enrutamiento?
 
-**Respuesta:** El enrutamiento decide **qué página mostrar según la URL**. Funciona como el índice de un libro: si la URL es `/cursos`, el router busca la ruta que coincide y renderiza el componente `Cursos`. Si la URL no coincide con ninguna ruta, se muestra la página de error 404. Todo esto ocurre sin recargar la página del navegador, lo que hace la navegación más rápida y suave.
+**Respuesta:** El enrutamiento decide **qué página mostrar según la URL**. Funciona como el índice de un libro: si la URL es `/cursos`, el router busca la ruta que coincide y renderiza el componente `Cursos`. Todo esto ocurre sin recargar la página del navegador, lo que hace la navegación más rápida y suave. En este proyecto, las rutas están definidas directamente en `App.tsx`.
 
 ### P8: ¿Qué es un hook?
 
 **Respuesta:** Un hook es una **función especial de React** que permite usar características como el estado o los efectos secundarios dentro de un componente. El hook más usado en este proyecto es `useState`, que crea una "variable con memoria" que React vigila para actualizar la pantalla cuando cambia. Otro es `useEffect`, que ejecuta código cuando el componente aparece o se actualiza.
 
-### P9: ¿Cómo protegiste el panel de administración?
+### P9: ¿Qué es el sistema Mock?
 
-**Respuesta:** **No está protegido**. Actualmente, el panel de administración es accesible simplemente escribiendo `/admin` en la URL. No hay sistema de autenticación (login/contraseña). Es una **carencia importante** que habría que resolver. Una solución sería implementar autenticación con Supabase Auth o con un proveedor como Google/Auth0.
+**Respuesta:** El sistema Mock es un **simulador de base de datos**. Cuando no hay conexión a Supabase, en lugar de que la web se rompa, un "cliente falso" llamado `MockQueryBuilder` responde a las mismas preguntas que harías a la base de datos real pero con datos ficticios guardados en el propio código. Es como tener un **libro de respuestas** dentro del programa: cuando preguntas "dame los proyectos", el mock consulta su lista interna y te responde con 3 proyectos de ejemplo. Esto permite que la web se pueda mostrar y probar en cualquier momento, incluso sin conexión a internet.
 
 ### P10: ¿Qué es el estado en React?
 
-**Respuesta:** El estado es la **memoria interna** de un componente. Por ejemplo, el estado `expanded` en las tarjetas recuerda si la descripción está visible u oculta. Cuando el estado cambia (el usuario hace clic), React vuelve a pintar automáticamente la parte de la pantalla que depende de ese estado. Es como un interruptor: cuando cambia, la luz (la pantalla) cambia.
+**Respuesta:** El estado es la **memoria interna** de un componente. Por ejemplo, el estado `loading` en Servicios recuerda si los datos se están cargando. Cuando el estado cambia (los datos llegan), React vuelve a pintar automáticamente la parte de la pantalla que depende de ese estado. Es como un interruptor: cuando cambia, la luz (la pantalla) cambia.
 
 ### P11: ¿Qué librerías externas usaste y por qué?
 
 **Respuesta:** Las principales son:
 - **React Router** — para tener múltiples páginas sin recargar.
-- **Supabase JS** — para conectarme a la base de datos en la nube.
+- **Supabase JS** — para conectarme a la base de datos en la nube (o al mock).
 - **Tailwind CSS** — para dar estilo de forma rápida con clases prehechas.
-- **shadcn/ui** — para tener componentes accesibles y bonitos (botones, tarjetas, inputs).
-- **react-hook-form** — para manejar formularios de forma más limpia en el panel de admin.
-- **Lucide React** — para iconos en el panel de administración.
-- **Sonner** — para notificaciones (aunque parece no estar usado aún).
+- **Framer Motion** — para animaciones suaves (aparición de tarjetas, transiciones).
+- **Typewriter Effect** — para la animación de escritura automática en el héroe.
+- **React Icons** — para iconos (FontAwesome: FaServer, FaLinux, etc.).
 
-### P12: ¿Qué es la "rejilla" que se ve de fondo?
+### P12: ¿Cómo se actualiza la pantalla después de obtener datos?
 
-**Respuesta:** Es un efecto visual creado con CSS. En lugar de usar una imagen de fondo, dibujo líneas horizontales y verticales con una opacidad muy baja (4%) formando una cuadrícula de 40x40 píxeles. Esto da un aspecto técnico, como una interfaz de monitor antiguo o estilo "matrix". Además, hay una línea animada que baja lentamente por la pantalla simulando un barrido.
+**Respuesta:** Sigue este flujo: 1) Al cargar la página, `useEffect` ejecuta una función. 2) Esa función llama a Supabase (o al mock). 3) Los datos recibidos se guardan en el estado con `setDatos(...)`. 4) React detecta que el estado cambió y vuelve a pintar el componente. 5) Ahora el `.map()` recorre los datos y pinta las tarjetas en pantalla.
 
-### P13: ¿Cómo se actualiza la pantalla después de insertar o eliminar datos?
-
-**Respuesta:** En los formularios de admin, después de insertar o eliminar, se actualiza el estado local del componente. Por ejemplo, en `DeleteCursoForm`, después de eliminar un curso, se filtra el array local con `.filter()` para quitar el curso borrado: `setCursos(prev => prev.filter(c => c.curso_id !== selectedId))`. Así la lista visible se actualiza al instante sin recargar la página.
-
-### P14: ¿Por qué algunas páginas tienen datos fijos y otras vienen de base de datos?
-
-**Respuesta:** Las páginas de **Home, Formación y Servicios** tienen los datos escritos directamente en el código (hardcodeados) porque son datos que cambian poco: mi nombre, mi stack técnico, mi formación principal. Las páginas de **Cursos y Trabajos** obtienen los datos de Supabase porque están pensadas para que yo pueda añadir, modificar o quitar contenido desde el panel de administración sin tocar el código.
-
-### P15: ¿Qué fallos o mejoras le ves al proyecto?
+### P13: ¿Qué fallos o mejoras le ves al proyecto?
 
 **Respuesta sincera:** Varias:
-1. **El formulario de contacto no funciona** — el botón de enviar no envía nada.
-2. **El panel de admin no tiene login** — cualquiera que sepa la URL puede entrar.
-3. **Los datos de Formación y Servicios están hardcodeados** — no se pueden gestionar desde el admin aunque hay formularios para insertarlos.
-4. **Algunos imports de TypeScript están mal** (importan `IServicios` cuando la interfaz se llama `IServicio`), lo que podría dar errores al compilar.
-5. **No hay feedback de carga** en las páginas de Cursos y Trabajos — mientras los datos llegan de Supabase, la página se ve vacía.
-6. **Los botones de Home ("Ver proyectos", "Contactar") no redirigen** a las páginas reales.
+1. **No hay página 404** — si navegas a una URL que no existe, no se muestra nada.
+2. **No hay indicador de carga en todas las páginas** — en Proyectos y Cursos, si hay error no se ve un mensaje claro.
+3. **El formulario de contacto requiere Telegram** — si no hay token de Telegram, la notificación no llega (aunque el mensaje se guarda en Supabase).
+4. **Los datos mock están en el código fuente** — si se quisieran cambiar, habría que modificar el archivo `supabaseClient.ts`.
+5. **No hay panel de administración** — no se puede añadir contenido desde la web.
 
-### P16: ¿Qué harías si tuvieras más tiempo?
+### P14: ¿Cómo creaste el proyecto desde cero?
 
-**Respuesta:** Implementaría autenticación para el panel de admin, conectaría el formulario de contacto a un servicio real de envío de correos (EmailJS o Formspree), completaría el CRUD para todas las entidades (poder modificar y eliminar formación, servicios y trabajos), añadiría una página de carga mientras se obtienen datos de Supabase, y mejoraría el diseño responsive para móviles.
+**Respuesta:** Usé el comando `npm create vite@latest portfolio -- --template react-ts` que crea un proyecto base con React + TypeScript ya configurados. Luego instalé las dependencias una a una: Tailwind CSS, React Router, Supabase, Framer Motion, etc. El diseño visual lo fui construyendo componente por componente, usando Tailwind para los estilos y Framer Motion para las animaciones.
 
-### P17: ¿Qué es el `useEffect` y por qué tiene `[]`?
+### P15: ¿Qué es el `useEffect` y por qué tiene `[]`?
 
 **Respuesta:** `useEffect` ejecuta código cuando el componente se **monta** (aparece) o cuando ciertos valores cambian. El `[]` vacío significa "ejecuta esto solo una vez, justo cuando el componente aparece por primera vez". Sin el `[]`, se ejecutaría cada vez que el componente se actualiza, lo que provocaría un bucle infinito de llamadas a Supabase.
 
-### P18: ¿Cómo creaste el proyecto desde cero?
+### P16: ¿Qué es una API fluida (fluent API)?
 
-**Respuesta:** Usé el comando `npm create vite@latest portfolio-luis -- --template react-ts` que crea un proyecto base con React + TypeScript ya configurados. Luego instalé las dependencias una a una: Tailwind CSS, React Router, Supabase, shadcn/ui, etc. El diseño visual lo fui construyendo componente por componente, inspirándome en portfolios tipo "cyberpunk/terminal".
-
-### P19: ¿Qué es el `Outlet` en React Router?
-
-**Respuesta:** `Outlet` es un **marcador de posición**. El `MainLayout` tiene un Header, un Footer y en medio un `<Outlet/>`. Cuando navegas a una página, el contenido de esa página se coloca automáticamente donde está el `Outlet`. Es como el hueco de una tostadora: el layout es la tostadora, y cada página es una rebanada de pan diferente.
-
-### P20: ¿Cómo se gestionan los formularios en el admin?
-
-**Respuesta:** Uso **react-hook-form**, una librería que simplifica el manejo de formularios. Con `useForm<ICurso>()` creo un formulario tipado. El `register` conecta cada input con el formulario, y `handleSubmit` valida y recoge los datos cuando se envía. Luego llamo a la función de Supabase correspondiente (insertar, actualizar) con los datos recogidos.
+**Respuesta:** Es un estilo de programación donde puedes **encadenar métodos** uno detrás de otro. El mock de Supabase lo usa: puedes escribir `supabase.from('Servicios').select('*').eq('id', 1).single()`. Cada método devuelve el mismo objeto, permitiendo seguir añadiendo métodos. Es como una **frase** que se va construyendo: "de la tabla Servicios → selecciona todo → donde el id sea 1 → y devuelve solo uno".
 
 ---
 
@@ -1255,27 +810,29 @@ index.html
     └── <div id="root">
          └── main.tsx
               └── App.tsx
-                   └── AppRouter.tsx
-                        ├── MainLayout (Header + Outlet + Footer)
-                        │    ├── Home (/)
-                        │    ├── Formacion (/Formacion)
-                        │    ├── Servicios (/servicios)
-                        │    ├── Cursos (/cursos) ──► Supabase
-                        │    ├── Contacto (/contacto)
-                        │    ├── Trabajos (/Trabajos) ──► Supabase
-                        │    └── NotFound (cualquier otra URL)
-                        │
-                        └── BackendLayout (Sidebar + Header + Outlet)
-                             ├── AdminCursos (/admin/Cursos)
-                             │    ├── NewCursoForm ──► Supabase INSERT
-                             │    ├── DeleteCursoForm ──► Supabase DELETE
-                             │    └── EditCursoForm ──► Supabase UPDATE
-                             ├── AdminFormacion (/admin/Formacion)
-                             │    └── NewFormacionForm ──► Supabase INSERT
-                             ├── AdminServicios (/admin/Servicios)
-                             │    └── NewServicioForm ──► Supabase INSERT
-                             └── AdminTrabajos (/admin/Trabajos)
-                                  └── NewTrabajoForm ──► Supabase INSERT
+                   ├── Navbar (barra de navegación)
+                   ├── <Routes>
+                   │    ├── Home (/)
+                   │    ├── SobreMi (/sobre-mi)
+                   │    ├── Servicios (/servicios) ──► Supabase / Mock (SELECT)
+                   │    ├── ServicioDetalle (/servicios/:id) ──► Supabase / Mock (SELECT con filtro)
+                   │    ├── Proyectos (/proyectos) ──► Supabase / Mock (SELECT)
+                   │    ├── Cursos (/cursos) ──► Supabase / Mock (SELECT ordenado)
+                   │    └── Contacto (/contacto)
+                   │         ├── Informacion_Contacto ──► Supabase / Mock (SELECT single)
+                   │         └── Mensaje_Contacto ──► Supabase / Mock (INSERT)
+                   └── Footer (pie de página)
+
+Cliente Supabase (src/supabase/supabaseClient.ts)
+    ├── ¿Hay VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY?
+    │    ├── SÍ  → Usa createClient() real (conexión a la nube)
+    │    └── NO  → Usa MockQueryBuilder con datos ficticios
+    └── Tablas disponibles en el Mock:
+         ├── Proyectos (3 proyectos)
+         ├── Cursos (3 cursos)
+         ├── Servicios (3 servicios)
+         ├── Informacion_Contacto (1 registro)
+         └── Mensaje_Contacto (INSERT simulado)
 ```
 
 ---
@@ -1291,15 +848,13 @@ index.html
 | **useState** | Hook que crea una variable con memoria |
 | **useEffect** | Hook que ejecuta código cuando el componente aparece o cambia |
 | **Router** | Sistema que decide qué página mostrar según la URL |
-| **Layout** | Plantilla que envuelve varias páginas (Header + contenido + Footer) |
-| **Outlet** | Hueco en el layout donde se inserta cada página |
 | **Props** | Parámetros que se le pasan a un componente (como argumentos de una función) |
 | **.map()** | Método que recorre una lista y devuelve un elemento por cada ítem |
 | **Supabase** | Base de datos en la nube con API automática |
-| **CRUD** | Crear, Leer, Actualizar, Eliminar — las 4 operaciones básicas con datos |
+| **Mock** | Simulacro de base de datos que devuelve datos ficticios para que la web funcione sin conexión |
+| **API Fluida** | Estilo de programación que permite encadenar métodos (`.from().select().eq().single()`) |
 | **Tailwind CSS** | Sistema de estilos con clases prehechas (como piezas de LEGO) |
-| **shadcn/ui** | Colección de componentes copiados al proyecto, no una librería externa |
+| **Framer Motion** | Librería de animaciones para React |
 | **TypeScript** | JavaScript con tipos — etiqueta las variables para evitar errores |
 | **Vite** | Herramienta que acelera el desarrollo y optimiza el código final |
-| **API** | Interfaz que permite a dos programas comunicarse (en este caso, la web con Supabase) |
-| **Variable CSS** | Valor que se define una vez y se reutiliza en muchos sitios (ej: color principal) |
+| **Typewriter Effect** | Efecto de máquina de escribir que anima el texto letra por letra |

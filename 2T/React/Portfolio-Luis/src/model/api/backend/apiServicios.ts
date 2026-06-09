@@ -24,3 +24,27 @@ export const insertServicio = async (servicio: IServicio) => {
     return "Servicio insertado correctamente";
 
 }
+
+export const deleteServicio = async (servicio_id: string) => {
+    const { error } = await supabase
+                    .from('servicios')
+                    .delete()
+                    .eq('servicio_id', servicio_id);
+    if (error) {
+        console.error(error)
+        throw error
+    }
+    return "Servicio eliminado correctamente";
+}
+
+export const updateServicio = async (servicio_id: string, servicioData: Partial<IServicio>) => {
+    const { error } = await supabase
+                    .from('servicios')
+                    .update(servicioData)
+                    .eq('servicio_id', servicio_id);
+    if (error) {
+        console.error(error)
+        throw error
+    }
+    return "Servicio actualizado correctamente";
+}
