@@ -66,10 +66,10 @@ export default function Home() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              to="/Trabajos"
+              to="/Formacion"
               className="inline-flex items-center justify-center rounded-md border border-[#00c8ff] bg-[#00c8ff] px-5 py-3 font-mono text-sm font-bold uppercase tracking-widest text-[#050d1a] transition hover:bg-transparent hover:text-[#00c8ff]"
             >
-              Ver trabajos
+              Ver Formaciones
             </Link>
             <Link
               to="/Contacto"

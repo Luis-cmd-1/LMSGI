@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { MainLayout } from "../layouts/MainLayout"
 import { Formacion } from "../pages/formacion/Formacion"  
+import { DetalleFormacion } from "@/pages/formacion/DetalleFormacion"
 import { Servicios } from "../pages/servicios/Servicios"
 import Contacto from "../pages/Contacto"
 
@@ -22,6 +23,7 @@ export const AppRouter = () => {
                     <Route element={<MainLayout />} >
                     <Route path="/" element={<Home/>}/>
                     <Route path="/Formacion" element={<Formacion/>}/>
+                    <Route path="/formacion/:id" element={<DetalleFormacion/>}/>
                     <Route path="/servicios" element={<Servicios/>}/>
                     <Route path="/cursos" element={<Cursos/>}/>
                     <Route path="/contacto" element={<Contacto/>}/>

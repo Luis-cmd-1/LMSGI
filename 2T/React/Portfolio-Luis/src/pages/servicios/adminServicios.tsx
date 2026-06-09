@@ -1,6 +1,6 @@
 import { DeleteServicioForm } from "@/components/forms/DeleteServicioForm"
 import { NewServicioForm } from "@/components/forms/NewServicioForm"
-import { EditServicioForm } from "@/components/forms/UpdateServicioForm"
+import { EditServicioForm } from "@/components/forms/EditServicioForm"
 import { BriefcaseBusinessIcon, PencilIcon, PlusIcon, SettingsIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
 
 export default function AdminServicios() {

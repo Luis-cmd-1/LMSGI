@@ -1,6 +1,6 @@
 import { DeleteTrabajoForm } from "@/components/forms/DeleteTrabajoForm"
 import { NewTrabajoForm } from "@/components/forms/NewTrabajoForm"
-import { EditTrabajoForm } from "@/components/forms/UpdateTrabajoForm"
+import { EditTrabajoForm } from "@/components/forms/EditTrabajoForm"
 import { FolderKanbanIcon, PencilIcon, PlusIcon, ShieldCheckIcon, Trash2Icon, WrenchIcon } from "lucide-react"
 
 export default function AdminTrabajos() {

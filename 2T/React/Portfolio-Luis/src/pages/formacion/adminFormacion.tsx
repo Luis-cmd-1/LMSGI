@@ -1,6 +1,6 @@
 import { DeleteFormacionForm } from "@/components/forms/DeleteFormacionForm"
 import { NewFormacionForm } from "@/components/forms/NewFormacionForm"
-import { EditFormacionForm } from "@/components/forms/UpdateFormacionForm"
+import { EditFormacionForm } from "@/components/forms/EditFormacionForm"
 import { BookOpenIcon, GraduationCapIcon, PencilIcon, PlusIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
 
 export default function AdminFormacion() {

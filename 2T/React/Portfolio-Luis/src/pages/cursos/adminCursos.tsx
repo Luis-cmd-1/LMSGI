@@ -1,6 +1,6 @@
 import { DeleteCursoForm } from "@/components/forms/DeleteCursoForm"
 import { NewCursoForm } from "@/components/forms/NewCursoForm"
-import { EditCursoForm } from "@/components/forms/UpdateCursoForm"
+import { EditCursoForm } from "@/components/forms/EditCursoForm"
 import {
   BookOpenIcon,
   GraduationCapIcon,
