@@ -1,125 +1,156 @@
-export const Home = () => {
-    return (
-<div className="relative min-h-screen bg-[#050d1a] text-[#c9d8f0] font-sans overflow-hidden">
- 
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
- 
-      {/* Scan line animation */}
-      <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,200,255,0.4)] to-transparent pointer-events-none animate-[scan_4s_linear_infinite]" />
- 
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative px-10 pt-16 pb-10">
-        {/* Corner decorations */}
-        <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#00c8ff]" />
-        <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#00c8ff]" />
-        <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#00c8ff]" />
- 
-        {/* Status */}
-        <div className="flex items-center gap-2 mb-4 font-mono text-[11px] text-[#3d7a5a] tracking-widest">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00d46a] animate-pulse" />
-          DISPONIBLE · ESPAÑA
-        </div>
- 
-        {/* Badge */}
-        <span className="inline-block font-mono text-[11px] text-[#00c8ff] border border-[rgba(0,200,255,0.3)] px-3 py-1 mb-3 tracking-[3px]">
-          // ASIR · SYSADMIN · NETWORKS
-        </span>
- 
-        {/* Name */}
-        <h1 className="text-6xl font-bold leading-none text-[#e8f4ff] tracking-tight mb-1">
-           <span className="text-[#00c8ff]">Luis Miguel</span>
-        </h1>
- 
-        {/* Role */}
-        {/* <p className="font-mono text-sm text-[#5a8fa8] tracking-widest mb-5">
-          $ whoami → estudiante_asir --ciclo=superior
-        </p> */}
- 
-        {/* Description */}
-        <p className="text-base text-[#7fa8c0] max-w-lg leading-relaxed mb-8">
-          Estudiante de Administración de Sistemas Informáticos en Red.
-          Apasionado por las redes, los servidores Linux y la automatización
-          de infraestructura.
-        </p>
- 
-        {/* Buttons */}
-        <div className="flex flex-wrap gap-3">
-          <button className="font-mono text-xs tracking-[2px] uppercase px-6 py-2.5 border border-[#00c8ff] text-[#00c8ff] bg-transparent hover:bg-[rgba(0,200,255,0.1)] transition-colors">
-            Ver proyectos
-          </button>
-          <button className="font-mono text-xs tracking-[2px] uppercase px-6 py-2.5 border border-[rgba(90,143,168,0.4)] text-[#5a8fa8] bg-transparent hover:border-[rgba(90,143,168,0.8)] hover:text-[#8ab4cc] transition-colors">
-            Contactar
-          </button>
-        </div>
-      </section>
- 
-      {/* Divider */}
-      <div className="h-px mx-10 bg-gradient-to-r from-transparent via-[rgba(0,200,255,0.3)] to-transparent" />
- 
-      {/* ── STACK ────────────────────────────────────────── */}
-      <section className="px-10 py-8">
-        <h2 className="font-mono text-[11px] tracking-[3px] text-[#00c8ff] uppercase mb-5 flex items-center gap-3 after:content-[''] after:flex-1 after:h-px after:bg-[rgba(0,200,255,0.2)]">
-          Stack técnico
-        </h2>
- 
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(110px,1fr))] gap-2">
-          {[
-            { label: "Linux",           highlight: false  },
-            { label: "Cisco",           highlight: true  },
-            { label: "Windows Server",  highlight: false },
-            { label: "Docker",          highlight: false },
-            { label: "Bash",            highlight: false },
-            { label: "Python",          highlight: false },
-            { label: "VMware",          highlight: false },
-            { label: "Active Directory",highlight: false },
-            { label: "SQL",             highlight: false },
-            { label: "Tailwind",        highlight: false },
-          ].map(({ label, highlight }) => (
-            <div
-              key={label}
-              className={`
-                text-center text-[13px] font-semibold py-2 px-3 border transition-all cursor-default
-                ${highlight
-                  ? "border-[rgba(0,200,255,0.5)] text-[#00c8ff] bg-[rgba(0,200,255,0.06)]"
-                  : "border-[rgba(0,200,255,0.2)] text-[#8ab4cc] bg-[rgba(0,200,255,0.03)] hover:border-[rgba(0,200,255,0.6)] hover:text-[#00c8ff] hover:bg-[rgba(0,200,255,0.08)]"
-                }
-              `}
+import { Link } from "react-router-dom"
+
+const stats = [
+  { value: "ASIR", label: "Sistemas y redes" },
+  { value: "React", label: "Front-end moderno" },
+  { value: "Linux", label: "Administracion" },
+]
+
+const skills = [
+  {
+    title: "Sistemas",
+    detail: "Windows Server, Linux, usuarios, permisos, servicios y mantenimiento.",
+  },
+  {
+    title: "Redes",
+    detail: "Subnetting, VLANs, routing, switching y configuracion Cisco.",
+  },
+  {
+    title: "Desarrollo",
+    detail: "React, TypeScript, Vite, Tailwind CSS y conexion con APIs.",
+  },
+  {
+    title: "Bases de datos",
+    detail: "SQL, PostgreSQL, modelado relacional y consultas estructuradas.",
+  },
+]
+
+const quickLinks = [
+  {
+    title: "Formacion",
+    description: "Estudios, cursos y certificaciones tecnicas.",
+    to: "/Formacion",
+  },
+  {
+    title: "Servicios",
+    description: "Soluciones de desarrollo, sistemas e infraestructura.",
+    to: "/servicios",
+  },
+  {
+    title: "Trabajos",
+    description: "Proyectos destacados y practicas realizadas.",
+    to: "/Trabajos",
+  },
+  
+]
+
+export default function Home() {
+  return (
+    <section className="relative overflow-hidden px-6 py-14 lg:px-8 lg:py-20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 " />
+
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <span className="inline-flex border border-[#00c8ff]/20 px-3 py-1 font-mono text-xs uppercase tracking-[4px] text-[#00c8ff]/70">
+            ./home
+          </span>
+
+          <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-tight tracking-tight text-[#e8f4ff] sm:text-6xl">
+            Hola, soy <span className="text-[#00c8ff]">Luis</span>
+          </h1>
+
+          <p className="mt-5 max-w-2xl font-mono text-sm leading-7 text-[#5a8fa8] sm:text-base">
+            Estudiante de Administracion de Sistemas Informaticos en Red, centrado
+            en redes, Linux, virtualizacion y desarrollo web  .
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              to="/Trabajos"
+              className="inline-flex items-center justify-center rounded-md border border-[#00c8ff] bg-[#00c8ff] px-5 py-3 font-mono text-sm font-bold uppercase tracking-widest text-[#050d1a] transition hover:bg-transparent hover:text-[#00c8ff]"
             >
-              {label}
-            </div>
+              Ver trabajos
+            </Link>
+            <Link
+              to="/Contacto"
+              className="inline-flex items-center justify-center rounded-md border border-[#00c8ff]/25 px-5 py-3 font-mono text-sm font-bold uppercase tracking-widest text-[#00c8ff] transition hover:border-[#00c8ff]/60 hover:bg-[#00c8ff]/10"
+            >
+              Contactar
+            </Link> 
+          </div>
+
+          <div className="mt-10 grid max-w-2xl grid-cols-3 border-y border-[#00c8ff]/15">
+            {stats.map((stat) => (
+              <div key={stat.label} className="py-5 pr-4">
+                <p className="font-mono text-xl font-bold text-[#00c8ff]">{stat.value}</p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-[#5a8fa8]">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="absolute -inset-4 -z-10 border border-[#00c8ff]/10 bg-[#00c8ff]/5" />
+          <img
+            src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*NJSv6DGoKTloI8d8im98zg.png"
+            alt="Espacio de trabajo tecnologico"
+            className="aspect-[4/3] w-full rounded-md border border-[#00c8ff]/20 object-cover shadow-2xl shadow-[#00c8ff]/10"
+          />
+        </div>
+      </div>
+
+      <div className="mx-auto mt-20 max-w-7xl">
+        <div className="flex items-center gap-4">
+          <span className="font-mono text-xs uppercase tracking-[3px] text-[#5a8fa8]">
+            Accesos rapidos
+          </span>
+          <div className="h-px flex-1 bg-[#00c8ff]/15" />
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {quickLinks.map((item) => (
+            <Link
+              key={item.title}
+              to={item.to}
+              className="group rounded-md border border-[#00c8ff]/20 bg-[#050d1a]/70 p-6 transition hover:border-[#00c8ff]/60 hover:bg-[#00c8ff]/5"
+            >
+              <h2 className="font-mono text-lg font-bold text-[#e8f4ff] group-hover:text-[#00c8ff]">
+                {item.title}
+              </h2>
+              <p className="mt-3 font-mono text-sm leading-6 text-[#5a8fa8]">
+                {item.description}
+              </p>
+            </Link>
           ))}
         </div>
-      </section>
- 
-      {/* ── STATS ────────────────────────────────────────── */}
-      <section className="px-10 pb-12">
-        <h2 className="font-mono text-[11px] tracking-[3px] text-[#00c8ff] uppercase mb-5 flex items-center gap-3 after:content-[''] after:flex-1 after:h-px after:bg-[rgba(0,200,255,0.2)]">
-          Stats
-        </h2>
- 
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { num: "2°",  label: "Año ASIR"   },
-            { num: "12+", label: "Prácticas"  },
-            { num: "5+",  label: "Proyectos"  },
-          ].map(({ num, label }) => (
-            <div
-              key={label}
-              className="bg-[rgba(0,200,255,0.04)] border border-[rgba(0,200,255,0.15)] py-5 text-center"
+      </div>
+
+      <div className="mx-auto mt-20 max-w-7xl pb-8">
+        <div className="mb-8">
+          <span className="font-mono text-xs uppercase tracking-[4px] text-[#00c8ff]/70">
+            // stack tecnico
+          </span>
+          <h2 className="mt-3 text-3xl font-bold text-[#00c8ff]">Habilidades</h2>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {skills.map((skill) => (
+            <article
+              key={skill.title}
+              className="rounded-md border border-[#00c8ff]/20 bg-[#07101e] p-5"
             >
-              <div className="font-mono text-3xl text-[#00c8ff]">{num}</div>
-              <div className="text-xs text-[#5a8fa8] tracking-widest mt-1">{label}</div>
-            </div>
+              <h3 className="font-mono text-sm font-bold uppercase tracking-widest text-[#00c8ff]">
+                {skill.title}
+              </h3>
+              <p className="mt-4 font-mono text-sm leading-6 text-[#7a99b0]">
+                {skill.detail}
+              </p>
+            </article>
           ))}
         </div>
-      </section>
-    </div>    )
+      </div>
+    </section>
+  )
 }

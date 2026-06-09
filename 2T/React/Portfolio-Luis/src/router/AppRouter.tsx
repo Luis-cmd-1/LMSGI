@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { MainLayout } from "../layouts/MainLayout"
-import { Home } from "../pages/Home"
 import { Formacion } from "../pages/formacion/Formacion"  
 import { Servicios } from "../pages/servicios/Servicios"
 import Contacto from "../pages/Contacto"
@@ -13,8 +12,9 @@ import AdminFormacion from "@/pages/formacion/adminFormacion"
 import AdminServicios from "@/pages/servicios/adminServicios"
 import AdminTrabajos from "@/pages/trabajos/adminTrabajos"
 import NotFound from "@/pages/NotFound"
+import Home from "@/pages/Home"
 
-
+    
 export const AppRouter = () => {
     return(
             <BrowserRouter>
