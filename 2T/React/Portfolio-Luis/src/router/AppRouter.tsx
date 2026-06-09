@@ -12,6 +12,7 @@ import AdminCursos from "@/pages/cursos/adminCursos"
 import AdminFormacion from "@/pages/formacion/adminFormacion"
 import AdminServicios from "@/pages/servicios/adminServicios"
 import AdminTrabajos from "@/pages/trabajos/adminTrabajos"
+import Dashboard from "@/pages/admin/Dashboard"
 import NotFound from "@/pages/NotFound"
 import Home from "@/pages/Home"
 
@@ -32,6 +33,7 @@ export const AppRouter = () => {
                     </Route>
 
                     <Route path="/admin" element={<BackendLayout/>}>
+                    <Route index element={<Dashboard/>}/>
                     <Route path="/admin/Cursos" element={<AdminCursos/>}/>
                     <Route path="/admin/Formacion" element={<AdminFormacion/>}/>
                     <Route path="/admin/Servicios" element={<AdminServicios/>}/>

@@ -33,18 +33,18 @@ export default function AdminServicios() {
         </section>
 
         <section className="grid gap-4 md:grid-cols-3">
-          <ResumenCard label="Crear" value="Nuevo servicio" icon={PlusIcon} color="text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" />
-          <ResumenCard label="Editar" value="Datos existentes" icon={PencilIcon} color="text-sky-500 bg-sky-500/10 ring-sky-500/20" />
-          <ResumenCard label="Eliminar" value="Registro seguro" icon={Trash2Icon} color="text-rose-500 bg-rose-500/10 ring-rose-500/20" />
+          <ResumenCard label="Crear" seccionId="crear-servicio" value="Nuevo servicio" icon={PlusIcon} color="text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" glow="rgba(16,185,129,0.4)" />
+          <ResumenCard label="Editar" seccionId="editar-servicio" value="Datos existentes" icon={PencilIcon} color="text-sky-500 bg-sky-500/10 ring-sky-500/20" glow="rgba(14,165,233,0.4)" />
+          <ResumenCard label="Eliminar" seccionId="eliminar-servicio" value="Registro seguro" icon={Trash2Icon} color="text-rose-500 bg-rose-500/10 ring-rose-500/20" glow="rgba(244,63,94,0.4)" />
         </section>
 
-        <AdminSection title="Insertar servicio" description="Anade un servicio con nombre, tipo, precio y caracteristicas." icon={PlusIcon}>
+        <AdminSection id="crear-servicio" title="Insertar servicio" description="Anade un servicio con nombre, tipo, precio y caracteristicas." icon={PlusIcon}>
           <NewServicioForm />
         </AdminSection>
-        <AdminSection title="Eliminar servicio" description="Retira un servicio que ya no quieras mostrar." icon={Trash2Icon}>
+        <AdminSection id="eliminar-servicio" title="Eliminar servicio" description="Retira un servicio que ya no quieras mostrar." icon={Trash2Icon}>
           <DeleteServicioForm />
         </AdminSection>
-        <AdminSection title="Modificar servicios" description="Selecciona un servicio y actualiza su informacion." icon={SettingsIcon}>
+        <AdminSection id="editar-servicio" title="Modificar servicios" description="Selecciona un servicio y actualiza su informacion." icon={SettingsIcon}>
           <EditServicioForm />
         </AdminSection>
       </div>
@@ -54,9 +54,13 @@ export default function AdminServicios() {
 
 type IconProps = { className?: string }
 
-function ResumenCard({ label, value, icon: Icon, color }: { label: string; value: string; icon: React.ComponentType<IconProps>; color: string }) {
+function ResumenCard({ label, seccionId, value, icon: Icon, color, glow }: { label: string; seccionId: string; value: string; icon: React.ComponentType<IconProps>; color: string; glow: string }) {
   return (
-    <article className="rounded-xl border bg-background p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <article
+      onClick={() => document.getElementById(seccionId)?.scrollIntoView({ behavior: 'smooth' })}
+      style={{ '--glow': glow } as React.CSSProperties}
+      className="rounded-xl border bg-background p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-[0_0_30px_var(--glow)] cursor-pointer"
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-medium text-muted-foreground">{label}</p>
@@ -70,9 +74,9 @@ function ResumenCard({ label, value, icon: Icon, color }: { label: string; value
   )
 }
 
-function AdminSection({ title, description, icon: Icon, children }: { title: string; description: string; icon: React.ComponentType<IconProps>; children: React.ReactNode }) {
+function AdminSection({ id, title, description, icon: Icon, children }: { id: string; title: string; description: string; icon: React.ComponentType<IconProps>; children: React.ReactNode }) {
   return (
-    <section className="rounded-xl border bg-background p-5 shadow-sm sm:p-6">
+    <section id={id} className="rounded-xl border bg-background p-5 shadow-sm sm:p-6 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
       <div className="mb-6 flex gap-4 border-b pb-5">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/15">
           <Icon className="size-5" />

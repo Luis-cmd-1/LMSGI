@@ -34,9 +34,9 @@ export const CursoCard = ({ curso }: Props) => {
                     <span className="font-mono text-sm font-semibold text-[#00c8ff]">
                         ${curso.precio}
                     </span>
-                    <span className="font-mono text-xs text-[#00c8ff]/60 hover:text-white hover:drop-shadow-[0_0_6px_rgba(0,200,255,0.8)] hover:scale-105 active:scale-95 transition-all cursor-pointer">
+                    {/* <span className="font-mono text-xs text-[#00c8ff]/60 hover:text-white hover:drop-shadow-[0_0_6px_rgba(0,200,255,0.8)] hover:scale-105 active:scale-95 active:bg-[#00c8ff]/20 active:px-3 active:py-1 transition-all cursor-pointer">
                         [ + VER MÁS ]
-                    </span>
+                    </span> */}
                 </div>
             </div>
         </article>

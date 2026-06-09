@@ -13,21 +13,27 @@ import {
 const resumen = [
   {
     label: "Crear",
+    seccionId: "crear-curso",
     value: "Nuevo curso",
     icon: PlusIcon,
     tone: "text-emerald-500 bg-emerald-500/10 ring-emerald-500/20",
+    glow: "rgba(16,185,129,0.4)",
   },
   {
     label: "Editar",
+    seccionId: "editar-curso",
     value: "Datos existentes",
     icon: PencilIcon,
     tone: "text-sky-500 bg-sky-500/10 ring-sky-500/20",
+    glow: "rgba(14,165,233,0.4)",
   },
   {
     label: "Eliminar",
+    seccionId: "eliminar-curso",
     value: "Registro seguro",
     icon: Trash2Icon,
     tone: "text-rose-500 bg-rose-500/10 ring-rose-500/20",
+    glow: "rgba(244,63,94,0.4)",
   },
 ]
 
@@ -71,7 +77,9 @@ export default function AdminCursos() {
           {resumen.map((item) => (
             <article
               key={item.label}
-              className="rounded-xl border bg-background p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              onClick={() => document.getElementById(item.seccionId)?.scrollIntoView({ behavior: 'smooth' })}
+              style={{ '--glow': item.glow } as React.CSSProperties}
+              className="rounded-xl border bg-background p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-[0_0_30px_var(--glow)] cursor-pointer"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -87,6 +95,7 @@ export default function AdminCursos() {
         </section>
 
         <AdminSection
+          id="crear-curso"
           eyebrow="Alta de contenido"
           title="Insertar curso"
           description="Anade un curso nuevo indicando titulo, categoria, academia y precio."
@@ -96,6 +105,7 @@ export default function AdminCursos() {
         </AdminSection>
 
         <AdminSection
+          id="eliminar-curso"
           eyebrow="Mantenimiento"
           title="Eliminar curso"
           description="Selecciona un curso existente y retiralo de la base de datos."
@@ -105,6 +115,7 @@ export default function AdminCursos() {
         </AdminSection>
 
         <AdminSection
+          id="editar-curso"
           eyebrow="Actualizacion"
           title="Modificar cursos"
           description="Busca un curso, carga sus datos y guarda los cambios que necesites."
@@ -118,6 +129,7 @@ export default function AdminCursos() {
 }
 
 type AdminSectionProps = {
+  id: string
   eyebrow: string
   title: string
   description: string
@@ -126,6 +138,7 @@ type AdminSectionProps = {
 }
 
 function AdminSection({
+  id,
   eyebrow,
   title,
   description,
@@ -133,7 +146,7 @@ function AdminSection({
   children,
 }: AdminSectionProps) {
   return (
-    <section className="rounded-xl border bg-background p-5 shadow-sm sm:p-6">
+    <section id={id} className="rounded-xl border bg-background p-5 shadow-sm sm:p-6 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
       <div className="mb-6 flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex gap-4">
           <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/15">

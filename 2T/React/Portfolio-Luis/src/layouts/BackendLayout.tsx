@@ -4,9 +4,11 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 
 export default function Page() {
+  const transicion = useLocation();
+
   return (
     <SidebarProvider
       style={
@@ -20,7 +22,9 @@ export default function Page() {
       <SidebarInset>
         <SiteHeader />
 
-        <Outlet/>
+        <div key={transicion.pathname} className="page-enter-back">
+          <Outlet/>
+        </div>
 
       </SidebarInset>
     </SidebarProvider>

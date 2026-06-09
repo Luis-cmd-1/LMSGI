@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Header from "../components/main/Header"
 import Footer from "../components/main/Footer"
 
@@ -6,6 +6,8 @@ import Footer from "../components/main/Footer"
 
 
 export function MainLayout() {
+  const transicion = useLocation();
+
   return (
     <div className="relative min-h-screen bg-[#050d1a] flex flex-col">
       {/* Grid background global */}
@@ -21,7 +23,9 @@ export function MainLayout() {
             <Header />
             <main className="flex-1 relative z-10">
               {/* El componente Outlet es un componente de React Router que se utiliza para renderizar los componentes */}
+              <div key={transicion.pathname} className="page-enter">
                 <Outlet />
+              </div>
             </main>
             <Footer />
     </div>

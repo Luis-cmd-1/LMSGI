@@ -341,3 +341,33 @@ code {
     @apply font-sans;
     }
 }
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes page-enter-back {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.5s ease-out;
+}
+
+.page-enter-back {
+  animation: page-enter-back 0.5s ease-out;
+}

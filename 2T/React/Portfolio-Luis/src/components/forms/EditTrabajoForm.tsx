@@ -92,7 +92,7 @@ export function EditTrabajoForm({ className, ...props }: React.ComponentProps<"d
       )}
 
       {seleccionado && (
-        <Card className="overflow-hidden p-8 w-full max-w-2xl border-primary bg-accent/20">
+        <Card className="overflow-hidden p-8 w-full max-w-2xl border-primary bg-accent/20 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
           <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
             <CardContent className="grid p-0 md:grid-cols-2">
               <FieldGroup className="gap-4 w-130">
@@ -105,7 +105,7 @@ export function EditTrabajoForm({ className, ...props }: React.ComponentProps<"d
                 <Field><FieldLabel htmlFor="edit-tecnologias">Tecnologias</FieldLabel><Input id="edit-tecnologias" placeholder="React, TypeScript" {...register("tecnologias")} /></Field>
 
                 <div className="flex gap-4 pt-2">
-                  <Button type="submit" className="flex-1" disabled={loading}>{loading ? "Guardando..." : "Guardar Cambios"}</Button>
+                  <Button type="submit" className="flex-1 transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" disabled={loading}>{loading ? "Guardando..." : "Guardar Cambios"}</Button>
                   <Button type="button" variant="outline" className="flex-1" onClick={cancelarEdicion}>Cancelar</Button>
                 </div>
               </FieldGroup>
@@ -114,7 +114,7 @@ export function EditTrabajoForm({ className, ...props }: React.ComponentProps<"d
         </Card>
       )}
 
-      <Card className="p-6 w-full max-w-4xl">
+      <Card className="p-6 w-full max-w-4xl transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <h2 className="text-xl font-bold mb-4">Trabajos Disponibles ({trabajos.length})</h2>
         {loadingLista ? (
           <p className="text-center text-muted-foreground p-4">Cargando trabajos...</p>

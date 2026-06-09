@@ -8,12 +8,14 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon,SquareArrowRightExit , ListIcon, ChartBarIcon, FolderIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon } from "lucide-react"
+import { LayoutDashboardIcon,GaugeIcon,SquareArrowRightExit , ListIcon, ChartBarIcon, FolderIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon, GraduationCapIcon, HandPlatterIcon, BriefcaseBusinessIcon } from "lucide-react"
 
 const data = {
   user: {
@@ -26,15 +28,15 @@ const data = {
       title: "Formación",
       url: "/admin/Formacion",
       icon: (
-        <LayoutDashboardIcon
+        <GraduationCapIcon
         />
       ),
     },
     {
-      title: "Servicios ",
+      title: "Servicios",
       url: "/admin/Servicios",
       icon: (
-        <ListIcon
+        <HandPlatterIcon
         />
       ),
     },
@@ -42,7 +44,7 @@ const data = {
       title: "Trabajos",
       url: "/admin/Trabajos",
       icon: (
-        <ChartBarIcon
+        <BriefcaseBusinessIcon
         />
       ),
     },
@@ -121,30 +123,30 @@ const data = {
     },
   ],
   navSecondary: [
-    {
-      title: "Ajustes",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
-    },
-    {
-      title: "Ayuda",
-      url: "#",
-      icon: (
-        <CircleHelpIcon
-        />
-      ),
-    },
-    {
-      title: "Buscar",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
-      ),
-    },
+    // {
+    //   title: "Ajustes",
+    //   url: "#",
+    //   icon: (
+    //     <Settings2Icon
+    //     />
+    //   ),
+    // },
+    // {
+    //   title: "Ayuda",
+    //   url: "#",
+    //   icon: (
+    //     <CircleHelpIcon
+    //     />
+    //   ),
+    // },
+    // {
+    //   title: "Buscar",
+    //   url: "#",
+    //   icon: (
+    //     <SearchIcon
+    //     />
+    //   ),
+    // },
     {
       title: "Salir",
       url: "/",
@@ -152,33 +154,34 @@ const data = {
         <SquareArrowRightExit
         />
       ),
+      className: "bg-red-500/10 hover:bg-red-500/20 text-red-600 hover:text-red-700",
     },
   ],
   documents: [
-    {
-      name: "Database",
-      url: "#",
-      icon: (
-        <DatabaseIcon
-        />
-      ),
-    },
-    {
-      name: "Reportes",
-      url: "#",
-      icon: (
-        <FileChartColumnIcon
-        />
-      ),
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: (
-        <FileIcon
-        />
-      ),
-    },
+    // {
+    //   name: "Database",
+    //   url: "#",
+    //   icon: (
+    //     <DatabaseIcon
+    //     />
+    //   ),
+    // },
+    // {
+    //   name: "Reportes",
+    //   url: "#",
+    //   icon: (
+    //     <FileChartColumnIcon
+    //     />
+    //   ),
+    // },
+    // {
+    //   name: "Word Assistant",
+    //   url: "#",
+    //   icon: (
+    //     <FileIcon
+    //     />
+    //   ),
+    // },
   ],
 }
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -188,16 +191,34 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-              render={<a href="#" />}
+              className="data-[slot=sidebar-menu-button]:p-5! bg-black/80 text-white"
+              render={<a href="/admin" />}
             >
-              <CommandIcon className="size-5!" />
-              <span className="text-base font-semibold">Dashboard</span>
+              <LayoutDashboardIcon className="size-7!" />
+              <span className="text-xl font-semibold">Dashboard</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
+        {/* <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  tooltip="Dashboard"
+                  className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
+                  asChild
+                >
+                  <a href="/admin" className="flex items-center gap-2">
+                    <GaugeIcon className="size-6" />
+                    <span className="text-base">Dashboard</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup> */}
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />

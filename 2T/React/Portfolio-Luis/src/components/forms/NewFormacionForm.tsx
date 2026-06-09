@@ -59,7 +59,7 @@ export function NewFormacionForm({
         </div>
       )}
 
-      <Card className="w-full max-w-2xl overflow-hidden p-0">
+      <Card className="w-full max-w-2xl overflow-hidden p-0 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <form className="w-full p-4 sm:p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
           <CardContent className="p-0">
             <FieldGroup className="w-full gap-4">
@@ -100,7 +100,7 @@ export function NewFormacionForm({
                 <Input id="autor_nombre" type="text" placeholder="Nombre del autor" {...register("autor_nombre")} />
               </Field>
               <Field>
-                <Button type="submit" disabled={loading} className="w-full sm:w-auto">
+                <Button type="submit" disabled={loading} className="w-full sm:w-auto transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
                   {loading ? 'Insertando...' : 'Insertar Formación'}
                 </Button>
               </Field>

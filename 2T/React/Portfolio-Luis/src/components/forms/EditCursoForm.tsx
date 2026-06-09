@@ -102,7 +102,7 @@ export function EditCursoForm({
       )}
 
       {cursoSeleccionado && (
-        <Card className="overflow-hidden p-8 w-full max-w-2xl border-primary bg-accent/20 animate-in fade-in-50 duration-200">
+        <Card className="overflow-hidden p-8 w-full max-w-2xl border-primary bg-accent/20 animate-in fade-in-50 duration-200 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
           <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
             <CardContent className="grid p-0 md:grid-cols-2">
               <FieldGroup className="gap-4 w-130">
@@ -130,10 +130,10 @@ export function EditCursoForm({
                 </Field>
 
                 <div className="flex gap-4 pt-2">
-                  <Button type="submit" variant="default" className="flex-1" disabled={loading}>
+                  <Button type="submit" variant="default" className="flex-1 transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" disabled={loading}>
                     {loading ? "Guardando..." : "Guardar Cambios"}
                   </Button>
-                  <Button type="button" variant="outline" className="flex-1" onClick={cancelarEdicion}>
+                  <Button type="button" variant="outline" className="flex-1 transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" onClick={cancelarEdicion}>
                     Cancelar
                   </Button>
                 </div>
@@ -143,7 +143,7 @@ export function EditCursoForm({
         </Card>
       )}
 
-      <Card className="p-6 w-full max-w-4xl">
+      <Card className="p-6 w-full max-w-4xl transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <h2 className="text-xl font-bold mb-4">Cursos Disponibles ({cursos.length})</h2>
 
         {loadingLista ? (
@@ -173,6 +173,7 @@ export function EditCursoForm({
                       <Button
                         size="sm"
                         variant={cursoSeleccionado?.curso_id === curso.curso_id ? "secondary" : "outline"}
+                        className="transition-all hover:scale-[1.05] hover:shadow-[0_0_8px_rgba(0,0,0,0.1)]"
                         onClick={() => seleccionarCurso(curso)}
                       >
                         Editar

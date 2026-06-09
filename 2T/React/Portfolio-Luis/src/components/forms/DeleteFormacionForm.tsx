@@ -56,7 +56,7 @@ export function DeleteFormacionForm({ className, ...props }: React.ComponentProp
         </div>
       )}
 
-      <Card className="overflow-hidden p-8 w-full max-w-2xl">
+      <Card className="overflow-hidden p-8 w-full max-w-2xl transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <CardContent className="p-0">
           <FieldGroup className="gap-4">
             <Field>
@@ -76,7 +76,7 @@ export function DeleteFormacionForm({ className, ...props }: React.ComponentProp
               </select>
             </Field>
             <Field>
-              <Button type="button" variant="destructive" disabled={loading || !selectedId} onClick={handleDelete}>
+              <Button type="button" variant="destructive" disabled={loading || !selectedId} onClick={handleDelete} className="transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
                 {loading ? "Eliminando..." : "Eliminar Formacion"}
               </Button>
             </Field>
