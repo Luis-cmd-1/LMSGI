@@ -1,0 +1,31 @@
+npm create vite@latest
+npm install -D tailwindcss
+
+### PASOS PARA INSTALAR LAS DEPENDENCIAS DEL PROYECTO PORTFOLIO ###
+
+1. Instalar dependencias de UI y Utilidades:
+npm install @base-ui/react @headlessui/react class-variance-authority clsx tailwind-merge
+
+2. Instalar Iconografía y Fuentes:
+npm install lucide-react @heroicons/react @tabler/icons-react @fontsource-variable/geist
+
+3. Instalar Navegación y Animaciones:
+npm install react-router-dom tw-animate-css
+
+4. Instalar Shadcn CLI:
+npm install shadcn
+
+5. Instalar Dependencias de Desarrollo (Tailwind v4 + Tipos):
+npm install -D @tailwindcss/vite tailwindcss @types/node
+
+6. Inicializar configuración de Shadcn (Opcional si es proyecto nuevo):
+npx shadcn@latest init
+
+--------------------------------------------------
+NOTA DE CONFIGURACIÓN PARA TAILWIND V4 (Vite):
+En su archivo 'vite.config.ts', debe importar e incluir el plugin:
+import tailwindcss from '@tailwindcss/vite'
+
+Y en su 'src/index.css' principal, solo añada:
+@import "tailwindcss";
+--------------------------------------------------

@@ -1,0 +1,146 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+header{
+    background-color: rgb(209, 202, 245);
+    display: grid;
+    grid-template-areas: 
+        "redes redes"
+        "telefono login"
+        "img img"
+        "info info"
+        "seccion seccion";
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+    /* gap: 15px; */
+}
+header{
+    background-color: grey;
+    padding: 10px;
+    display: grid;
+    grid-template-areas: 
+        ". navSociales ."
+        "";
+}
+nav.redes{
+    /* border:1px solid rgb(0, 0, 0); */
+    gap: 30px;
+    grid-area: redes;
+    text-align: center;
+}
+nav.redes a{
+    /* border:1px solid rgb(0, 0, 0); */
+    text-decoration: none;
+    color: rgb(73, 78, 83);
+
+}
+div.telefono {
+    /* border: 1px solid black; */
+    text-align: center;
+    grid-area: telefono;
+}
+nav.login  {
+    /* border: 1px solid black; */
+    grid-area: login;
+}
+nav.login a{
+    text-decoration: none;
+}
+div.telefono a{
+    text-decoration: none;
+
+}
+nav.llamamos a{
+    /* border: 1px solid black; */
+    text-decoration: none
+    /* flex-basis: 30%; */
+}
+
+figure img{
+    grid-area: img;
+    width: 100%;
+}
+nav.info {
+    /* border: 1px solid black; */
+    display: grid;
+    grid-template-areas:
+    "lugar correo menu";
+    grid-template-columns: 4r 4fr 1fr;
+    grid-template-rows: auto;
+    text-align: center;
+    align-items: center;
+    grid-area: info;
+}
+nav div.lugar{
+    /* border: 1px solid black; */
+    background-color: rgb(211, 211, 211);
+    grid-area: lugar;
+    /* flex-basis: 35%; */
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+nav div.correo{
+    /* border: 1px solid black; */
+    background-color: rgb(211, 211, 211);
+    /* width: 35%; */
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    grid-area: correo;
+}
+a.menu {
+    grid-area: menu;
+    /* border:1px solid black; */
+    font-size: 20px;
+
+}
+
+nav.seccion{
+    border: 1px solid black;
+    display: grid;
+    grid-template-areas: 
+    "home ico"
+    "viviendas ico"
+    "noti ico"
+    "presu ico";
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: repeat(4,25px);
+    grid-area: seccion;
+
+}
+
+nav.seccion a {
+    /* border: 1px solid black; */
+    /* font-size: 15px; */
+    text-decoration: none;
+    margin-left: 50px;
+    
+}
+
+nav.seccion a.home {
+    grid-area: home;
+}
+nav.seccion a.vivi{
+    grid-area: viviendas;
+}
+
+nav.seccion a.noti{
+    grid-area: noti;
+}
+nav.seccion a.presu{
+    grid-area: presu;
+}
+/* nav.seccion i{
+    border:1px solid black;
+    grid-area: ico;
+}
+
+nav.seccion i2{
+    border:1px solid black;
+    grid-area: ico;
+} */

@@ -1,0 +1,64 @@
+header {
+    background-color: rgb(209, 202, 245);
+    align-items: normal;
+}
+header nav.redes{
+    /* border: 1px solid black; */
+    font-size: 20px;
+    justify-content: end;
+    flex-basis:60%;
+}
+
+header div.telefono{
+    display: none;
+    /* flex-basis:10%; */
+    
+}
+header nav.login{
+    font-size: 20px;
+    /* border: 1px solid black; */
+    margin-left: auto;
+    flex-basis: 10%;
+    text-align: center;
+}
+header figure{
+    /* border:1px solid black; */
+    flex-basis: 30%;
+}
+header nav.seccion{
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+}
+header nav.info{
+    display: none;
+}
+header nav.seccion{
+    /* border: 1px solid black; */
+    flex-basis: 100%;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+header nav.seccion i{
+    display: none;
+}
+nav.redes { 
+    order: 2; 
+}
+nav.login { 
+    order: 3; 
+}
+.telefono { 
+    order: 3; 
+}
+figure{ 
+    order: 1; 
+}
+nav.info { 
+    order: 5; 
+}
+nav.seccion { 
+    order: 6; 
+}

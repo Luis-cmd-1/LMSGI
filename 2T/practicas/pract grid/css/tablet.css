@@ -1,0 +1,54 @@
+header{
+    background-color: pink;
+    /* background-color: rgb(209, 202, 245); */
+    display: grid;
+    grid-template-areas: 
+        "telefono login redes"
+        "img info seccion";
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 15px;
+}
+header nav.redes{
+    /* border:1px solid black; */
+    grid-area: redes;
+}
+
+header div.telefono{
+    /* border:1px solid black; */
+    grid-area: telefono;
+}
+
+header nav.login {
+    /* border:1px solid black; */
+
+    grid-area: login;
+}
+
+header figure{
+    border:1px solid black;
+    align-items: center;
+    grid-area:img;
+}
+
+header nav.info {
+    border:1px solid black;
+    display: grid;
+    grid-template-areas:
+    "lugar correo";
+    grid-template-columns: 4r 1fr;
+    grid-template-rows: auto;
+    text-align: center;
+    align-items: center;
+    grid-area: info;
+}
+header nav a.menu{
+    display: none;
+    border:1px solid black
+}
+header nav.seccion{
+    grid-area: seccion;
+}
+header nav.seccion a{
+    margin-left: 0px;
+}
