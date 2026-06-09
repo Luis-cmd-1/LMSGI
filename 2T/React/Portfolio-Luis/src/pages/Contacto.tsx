@@ -1,12 +1,14 @@
 import { useState } from 'react'
 
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export default function Contacto() {
-  const [agreed,] = useState(false)
   const [form, setForm] = useState({ nombre: '', apellido: '', email: '', mensaje: '' })
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const formCompleto =
+    form.nombre.trim() !== '' &&
+    form.apellido.trim() !== '' &&
+    emailRegex.test(form.email) &&
+    form.mensaje.trim() !== ''
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -124,49 +126,19 @@ export default function Contacto() {
             />
           </div>
 
-          {/* Checkbox política de privacidad */}
-          {/* <div className="flex items-start gap-3 sm:col-span-2">
-            <button
-              type="button"
-              role="checkbox"
-              aria-checked={agreed}
-              onClick={() => setAgreed(!agreed)}
-              className={classNames(
-                'mt-0.5 relative inline-flex h-5 w-9 shrink-0 rounded-none border transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-[#00c8ff]/50',
-                agreed
-                  ? 'bg-[#00c8ff]/20 border-[#00c8ff]/60'
-                  : 'bg-[#00c8ff]/5 border-[#00c8ff]/20',
-              )}
-            >
-              <span
-                className={classNames(
-                  'inline-block h-3 w-3 mt-0.5 rounded-none bg-[#00c8ff] transition-transform duration-200',
-                  agreed ? 'translate-x-4' : 'translate-x-1',
-                )}
-              />
-            </button>
-            <p className="font-mono text-xs text-[#5a8fa8] leading-relaxed">
-              Al enviar aceptas la{' '}
-              <a href="#" className="text-[#00c8ff] hover:underline underline-offset-2 transition-colors">
-                política de privacidad
-              </a>
-              .
-            </p>
-          </div> */}
-        </div>
+          </div>
 
         {/* Botón enviar */}
         <div className="mt-8">
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={!agreed}
-              className={classNames(
-              'w-full rounded-md px-3.5 py-3 font-mono text-sm tracking-widest uppercase transition-all duration-200 border',
-              agreed
-                ? 'bg-[#00c8ff]/10 border-[#00c8ff]/50 text-[#00c8ff] hover:bg-[#00c8ff]/20 hover:border-[#00c8ff]'
-                : 'bg-transparent border-[#00c8ff]/10 text-[#5a8fa8] cursor-not-allowed',
-            )}
+            disabled={!formCompleto}
+            className={`w-full rounded-md px-3.5 py-3 font-mono text-sm tracking-widest uppercase transition-all duration-200 border ${
+              formCompleto
+                ? 'bg-[#00c8ff]/10 border-[#00c8ff]/50 text-[#00c8ff] hover:bg-[#00c8ff]/20 hover:border-[#00c8ff] cursor-pointer'
+                : 'bg-transparent border-[#00c8ff]/10 text-[#5a8fa8] cursor-not-allowed'
+            }`}
           >
             Enviar mensaje →
           </button>
