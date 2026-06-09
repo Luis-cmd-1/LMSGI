@@ -161,7 +161,7 @@ export default function Contacto() {
             type="button"
             onClick={handleSubmit}
             disabled={!agreed}
-            className={classNames(
+              className={classNames(
               'w-full rounded-md px-3.5 py-3 font-mono text-sm tracking-widest uppercase transition-all duration-200 border',
               agreed
                 ? 'bg-[#00c8ff]/10 border-[#00c8ff]/50 text-[#00c8ff] hover:bg-[#00c8ff]/20 hover:border-[#00c8ff]'

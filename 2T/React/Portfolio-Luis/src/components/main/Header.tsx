@@ -88,12 +88,12 @@ export default function Header() {
 
             {/* Avatar dropdown */}
             <Menu as="div" className="relative ml-2">
-              <MenuButton className="relative flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00c8ff]">
+              <MenuButton className="relative flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00c8ff] cursor-pointer">
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">Open user menu</span>
                 <img
                   alt=""
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png"
+                  src="https://ps.w.org/ultimate-dashboard/assets/icon-256x256.png?rev=2859260"
                   className="size-8 rounded-full bg-[#050d1a] outline outline-1 -outline-offset-1 outline-[#00c8ff]/40"
                 />
               </MenuButton>
