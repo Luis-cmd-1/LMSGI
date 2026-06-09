@@ -8,14 +8,12 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon,GaugeIcon,SquareArrowRightExit , ListIcon, ChartBarIcon, FolderIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon, GraduationCapIcon, HandPlatterIcon, BriefcaseBusinessIcon } from "lucide-react"
+import { LayoutDashboardIcon, SquareArrowRightExit, FolderIcon, CameraIcon, FileTextIcon, GraduationCapIcon, HandPlatterIcon, BriefcaseBusinessIcon } from "lucide-react"
 
 const data = {
   user: {
