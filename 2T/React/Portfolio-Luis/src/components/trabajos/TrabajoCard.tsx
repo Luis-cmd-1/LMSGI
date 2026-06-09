@@ -9,7 +9,7 @@ export const TrabajoCard = ({ trabajo }: Props) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <article className="relative flex flex-col border border-[#00c8ff]/20 bg-[#00c8ff]/5 p-6 hover:border-[#00c8ff]/40 hover:bg-[#00c8ff]/8 transition-all group">
+        <article className="relative flex flex-col border border-[#00c8ff]/20 bg-[#00c8ff]/5 p-6 hover:border-[#00c8ff]/40 hover:bg-[#00c8ff]/8 hover:shadow-[0_0_25px_rgba(0,200,255,0.25)] transition-all group">
             {/* Imagen del proyecto */}
             {trabajo.imagen && (
                 <img 
@@ -60,7 +60,7 @@ export const TrabajoCard = ({ trabajo }: Props) => {
             <div className="mt-auto border-t border-[#00c8ff]/10 pt-4 flex items-center justify-between">
                 <button
                     onClick={() => setExpanded(!expanded)}
-                    className="font-mono text-xs text-[#00c8ff]/60 group-hover:text-[#00c8ff] transition-colors cursor-pointer"
+                    className="font-mono text-xs text-[#00c8ff]/60 hover:text-white hover:drop-shadow-[0_0_6px_rgba(0,200,255,0.8)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                     {expanded ? "[ — OCULTAR ]" : "[ + VER MÁS ]"}
                 </button>
