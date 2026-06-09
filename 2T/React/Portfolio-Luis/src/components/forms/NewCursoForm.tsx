@@ -49,7 +49,7 @@ export function NewCursoForm({
     }
   }
   return (
-    <div className={cn("flex flex-col gap-6 items-center", className)} {...props}>
+    <div className={cn("flex w-full flex-col gap-6 items-center", className)} {...props}>
         <div className="flex flex-col items-center gap-2 text-center">
             <h1 className="text-2xl font-bold">Insertar Nuevo Curso</h1>
             <p className="text-balance text-muted-foreground">
@@ -59,7 +59,7 @@ export function NewCursoForm({
         </div>
         
         {message && (
-          <div className={`p-4 rounded-lg text-center font-semibold ${
+          <div className={`w-full max-w-2xl p-4 rounded-lg text-center font-semibold ${
             message.type === 'success' 
               ? 'bg-green-100 text-green-800 border border-green-300' 
               : 'bg-red-100 text-red-800 border border-red-300'
@@ -68,16 +68,16 @@ export function NewCursoForm({
           </div>
         )}
 
-      <Card className="overflow-hidden p-8 w-full max-w-2xl">
-        <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
+      <Card className="w-full max-w-2xl overflow-hidden p-0">
+        <form className="w-full p-4 sm:p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
         {/* <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader> */}
-        <CardContent className="grid p-0 md:grid-cols-2">
-            <FieldGroup className="gap-4 w-130">
+        <CardContent className="p-0">
+            <FieldGroup className="w-full gap-4">
               <Field>
                 <FieldLabel htmlFor="titulo">Titulo</FieldLabel>
                 <Input
@@ -130,7 +130,7 @@ export function NewCursoForm({
                 />
               </Field>
               <Field>
-                <Button type="submit" variant="destructive" disabled={loading}>
+                <Button type="submit" variant="destructive" disabled={loading} className="w-full sm:w-auto">
                   {loading ? 'Insertando...' : 'Insertar Curso'}
                 </Button>
               </Field>

@@ -41,7 +41,7 @@ export function NewTrabajoForm({
   }
 
   return (
-    <div className={cn("flex flex-col gap-6 items-center", className)} {...props}>
+    <div className={cn("flex w-full flex-col gap-6 items-center", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Insertar Nuevo Trabajo</h1>
         <p className="text-balance text-muted-foreground">
@@ -50,7 +50,7 @@ export function NewTrabajoForm({
       </div>
 
       {message && (
-        <div className={`p-4 rounded-lg text-center font-semibold ${
+        <div className={`w-full max-w-2xl p-4 rounded-lg text-center font-semibold ${
           message.type === 'success'
             ? 'bg-green-100 text-green-800 border border-green-300'
             : 'bg-red-100 text-red-800 border border-red-300'
@@ -59,10 +59,10 @@ export function NewTrabajoForm({
         </div>
       )}
 
-      <Card className="overflow-hidden p-8 w-full max-w-2xl">
-        <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
-          <CardContent className="grid p-0 md:grid-cols-2">
-            <FieldGroup className="gap-4 w-130">
+      <Card className="w-full max-w-2xl overflow-hidden p-0">
+        <form className="w-full p-4 sm:p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
+          <CardContent className="p-0">
+            <FieldGroup className="w-full gap-4">
               <Field>
                 <FieldLabel htmlFor="titulo">Título</FieldLabel>
                 <Input id="titulo" type="text" placeholder="Título del trabajo" required {...register("titulo")} />
@@ -92,7 +92,7 @@ export function NewTrabajoForm({
                 <Input id="tecnologias" type="text" placeholder="React, Node.js, TypeScript" {...register("tecnologias")} />
               </Field>
               <Field>
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                   {loading ? 'Insertando...' : 'Insertar Trabajo'}
                 </Button>
               </Field>
