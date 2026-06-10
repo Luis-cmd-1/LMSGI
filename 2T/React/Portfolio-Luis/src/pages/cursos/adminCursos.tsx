@@ -1,10 +1,7 @@
 import { DeleteCursoForm } from "@/components/forms/DeleteCursoForm"
 import { NewCursoForm } from "@/components/forms/NewCursoForm"
-import { EditCursoForm } from "@/components/forms/EditCursoForm"
 import {
-  BookOpenIcon,
   GraduationCapIcon,
-  PencilIcon,
   PlusIcon,
   ShieldCheckIcon,
   Trash2Icon,
@@ -18,14 +15,6 @@ const resumen = [
     icon: PlusIcon,
     tone: "text-emerald-500 bg-emerald-500/10 ring-emerald-500/20",
     glow: "rgba(16,185,129,0.4)",
-  },
-  {
-    label: "Editar",
-    seccionId: "editar-curso",
-    value: "Datos existentes",
-    icon: PencilIcon,
-    tone: "text-sky-500 bg-sky-500/10 ring-sky-500/20",
-    glow: "rgba(14,165,233,0.4)",
   },
   {
     label: "Eliminar",
@@ -56,8 +45,7 @@ export default function AdminCursos() {
               </h1>
               <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
                 Administra los cursos de tu portfolio desde un unico espacio:
-                crea nuevos registros, elimina cursos antiguos y actualiza la
-                informacion que ya tienes publicada.
+                crea nuevos registros y elimina cursos antiguos.
               </p>
             </div>
 
@@ -73,7 +61,7 @@ export default function AdminCursos() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-4 md:grid-cols-2">
           {resumen.map((item) => (
             <article
               key={item.label}
@@ -112,16 +100,6 @@ export default function AdminCursos() {
           icon={Trash2Icon}
         >
           <DeleteCursoForm />
-        </AdminSection>
-
-        <AdminSection
-          id="editar-curso"
-          eyebrow="Actualizacion"
-          title="Modificar cursos"
-          description="Busca un curso, carga sus datos y guarda los cambios que necesites."
-          icon={BookOpenIcon}
-        >
-          <EditCursoForm />
         </AdminSection>
       </div>
     </main>

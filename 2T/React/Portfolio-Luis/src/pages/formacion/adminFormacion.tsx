@@ -1,7 +1,6 @@
 import { DeleteFormacionForm } from "@/components/forms/DeleteFormacionForm"
 import { NewFormacionForm } from "@/components/forms/NewFormacionForm"
-import { EditFormacionForm } from "@/components/forms/EditFormacionForm"
-import { BookOpenIcon, GraduationCapIcon, PencilIcon, PlusIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
+import { GraduationCapIcon, PlusIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
 
 export default function AdminFormacion() {
   return (
@@ -17,7 +16,7 @@ export default function AdminFormacion() {
               </div>
               <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">Gestion de formacion</h1>
               <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                Crea, elimina y actualiza los estudios, certificaciones y cursos destacados del portfolio.
+                Crea y elimina estudios, certificaciones y cursos destacados del portfolio.
               </p>
             </div>
             <div className="flex items-center gap-3 rounded-lg border bg-card px-4 py-3 text-sm shadow-sm">
@@ -32,9 +31,8 @@ export default function AdminFormacion() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-4 md:grid-cols-2">
           <ResumenCard label="Crear" seccionId="crear-formacion" value="Nueva formacion" icon={PlusIcon} color="text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" glow="rgba(16,185,129,0.4)" />
-          <ResumenCard label="Editar" seccionId="editar-formacion" value="Datos existentes" icon={PencilIcon} color="text-sky-500 bg-sky-500/10 ring-sky-500/20" glow="rgba(14,165,233,0.4)" />
           <ResumenCard label="Eliminar" seccionId="eliminar-formacion" value="Registro seguro" icon={Trash2Icon} color="text-rose-500 bg-rose-500/10 ring-rose-500/20" glow="rgba(244,63,94,0.4)" />
         </section>
 
@@ -43,9 +41,6 @@ export default function AdminFormacion() {
         </AdminSection>
         <AdminSection id="eliminar-formacion" title="Eliminar formacion" description="Retira una formacion que ya no quieras mostrar." icon={Trash2Icon}>
           <DeleteFormacionForm />
-        </AdminSection>
-        <AdminSection id="editar-formacion" title="Modificar formaciones" description="Selecciona una formacion y actualiza sus datos." icon={BookOpenIcon}>
-          <EditFormacionForm />
         </AdminSection>
       </div>
     </main>

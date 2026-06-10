@@ -1,7 +1,6 @@
 import { DeleteTrabajoForm } from "@/components/forms/DeleteTrabajoForm"
 import { NewTrabajoForm } from "@/components/forms/NewTrabajoForm"
-import { EditTrabajoForm } from "@/components/forms/EditTrabajoForm"
-import { FolderKanbanIcon, PencilIcon, PlusIcon, ShieldCheckIcon, Trash2Icon, WrenchIcon } from "lucide-react"
+import { FolderKanbanIcon, PlusIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
 
 export default function AdminTrabajos() {
   return (
@@ -32,9 +31,8 @@ export default function AdminTrabajos() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-4 md:grid-cols-2">
           <ResumenCard label="Crear" seccionId="crear-trabajo" value="Nuevo trabajo" icon={PlusIcon} color="text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" glow="rgba(16,185,129,0.4)" />
-          <ResumenCard label="Editar" seccionId="editar-trabajo" value="Datos existentes" icon={PencilIcon} color="text-sky-500 bg-sky-500/10 ring-sky-500/20" glow="rgba(14,165,233,0.4)" />
           <ResumenCard label="Eliminar" seccionId="eliminar-trabajo" value="Registro seguro" icon={Trash2Icon} color="text-rose-500 bg-rose-500/10 ring-rose-500/20" glow="rgba(244,63,94,0.4)" />
         </section>
 
@@ -43,9 +41,6 @@ export default function AdminTrabajos() {
         </AdminSection>
         <AdminSection id="eliminar-trabajo" title="Eliminar trabajo" description="Retira un proyecto que ya no quieras mostrar." icon={Trash2Icon}>
           <DeleteTrabajoForm />
-        </AdminSection>
-        <AdminSection id="editar-trabajo" title="Modificar trabajos" description="Selecciona un trabajo y actualiza sus datos." icon={WrenchIcon}>
-          <EditTrabajoForm />
         </AdminSection>
       </div>
     </main>

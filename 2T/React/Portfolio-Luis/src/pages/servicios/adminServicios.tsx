@@ -1,7 +1,6 @@
 import { DeleteServicioForm } from "@/components/forms/DeleteServicioForm"
 import { NewServicioForm } from "@/components/forms/NewServicioForm"
-import { EditServicioForm } from "@/components/forms/EditServicioForm"
-import { BriefcaseBusinessIcon, PencilIcon, PlusIcon, SettingsIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
+import { BriefcaseBusinessIcon, PlusIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
 
 export default function AdminServicios() {
   return (
@@ -32,9 +31,8 @@ export default function AdminServicios() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-4 md:grid-cols-2">
           <ResumenCard label="Crear" seccionId="crear-servicio" value="Nuevo servicio" icon={PlusIcon} color="text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" glow="rgba(16,185,129,0.4)" />
-          <ResumenCard label="Editar" seccionId="editar-servicio" value="Datos existentes" icon={PencilIcon} color="text-sky-500 bg-sky-500/10 ring-sky-500/20" glow="rgba(14,165,233,0.4)" />
           <ResumenCard label="Eliminar" seccionId="eliminar-servicio" value="Registro seguro" icon={Trash2Icon} color="text-rose-500 bg-rose-500/10 ring-rose-500/20" glow="rgba(244,63,94,0.4)" />
         </section>
 
@@ -43,9 +41,6 @@ export default function AdminServicios() {
         </AdminSection>
         <AdminSection id="eliminar-servicio" title="Eliminar servicio" description="Retira un servicio que ya no quieras mostrar." icon={Trash2Icon}>
           <DeleteServicioForm />
-        </AdminSection>
-        <AdminSection id="editar-servicio" title="Modificar servicios" description="Selecciona un servicio y actualiza su informacion." icon={SettingsIcon}>
-          <EditServicioForm />
         </AdminSection>
       </div>
     </main>

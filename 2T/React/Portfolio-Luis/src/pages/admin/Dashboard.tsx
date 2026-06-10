@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom"
-import { ShieldCheckIcon, FolderIcon, LayoutDashboardIcon, ListIcon, ChartBarIcon, ArrowRightIcon, PlusIcon, PencilIcon, Trash2Icon } from "lucide-react"
+import { ShieldCheckIcon, FolderIcon, LayoutDashboardIcon, ListIcon, ChartBarIcon, ArrowRightIcon, PlusIcon, Trash2Icon } from "lucide-react"
 
 const ACCIONES = [
   { label: "Insertar", descripcion: "Añade nuevos registros a cada sección del portfolio", icon: PlusIcon, color: "text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" },
-  { label: "Editar", descripcion: "Modifica la información de los registros existentes", icon: PencilIcon, color: "text-sky-500 bg-sky-500/10 ring-sky-500/20" },
   { label: "Eliminar", descripcion: "Retira registros que ya no quieras mostrar", icon: Trash2Icon, color: "text-rose-500 bg-rose-500/10 ring-rose-500/20" },
 ]
 
 const SECCIONES = [
-  { label: "Cursos", descripcion: "Añadir, editar y eliminar cursos formativos", icon: FolderIcon, ruta: "/admin/Cursos" },
+  { label: "Cursos", descripcion: "Añadir y eliminar cursos formativos", icon: FolderIcon, ruta: "/admin/Cursos" },
   { label: "Formación", descripcion: "Gestionar estudios y certificaciones", icon: LayoutDashboardIcon, ruta: "/admin/Formacion" },
   { label: "Servicios", descripcion: "Administrar servicios profesionales", icon: ListIcon, ruta: "/admin/Servicios" },
   { label: "Trabajos", descripcion: "Controlar proyectos y trabajos", icon: ChartBarIcon, ruta: "/admin/Trabajos" },
@@ -29,13 +28,13 @@ export default function Dashboard() {
               Bienvenido al panel de administración
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
-              Desde aquí puedes gestionar todo el contenido de tu portfolio: insertar, editar y eliminar registros de cada sección.
+               Desde aquí puedes gestionar todo el contenido de tu portfolio: insertar y eliminar registros de cada sección.
             </p>
           </div>
         </section>
 
         <section className="rounded-xl border bg-background px-6 py-6 shadow-sm sm:px-8">
-          <p className="text-sm text-muted-foreground mb-4">Desde este panel puedes insertar, editar o eliminar el contenido de cada sección del portfolio.</p>
+          <p className="text-sm text-muted-foreground mb-4">Desde este panel puedes insertar o eliminar el contenido de cada sección del portfolio.</p>
           <div className="grid gap-4 sm:grid-cols-3">
           {ACCIONES.map((a) => (
             <div key={a.label} className="rounded-xl border bg-background p-5 shadow-sm">
