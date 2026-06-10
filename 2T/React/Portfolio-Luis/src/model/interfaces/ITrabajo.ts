@@ -5,7 +5,7 @@ export interface ITrabajo {
     descripcion:    string;
     empresa:        string;
     fecha:          string;
-    tecnologias:    string[];
+    tecnologias:    string;
     enlace:         string;
     imagen:         string;
 }

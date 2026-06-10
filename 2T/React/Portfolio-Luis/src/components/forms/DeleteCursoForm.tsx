@@ -7,15 +7,21 @@ import { getCursos, deleteCurso } from "@/model/api/backend/apiCursos"
 import { useEffect, useState } from "react"
 
 export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"div">) {
+  // Lista de cursos disponibles
   const [cursos, setCursos] = useState<ICurso[]>([])
+  // ID del curso seleccionado en el <select>
   const [selectedId, setSelectedId] = useState<string>("")
+  // Mensaje de feedback (éxito o error)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
-  const [loading, setLoading] = useState(false)
+  // Controla si la operación de borrado está en curso
+    const [loading, setLoading] = useState(false)
 
+  // Al montar el componente, carga los cursos desde la API
   useEffect(() => {
     getCursos().then(setCursos)
   }, [])
 
+  // Elimina el curso seleccionado llamando a la API
   const handleDelete = async () => {
     if (!selectedId) return
     setLoading(true)
@@ -23,8 +29,10 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
     try {
       await deleteCurso(selectedId)
       setMessage({ type: 'success', text: '✓ Curso eliminado correctamente' })
+      // Quita el curso eliminado de la lista local
       setCursos(prev => prev.filter(c => c.curso_id !== selectedId))
       setSelectedId("")
+      // El mensaje de éxito desaparece tras 5 segundos
       setTimeout(() => setMessage(null), 5000)
     } catch (error) {
       setMessage({ type: 'error', text: '✗ Error al eliminar el curso. Intenta nuevamente.' })
@@ -36,6 +44,7 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
 
   return (
     <div className={cn("flex flex-col gap-6 items-center", className)} {...props}>
+      {/* Título y descripción del formulario */}
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Eliminar Curso</h1>
         <p className="text-balance text-muted-foreground">
@@ -43,6 +52,7 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
         </p>
       </div>
 
+      {/* Mensaje de feedback según el resultado de la operación */}
       {message && (
         <div className={`p-4 rounded-lg text-center font-semibold ${
           message.type === 'success'
@@ -56,6 +66,7 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
       <Card className="overflow-hidden p-8 w-full max-w-2xl transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <CardContent className="p-0">
           <FieldGroup className="gap-4">
+            {/* Selector de curso a eliminar */}
             <Field>
               <FieldLabel htmlFor="curso">Curso</FieldLabel>
               <select
@@ -72,6 +83,7 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
                 ))}
               </select>
             </Field>
+            {/* Botón para ejecutar la eliminación */}
             <Field>
               <Button
                 type="button"

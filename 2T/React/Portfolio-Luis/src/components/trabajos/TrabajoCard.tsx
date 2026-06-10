@@ -7,6 +7,7 @@ interface Props {
 
 export const TrabajoCard = ({ trabajo }: Props) => {
     const [expanded, setExpanded] = useState(false);
+    const tecnologias = trabajo.tecnologias ?? "";
 
     return (
         <article className="relative flex flex-col border border-[#00c8ff]/20 bg-[#00c8ff]/5 p-6 hover:border-[#00c8ff]/40 hover:bg-[#00c8ff]/8 hover:shadow-[0_0_25px_rgba(0,200,255,0.25)] transition-all group">
@@ -15,7 +16,7 @@ export const TrabajoCard = ({ trabajo }: Props) => {
                 <img 
                     src={trabajo.imagen}
                     alt={trabajo.titulo}
-                    className="w-full h-40 object-cover rounded-lg border border-[#00c8ff]/20 mb-4"
+                    className="w-full aspect-video object-cover rounded-lg border border-[#00c8ff]/20 mb-4"
                 />
             )}
 
@@ -24,10 +25,7 @@ export const TrabajoCard = ({ trabajo }: Props) => {
                 <span className="font-mono text-xs tracking-widest uppercase border border-[#00c8ff]/30 text-[#00c8ff] px-2 py-0.5">
                     {trabajo.empresa}
                 </span>
-                <span className="flex items-center gap-1.5 font-mono text-xs text-[#00c8ff]">
-                    <span className="inline-block size-1.5 rounded-full bg-[#00c8ff] animate-pulse" />
-                    Activo
-                </span>
+
             </div>
 
             {/* Título */}
@@ -47,14 +45,11 @@ export const TrabajoCard = ({ trabajo }: Props) => {
                 </p>
             </div>
 
-            {/* Tecnologías */}
-            <div className="flex flex-wrap gap-2 mb-4">
-                {trabajo.tecnologias && trabajo.tecnologias.map((tech) => (
-                    <span key={tech} className="font-mono text-xs px-2 py-1 bg-[#00c8ff]/10 border border-[#00c8ff]/20 text-[#00c8ff] rounded">
-                        {tech}
-                    </span>
-                ))}
-            </div>
+            {tecnologias && (
+                <p className="text-xs text-[#7fa8c0] leading-relaxed mb-4">
+                    {tecnologias}
+                </p>
+            )}
 
             {/* Footer con botones */}
             <div className="mt-auto border-t border-[#00c8ff]/10 pt-4 flex items-center justify-between">
