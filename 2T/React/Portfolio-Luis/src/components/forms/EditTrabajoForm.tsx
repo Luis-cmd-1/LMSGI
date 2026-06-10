@@ -40,7 +40,7 @@ export function EditTrabajoForm({ className, ...props }: React.ComponentProps<"d
     setSeleccionado(trabajo)
     reset({
       ...trabajo,
-      tecnologias: Array.isArray(trabajo.tecnologias) ? trabajo.tecnologias.join(", ") : "",
+      tecnologias: trabajo.tecnologias ?? "",
     })
     setMessage(null)
   }
@@ -63,7 +63,7 @@ export function EditTrabajoForm({ className, ...props }: React.ComponentProps<"d
         fecha: data.fecha,
         enlace: data.enlace,
         imagen: data.imagen,
-        tecnologias: data.tecnologias.split(",").map((item) => item.trim()).filter(Boolean),
+        tecnologias: data.tecnologias,
       })
       setMessage({ type: "success", text: "Trabajo actualizado correctamente" })
       setSeleccionado(null)
