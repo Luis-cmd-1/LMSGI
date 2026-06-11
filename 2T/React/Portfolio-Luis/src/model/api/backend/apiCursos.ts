@@ -37,6 +37,18 @@ export const deleteCurso = async (curso_id: string) => {
     return "Curso eliminado correctamente";
 }
 
+export const updateCurso = async (curso_id: string, cursoData: Partial<ICurso>) => {
+    const { error } = await supabase
+        .from('cursos')
+        .update(cursoData)
+        .eq('curso_id', curso_id);
+    if (error) {
+        console.error(error)
+        throw error
+    }
+    return "Curso actualizado correctamente";
+}
+
 // Obtener un solo curso por su ID para cargar el formulario
 export const getCursoById = async (curso_id: string): Promise<ICurso | null> => {
     const { data, error } = await supabase
@@ -49,16 +61,4 @@ export const getCursoById = async (curso_id: string): Promise<ICurso | null> => 
         return null;
     }
     return data as ICurso;
-}
-
-export const updateCurso = async (curso_id: string, cursoData: Partial<ICurso>) => {
-    const { error } = await supabase
-                    .from('cursos')
-                    .update(cursoData)
-                    .eq('curso_id', curso_id);
-    if (error) {
-        console.error(error);
-        throw error;
-    }
-    return "Curso actualizado correctamente";
 }

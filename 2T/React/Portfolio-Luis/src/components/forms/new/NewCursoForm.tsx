@@ -25,8 +25,9 @@ import { useState } from "react"
 
 export function NewCursoForm({
   className,
+  onSuccess,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & { onSuccess?: () => void }) {
 
   
   const { register, handleSubmit, reset } = useForm<ICurso>()
@@ -38,11 +39,13 @@ export function NewCursoForm({
     setMessage(null)
     try {
       await insertCurso(data)
-      setMessage({ type: 'success', text: '✓ Curso insertado correctamente' })
-      reset()
+      setMessage({ type: 'success', text: 'Curso insertado correctamente' })
       setTimeout(() => setMessage(null), 5000)
+      reset()
+      onSuccess?.()
     } catch (error) {
-      setMessage({ type: 'error', text: '✗ Error al insertar el curso. Intenta nuevamente.' })
+      setMessage({ type: 'error', text: 'Error al insertar el curso. Intenta nuevamente.' })
+      setTimeout(() => setMessage(null), 5000)
       console.error(error)
     } finally {
       setLoading(false)
@@ -57,11 +60,11 @@ export function NewCursoForm({
               Completa el formulario con la informacion que deseas agregar.
             </p>
         </div>
-        
+
         {message && (
-          <div className={`w-full max-w-2xl p-4 rounded-lg text-center font-semibold ${
-            message.type === 'success' 
-              ? 'bg-green-100 text-green-800 border border-green-300' 
+          <div className={`p-4 rounded-lg text-center font-semibold ${
+            message.type === 'success'
+              ? 'bg-green-100 text-green-800 border border-green-300'
               : 'bg-red-100 text-red-800 border border-red-300'
           }`}>
             {message.text}
@@ -130,7 +133,7 @@ export function NewCursoForm({
                 />
               </Field>
               <Field>
-                <Button type="submit" variant="destructive" disabled={loading} className="w-full sm:w-auto transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
+                <Button type="submit" disabled={loading} className="w-full sm:w-auto transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
                   {loading ? 'Insertando...' : 'Insertar Curso'}
                 </Button>
               </Field>

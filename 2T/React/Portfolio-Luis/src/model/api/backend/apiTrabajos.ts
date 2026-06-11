@@ -25,6 +25,18 @@ export const insertTrabajo = async (trabajo: ITrabajo) => {
 
 }
 
+export const updateTrabajo = async (trabajo_id: string, trabajoData: Partial<ITrabajo>) => {
+    const { error } = await supabase
+        .from('trabajos')
+        .update(trabajoData)
+        .eq('trabajo_id', trabajo_id);
+    if (error) {
+        console.error(error)
+        throw error
+    }
+    return "Trabajo actualizado correctamente";
+}
+
 export const deleteTrabajo = async (trabajo_id: string) => {
     const { error } = await supabase
                     .from('trabajos')
@@ -35,16 +47,4 @@ export const deleteTrabajo = async (trabajo_id: string) => {
         throw error
     }
     return "Trabajo eliminado correctamente";
-}
-
-export const updateTrabajo = async (trabajo_id: string, trabajoData: Partial<ITrabajo>) => {
-    const { error } = await supabase
-                    .from('trabajos')
-                    .update(trabajoData)
-                    .eq('trabajo_id', trabajo_id);
-    if (error) {
-        console.error(error)
-        throw error
-    }
-    return "Trabajo actualizado correctamente";
 }

@@ -1,6 +1,8 @@
-import { DeleteServicioForm } from "@/components/forms/DeleteServicioForm"
-import { NewServicioForm } from "@/components/forms/NewServicioForm"
-import { BriefcaseBusinessIcon, PlusIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react"
+import { DeleteServicioForm } from "@/components/forms/delete/DeleteServicioForm"
+import { SelectServicio } from "@/components/forms/edit/SelectServicio"
+import { NewServicioForm } from "@/components/forms/new/NewServicioForm"
+import { BriefcaseBusinessIcon, PlusIcon, ShieldCheckIcon, SquarePen, Trash2Icon } from "lucide-react"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
 export default function AdminServicios() {
   return (
@@ -31,58 +33,68 @@ export default function AdminServicios() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-2">
-          <ResumenCard label="Crear" seccionId="crear-servicio" value="Nuevo servicio" icon={PlusIcon} color="text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" glow="rgba(16,185,129,0.4)" />
-          <ResumenCard label="Eliminar" seccionId="eliminar-servicio" value="Registro seguro" icon={Trash2Icon} color="text-rose-500 bg-rose-500/10 ring-rose-500/20" glow="rgba(244,63,94,0.4)" />
-        </section>
+        <Accordion type="single" collapsible className="space-y-4">
+          <AccordionItem value="crear-servicio" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]">
+            <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
+              <div className="flex w-full gap-4 text-left">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-500 ring-1 ring-emerald-500/20">
+                  <PlusIcon className="size-5" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Administrar</p>
+                  <h2 className="mt-1 text-2xl font-semibold tracking-tight">Insertar servicio</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Anade un servicio con nombre, tipo, precio y caracteristicas.</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 sm:px-6 pb-5 sm:pb-6">
+              <div className="flex justify-center border-t pt-5">
+                <NewServicioForm />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-        <AdminSection id="crear-servicio" title="Insertar servicio" description="Anade un servicio con nombre, tipo, precio y caracteristicas." icon={PlusIcon}>
-          <NewServicioForm />
-        </AdminSection>
-        <AdminSection id="eliminar-servicio" title="Eliminar servicio" description="Retira un servicio que ya no quieras mostrar." icon={Trash2Icon}>
-          <DeleteServicioForm />
-        </AdminSection>
+          <AccordionItem value="editar-servicio" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]">
+            <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
+              <div className="flex w-full gap-4 text-left">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-500/10 text-blue-500 ring-1 ring-blue-500/20">
+                  <SquarePen className="size-5" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Modificacion de contenido</p>
+                  <h2 className="mt-1 text-2xl font-semibold tracking-tight">Editar servicio</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Selecciona un servicio y actualiza sus datos.</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 sm:px-6 pb-5 sm:pb-6">
+              <div className="border-t pt-5">
+                <SelectServicio />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="eliminar-servicio" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+            <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
+              <div className="flex w-full gap-4 text-left">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-rose-500/10 text-rose-500 ring-1 ring-rose-500/20">
+                  <Trash2Icon className="size-5" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Administrar</p>
+                  <h2 className="mt-1 text-2xl font-semibold tracking-tight">Eliminar servicio</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Retira un servicio que ya no quieras mostrar.</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 sm:px-6 pb-5 sm:pb-6">
+              <div className="flex justify-center border-t pt-5">
+                <DeleteServicioForm />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </main>
-  )
-}
-
-type IconProps = { className?: string }
-
-function ResumenCard({ label, seccionId, value, icon: Icon, color, glow }: { label: string; seccionId: string; value: string; icon: React.ComponentType<IconProps>; color: string; glow: string }) {
-  return (
-    <article
-      onClick={() => document.getElementById(seccionId)?.scrollIntoView({ behavior: 'smooth' })}
-      style={{ '--glow': glow } as React.CSSProperties}
-      className="rounded-xl border bg-background p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-[0_0_30px_var(--glow)] cursor-pointer"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-muted-foreground">{label}</p>
-          <h2 className="mt-1 text-xl font-semibold">{value}</h2>
-        </div>
-        <div className={`rounded-md p-2 ring-1 ${color}`}>
-          <Icon className="size-5" />
-        </div>
-      </div>
-    </article>
-  )
-}
-
-function AdminSection({ id, title, description, icon: Icon, children }: { id: string; title: string; description: string; icon: React.ComponentType<IconProps>; children: React.ReactNode }) {
-  return (
-    <section id={id} className="rounded-xl border bg-background p-5 shadow-sm sm:p-6 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
-      <div className="mb-6 flex gap-4 border-b pb-5">
-        <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/15">
-          <Icon className="size-5" />
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Administrar</p>
-          <h2 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{description}</p>
-        </div>
-      </div>
-      <div className="flex justify-center">{children}</div>
-    </section>
   )
 }

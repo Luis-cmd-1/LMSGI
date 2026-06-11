@@ -1,30 +1,14 @@
-import { DeleteCursoForm } from "@/components/forms/DeleteCursoForm"
-import { NewCursoForm } from "@/components/forms/NewCursoForm"
+import { DeleteCursoForm } from "@/components/forms/delete/DeleteCursoForm"
+import { SelectCurso } from "@/components/forms/edit/SelectCurso"
+import { NewCursoForm } from "@/components/forms/new/NewCursoForm"
 import {
   GraduationCapIcon,
   PlusIcon,
   ShieldCheckIcon,
+  SquarePen,
   Trash2Icon,
 } from "lucide-react"
-
-const resumen = [
-  {
-    label: "Crear",
-    seccionId: "crear-curso",
-    value: "Nuevo curso",
-    icon: PlusIcon,
-    tone: "text-emerald-500 bg-emerald-500/10 ring-emerald-500/20",
-    glow: "rgba(16,185,129,0.4)",
-  },
-  {
-    label: "Eliminar",
-    seccionId: "eliminar-curso",
-    value: "Registro seguro",
-    icon: Trash2Icon,
-    tone: "text-rose-500 bg-rose-500/10 ring-rose-500/20",
-    glow: "rgba(244,63,94,0.4)",
-  },
-]
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
 export default function AdminCursos() {
   return (
@@ -61,88 +45,68 @@ export default function AdminCursos() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-2">
-          {resumen.map((item) => (
-            <article
-              key={item.label}
-              onClick={() => document.getElementById(item.seccionId)?.scrollIntoView({ behavior: 'smooth' })}
-              style={{ '--glow': item.glow } as React.CSSProperties}
-              className="rounded-xl border bg-background p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-[0_0_30px_var(--glow)] cursor-pointer"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">{item.label}</p>
-                  <h2 className="mt-1 text-xl font-semibold">{item.value}</h2>
+        <Accordion type="single" collapsible className="space-y-4">
+          <AccordionItem value="crear-curso" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]">
+            <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
+              <div className="flex w-full gap-4 text-left">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-500 ring-1 ring-emerald-500/20">
+                  <PlusIcon className="size-5" />
                 </div>
-                <div className={`rounded-md p-2 ring-1 ${item.tone}`}>
-                  <item.icon className="size-5" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Alta de contenido</p>
+                  <h2 className="mt-1 text-2xl font-semibold tracking-tight">Insertar curso</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Anade un curso nuevo indicando titulo, categoria, academia y precio.</p>
                 </div>
               </div>
-            </article>
-          ))}
-        </section>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 sm:px-6 pb-5 sm:pb-6">
+              <div className="flex justify-center border-t pt-5">
+                <NewCursoForm />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-        <AdminSection
-          id="crear-curso"
-          eyebrow="Alta de contenido"
-          title="Insertar curso"
-          description="Anade un curso nuevo indicando titulo, categoria, academia y precio."
-          icon={PlusIcon}
-        >
-          <NewCursoForm />
-        </AdminSection>
+          <AccordionItem value="editar-curso" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]">
+            <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
+              <div className="flex w-full gap-4 text-left">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-500/10 text-blue-500 ring-1 ring-blue-500/20">
+                  <SquarePen className="size-5" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Modificacion de contenido</p>
+                  <h2 className="mt-1 text-2xl font-semibold tracking-tight">Editar curso</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Selecciona un curso y actualiza sus campos.</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 sm:px-6 pb-5 sm:pb-6">
+              <div className="border-t pt-5">
+                <SelectCurso />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-        <AdminSection
-          id="eliminar-curso"
-          eyebrow="Mantenimiento"
-          title="Eliminar curso"
-          description="Selecciona un curso existente y retiralo de la base de datos."
-          icon={Trash2Icon}
-        >
-          <DeleteCursoForm />
-        </AdminSection>
+          <AccordionItem value="eliminar-curso" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+            <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
+              <div className="flex w-full gap-4 text-left">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-rose-500/10 text-rose-500 ring-1 ring-rose-500/20">
+                  <Trash2Icon className="size-5" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Mantenimiento</p>
+                  <h2 className="mt-1 text-2xl font-semibold tracking-tight">Eliminar curso</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Selecciona un curso existente y retiralo de la base de datos.</p>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 sm:px-6 pb-5 sm:pb-6">
+              <div className="flex justify-center border-t pt-5">
+                <DeleteCursoForm />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </main>
-  )
-}
-
-type AdminSectionProps = {
-  id: string
-  eyebrow: string
-  title: string
-  description: string
-  icon: React.ComponentType<{ className?: string }>
-  children: React.ReactNode
-}
-
-function AdminSection({
-  id,
-  eyebrow,
-  title,
-  description,
-  icon: Icon,
-  children,
-}: AdminSectionProps) {
-  return (
-    <section id={id} className="rounded-xl border bg-background p-5 shadow-sm sm:p-6 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
-      <div className="mb-6 flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-4">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/15">
-            <Icon className="size-5" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              {eyebrow}
-            </p>
-            <h2 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-              {description}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-center">{children}</div>
-    </section>
   )
 }

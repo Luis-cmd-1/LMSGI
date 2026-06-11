@@ -1,10 +1,35 @@
 import { Link } from "react-router-dom"
-import { ShieldCheckIcon, FolderIcon, LayoutDashboardIcon, ListIcon, ChartBarIcon, ArrowRightIcon, PlusIcon, Trash2Icon } from "lucide-react"
+import {
+  ShieldCheckIcon, FolderIcon, LayoutDashboardIcon, ListIcon, ChartBarIcon,
+  ArrowRightIcon, PlusIcon, SquarePen, Trash2Icon,
+} from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { DataTable } from "@/components/admin/data-table"
+import { getCursos, deleteCurso } from "@/model/api/backend/apiCursos"
+import { getFormaciones, deleteFormacion } from "@/model/api/backend/apiFormacion"
+import { getServicios, deleteServicio } from "@/model/api/backend/apiServicios"
+import { getTrabajos, deleteTrabajo } from "@/model/api/backend/apiTrabajos"
+import { NewCursoForm } from "@/components/forms/new/NewCursoForm"
+import { NewFormacionForm } from "@/components/forms/new/NewFormacionForm"
+import { NewServicioForm } from "@/components/forms/new/NewServicioForm"
+import { NewTrabajoForm } from "@/components/forms/new/NewTrabajoForm"
+import { EditCursoForm } from "@/components/forms/edit/EditCursoForm"
+import { EditFormacionForm } from "@/components/forms/edit/EditFormacionForm"
+import { EditServicioForm } from "@/components/forms/edit/EditServicioForm"
+import { EditTrabajoForm } from "@/components/forms/edit/EditTrabajoForm"
 
 const ACCIONES = [
   { label: "Insertar", descripcion: "Añade nuevos registros a cada sección del portfolio", icon: PlusIcon, color: "text-emerald-500 bg-emerald-500/10 ring-emerald-500/20" },
+  { label: "Editar", descripcion: "Modifica los registros seleccionados", icon: SquarePen, color: "text-blue-500 bg-blue-500/10 ring-blue-500/20" },
   { label: "Eliminar", descripcion: "Retira registros que ya no quieras mostrar", icon: Trash2Icon, color: "text-rose-500 bg-rose-500/10 ring-rose-500/20" },
 ]
+
+const SECCIONES_TAB = {
+  cursos: { label: "Cursos", api: getCursos, deleteApi: deleteCurso, EditFormComponent: EditCursoForm, InsertFormComponent: NewCursoForm, getId: (i: any) => i.curso_id, fields: ["titulo", "categoria", "academia", "precio"] },
+  formacion: { label: "Formación", api: getFormaciones, deleteApi: deleteFormacion, EditFormComponent: EditFormacionForm, InsertFormComponent: NewFormacionForm, getId: (i: any) => i.formacion_id, fields: ["titulo", "subtitulo", "descripcion", "centro", "estado", "fecha", "imagen", "categoria", "autor_nombre"] },
+  servicios: { label: "Servicios", api: getServicios, deleteApi: deleteServicio, EditFormComponent: EditServicioForm, InsertFormComponent: NewServicioForm, getId: (i: any) => i.servicio_id, fields: ["nombre", "descripcion", "tipo", "precio", "caracteristicas", "icono"] },
+  trabajos: { label: "Trabajos", api: getTrabajos, deleteApi: deleteTrabajo, EditFormComponent: EditTrabajoForm, InsertFormComponent: NewTrabajoForm, getId: (i: any) => i.trabajo_id, fields: ["titulo", "descripcion", "empresa", "fecha", "tecnologias", "enlace", "imagen"] },
+}
 
 const SECCIONES = [
   { label: "Cursos", descripcion: "Añadir y eliminar cursos formativos", icon: FolderIcon, ruta: "/admin/Cursos" },
@@ -28,13 +53,13 @@ export default function Dashboard() {
               Bienvenido al panel de administración
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
-               Desde aquí puedes gestionar todo el contenido de tu portfolio: insertar y eliminar registros de cada sección.
+               Desde aquí puedes gestionar todo el contenido de tu portfolio: insertar, editar y eliminar registros de cada sección.
             </p>
           </div>
         </section>
 
         <section className="rounded-xl border bg-background px-6 py-6 shadow-sm sm:px-8">
-          <p className="text-sm text-muted-foreground mb-4">Desde este panel puedes insertar o eliminar el contenido de cada sección del portfolio.</p>
+          <p className="text-sm text-muted-foreground mb-4">Desde este panel puedes insertar, editar o eliminar el contenido de cada sección del portfolio.</p>
           <div className="grid gap-4 sm:grid-cols-3">
           {ACCIONES.map((a) => (
             <div key={a.label} className="rounded-xl border bg-background p-5 shadow-sm">
@@ -50,6 +75,32 @@ export default function Dashboard() {
             </div>
           ))}
           </div>
+        </section>
+
+        <section className="rounded-xl border bg-background px-6 py-6 shadow-sm sm:px-8">
+          <Tabs defaultValue="cursos">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Listado de contenido</h2>
+              <TabsList>
+                {Object.entries(SECCIONES_TAB).map(([key, tab]) => (
+                  <TabsTrigger key={key} value={key}>{tab.label}</TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
+            {Object.entries(SECCIONES_TAB).map(([key, tab]) => (
+              <TabsContent key={key} value={key}>
+                <DataTable
+                  api={tab.api}
+                  deleteApi={tab.deleteApi}
+                  EditFormComponent={tab.EditFormComponent}
+                  InsertFormComponent={tab.InsertFormComponent}
+                  getId={tab.getId}
+                  fields={tab.fields}
+                  label={tab.label}
+                />
+              </TabsContent>
+            ))}
+          </Tabs>
         </section>
 
         <section className="grid gap-4 sm:grid-cols-2">

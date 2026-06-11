@@ -18,22 +18,26 @@ import { useState } from "react"
 
 export function NewTrabajoForm({
   className,
+  onSuccess,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & { onSuccess?: () => void }) {
   const { register, handleSubmit, reset } = useForm<ITrabajo>()
-  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
 
   const onSubmit: SubmitHandler<ITrabajo> = async (data) => {
     setLoading(true)
     setMessage(null)
     try {
       await insertTrabajo(data)
-      setMessage({ type: 'success', text: '✓ Trabajo insertado correctamente' })
-      reset()
+      setMessage({ type: 'success', text: 'Trabajo insertado correctamente' })
       setTimeout(() => setMessage(null), 5000)
+      reset()
+      reset()
+      onSuccess?.()
     } catch (error) {
-      setMessage({ type: 'error', text: '✗ Error al insertar el trabajo.' })
+      setMessage({ type: 'error', text: 'Error al insertar el trabajo.' })
+      setTimeout(() => setMessage(null), 5000)
       console.error(error)
     } finally {
       setLoading(false)
@@ -49,15 +53,15 @@ export function NewTrabajoForm({
         </p>
       </div>
 
-      {message && (
-        <div className={`w-full max-w-2xl p-4 rounded-lg text-center font-semibold ${
-          message.type === 'success'
-            ? 'bg-green-100 text-green-800 border border-green-300'
-            : 'bg-red-100 text-red-800 border border-red-300'
-        }`}>
-          {message.text}
-        </div>
-      )}
+        {message && (
+          <div className={`p-4 rounded-lg text-center font-semibold ${
+            message.type === 'success'
+              ? 'bg-green-100 text-green-800 border border-green-300'
+              : 'bg-red-100 text-red-800 border border-red-300'
+          }`}>
+            {message.text}
+          </div>
+        )}
 
       <Card className="w-full max-w-2xl overflow-hidden p-0 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <form className="w-full p-4 sm:p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>

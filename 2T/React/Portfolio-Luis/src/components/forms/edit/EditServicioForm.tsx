@@ -11,16 +11,19 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import type { IServicio } from "@/model/interfaces/IServicio";
-import { insertServicio } from "@/model/api/backend/apiServicios"
+import { updateServicio } from "@/model/api/backend/apiServicios"
 import { useForm } from "react-hook-form"
 import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 
-export function NewServicioForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const { register, handleSubmit, reset } = useForm<IServicio>()
+export function EditServicioForm({
+  item,
+  onSuccess,
+}: {
+  item: IServicio
+  onSuccess?: () => void
+}) {
+  const { register, handleSubmit } = useForm<IServicio>({ defaultValues: item })
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -28,12 +31,13 @@ export function NewServicioForm({
     setLoading(true)
     setMessage(null)
     try {
-      await insertServicio(data)
-      setMessage({ type: 'success', text: '✓ Servicio insertado correctamente' })
-      reset()
+      await updateServicio(item.servicio_id, data)
+      setMessage({ type: 'success', text: 'Servicio actualizado correctamente' })
       setTimeout(() => setMessage(null), 5000)
+      onSuccess?.()
     } catch (error) {
-      setMessage({ type: 'error', text: '✗ Error al insertar el servicio.' })
+      setMessage({ type: 'error', text: 'Error al actualizar el servicio.' })
+      setTimeout(() => setMessage(null), 5000)
       console.error(error)
     } finally {
       setLoading(false)
@@ -41,24 +45,23 @@ export function NewServicioForm({
   }
 
   return (
-    <div className={cn("flex w-full flex-col gap-6 items-center", className)} {...props}>
+    <div className={cn("flex w-full flex-col gap-6 items-center")}>
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Insertar Nuevo Servicio</h1>
+        <h1 className="text-2xl font-bold">Editar Servicio</h1>
         <p className="text-balance text-muted-foreground">
-          Completa el formulario con la información del servicio.
+          Modifica los datos del servicio seleccionado.
         </p>
       </div>
 
-      {message && (
-        <div className={`w-full max-w-2xl p-4 rounded-lg text-center font-semibold ${
-          message.type === 'success'
-            ? 'bg-green-100 text-green-800 border border-green-300'
-            : 'bg-red-100 text-red-800 border border-red-300'
-        }`}>
-          {message.text}
-        </div>
-      )}
-
+        {message && (
+          <div className={`p-4 rounded-lg text-center font-semibold ${
+            message.type === 'success'
+              ? 'bg-green-100 text-green-800 border border-green-300'
+              : 'bg-red-100 text-red-800 border border-red-300'
+          }`}>
+            {message.text}
+          </div>
+        )}
       <Card className="w-full max-w-2xl overflow-hidden p-0 transition-all hover:scale-[1.005] hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]">
         <form className="w-full p-4 sm:p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
           <CardContent className="p-0">
@@ -68,8 +71,8 @@ export function NewServicioForm({
                 <Input id="nombre" type="text" placeholder="Nombre del servicio" required {...register("nombre")} />
               </Field>
               <Field>
-                <FieldLabel htmlFor="descripcion">Descripción</FieldLabel>
-                <Input id="descripcion" type="text" placeholder="Descripción" required {...register("descripcion")} />
+                <FieldLabel htmlFor="descripcion">Descripcion</FieldLabel>
+                <Input id="descripcion" type="text" placeholder="Descripcion" required {...register("descripcion")} />
               </Field>
               <Field>
                 <FieldLabel htmlFor="tipo">Tipo</FieldLabel>
@@ -84,12 +87,12 @@ export function NewServicioForm({
                 <Input id="icono" type="text" placeholder="Nombre del icono" required {...register("icono")} />
               </Field>
               <Field>
-                <FieldLabel htmlFor="caracteristicas">Características (separadas por coma)</FieldLabel>
+                <FieldLabel htmlFor="caracteristicas">Caracteristicas (separadas por coma)</FieldLabel>
                 <Input id="caracteristicas" type="text" placeholder="caract1, caract2, caract3" {...register("caracteristicas")} />
               </Field>
               <Field>
                 <Button type="submit" disabled={loading} className="w-full sm:w-auto transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
-                  {loading ? 'Insertando...' : 'Insertar Servicio'}
+                  {loading ? 'Guardando...' : 'Guardar Cambios'}
                 </Button>
               </Field>
             </FieldGroup>
