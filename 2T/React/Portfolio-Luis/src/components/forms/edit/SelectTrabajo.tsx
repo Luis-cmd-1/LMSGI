@@ -29,7 +29,7 @@ export function SelectTrabajo({ className, ...props }: React.ComponentProps<"div
           <FieldGroup className="gap-4">
             <Field>
               <FieldLabel>Trabajo</FieldLabel>
-              <Select value={selectedId} onValueChange={setSelectedId}>
+              <Select value={selectedId} onValueChange={(value) => setSelectedId(value ?? "")}>
                 <SelectTrigger style={{ width: '100%' }}>
                   <SelectValue placeholder="Selecciona un trabajo para editar..." />
                 </SelectTrigger>

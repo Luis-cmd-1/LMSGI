@@ -73,7 +73,7 @@ export function DeleteFormacionForm({ className, ...props }: React.ComponentProp
           <FieldGroup className="gap-4">
             <Field>
               <FieldLabel>Formacion</FieldLabel>
-              <Select value={selectedId} onValueChange={setSelectedId}>
+              <Select value={selectedId} onValueChange={(value) => setSelectedId(value ?? "")}>
                 <SelectTrigger style={{ width: '100%' }}>
                   <SelectValue placeholder="Selecciona una formacion..." />
                 </SelectTrigger>

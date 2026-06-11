@@ -29,7 +29,7 @@ export function SelectServicio({ className, ...props }: React.ComponentProps<"di
           <FieldGroup className="gap-4">
             <Field>
               <FieldLabel>Servicio</FieldLabel>
-              <Select value={selectedId} onValueChange={setSelectedId}>
+              <Select value={selectedId} onValueChange={(value) => setSelectedId(value ?? "")}>
                 <SelectTrigger style={{ width: '100%' }}>
                   <SelectValue placeholder="Selecciona un servicio para editar..." />
                 </SelectTrigger>

@@ -72,7 +72,7 @@ export function DeleteServicioForm({ className, ...props }: React.ComponentProps
           <FieldGroup className="gap-4">
             <Field>
               <FieldLabel>Servicio</FieldLabel>
-              <Select value={selectedId} onValueChange={setSelectedId}>
+              <Select value={selectedId} onValueChange={(value) => setSelectedId(value ?? "")}>
                 <SelectTrigger style={{ width: '100%' }}>
                   <SelectValue placeholder="Selecciona un servicio..." />
                 </SelectTrigger>

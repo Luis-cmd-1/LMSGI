@@ -74,7 +74,7 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
           <FieldGroup className="gap-4">
             <Field>
               <FieldLabel>Curso</FieldLabel>
-              <Select value={selectedId} onValueChange={setSelectedId}>
+              <Select value={selectedId} onValueChange={(value) => setSelectedId(value ?? "")}>
                 <SelectTrigger style={{ width: '100%' }}>
                   <SelectValue placeholder="Selecciona un curso..." />
                 </SelectTrigger>

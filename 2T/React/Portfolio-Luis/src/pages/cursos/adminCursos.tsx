@@ -45,7 +45,7 @@ export default function AdminCursos() {
           </div>
         </section>
 
-        <Accordion type="single" collapsible className="space-y-4">
+        <Accordion className="space-y-4">
           <AccordionItem value="crear-curso" className="rounded-xl border bg-background shadow-sm transition-all hover:scale-[1.005] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]">
             <AccordionTrigger className="px-5 sm:px-6 py-5 sm:py-6 hover:no-underline">
               <div className="flex w-full gap-4 text-left">
