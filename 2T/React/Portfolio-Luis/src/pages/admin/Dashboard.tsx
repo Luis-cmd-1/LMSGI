@@ -81,7 +81,7 @@ export default function Dashboard() {
           <Tabs defaultValue="cursos">
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-lg font-semibold">Listado de contenido</h2>
-              <TabsList className="overflow-x-auto">
+              <TabsList>
                 {Object.entries(SECCIONES_TAB).map(([key, tab]) => (
                   <TabsTrigger key={key} value={key}>{tab.label}</TabsTrigger>
                 ))}
