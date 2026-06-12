@@ -13,6 +13,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { ICurso } from "@/model/interfaces/ICurso";
 import { insertCurso } from "@/model/api/backend/apiCursos"
 
@@ -30,7 +31,7 @@ export function NewCursoForm({
 }: React.ComponentProps<"div"> & { onSuccess?: () => void }) {
 
   
-  const { register, handleSubmit, reset } = useForm<ICurso>()
+  const { register, handleSubmit, reset, watch, setValue } = useForm<ICurso>()
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -131,6 +132,21 @@ export function NewCursoForm({
                   required
                   {...register("precio", { valueAsNumber: true })}
                 />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="estado">Estado</FieldLabel>
+                <Select value={watch("estado") ?? ""} onValueChange={(value) => setValue("estado", value ?? "")}>
+                  <SelectTrigger style={{ width: '100%' }}>
+                    <SelectValue placeholder="Selecciona un estado..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="En progreso">En progreso</SelectItem>
+                    <SelectItem value="Completado">Completado</SelectItem>
+                    <SelectItem value="Pendiente">Pendiente</SelectItem>
+                    <SelectItem value="Abandonado">Abandonado</SelectItem>
+                    <SelectItem value="Certificado">Certificado</SelectItem>
+                  </SelectContent>
+                </Select>
               </Field>
               <Field>
                 <Button type="submit" disabled={loading} className="w-full sm:w-auto transition-all hover:scale-[1.01] hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">

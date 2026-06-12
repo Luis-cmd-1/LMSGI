@@ -6,5 +6,5 @@ export interface ICurso {
     categoria:  string;
     academia:   string;
     precio:     number;
-    
+    estado:     string;
 }

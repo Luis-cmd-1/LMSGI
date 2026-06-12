@@ -55,7 +55,7 @@ export default function AdminCursos() {
                 <div className="flex-1">
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Alta de contenido</p>
                   <h2 className="mt-1 text-2xl font-semibold tracking-tight">Insertar curso</h2>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Anade un curso nuevo indicando titulo, categoria, academia y precio.</p>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Anade un curso nuevo indicando titulo, categoria, academia, estado y precio.</p>
                 </div>
               </div>
             </AccordionTrigger>

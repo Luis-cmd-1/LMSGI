@@ -14,7 +14,7 @@ export const CursoCard = ({ curso }: Props) => {
                 </span>
                 <span className="flex items-center gap-1.5 font-mono text-xs text-[#00c8ff]">
                     <span className="inline-block size-1.5 rounded-full bg-[#00c8ff] animate-pulse" />
-                    Activo
+                    {curso.estado}
                 </span>
             </div>
 

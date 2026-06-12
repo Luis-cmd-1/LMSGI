@@ -40,7 +40,7 @@ export function SelectCurso({ className, ...props }: React.ComponentProps<"div">
                     <SelectItem key={curso.curso_id} value={curso.curso_id}>
                       <div className="flex flex-col py-0.5">
                         <span className="font-medium">{curso.titulo}</span>
-                        <span className="text-xs text-muted-foreground">{curso.academia} — {curso.categoria} — {curso.precio}€</span>
+                        <span className="text-xs text-muted-foreground">{curso.academia} — {curso.categoria} — {curso.estado} — {curso.precio}€</span>
                       </div>
                     </SelectItem>
                   ))}

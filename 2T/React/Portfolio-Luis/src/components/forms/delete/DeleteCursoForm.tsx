@@ -83,7 +83,7 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
                     <SelectItem key={curso.curso_id} value={curso.curso_id}>
                       <div className="flex flex-col py-0.5">
                         <span className="font-medium">{curso.titulo}</span>
-                        <span className="text-xs text-muted-foreground">{curso.academia} — {curso.categoria} — {curso.precio}€</span>
+                        <span className="text-xs text-muted-foreground">{curso.academia} — {curso.categoria} — {curso.estado} — {curso.precio}€</span>
                       </div>
                     </SelectItem>
                   ))}
@@ -101,6 +101,8 @@ export function DeleteCursoForm({ className, ...props }: React.ComponentProps<"d
                   <span className="font-medium">{selected.categoria}</span>
                   <span className="text-muted-foreground">Academia</span>
                   <span className="font-medium">{selected.academia}</span>
+                  <span className="text-muted-foreground">Estado</span>
+                  <span className="font-medium">{selected.estado}</span>
                   <span className="text-muted-foreground">Precio</span>
                   <span className="font-medium">{selected.precio}€</span>
                 </div>

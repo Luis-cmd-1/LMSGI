@@ -25,7 +25,7 @@ const ACCIONES = [
 ]
 
 const SECCIONES_TAB = {
-  cursos: { label: "Cursos", api: getCursos, deleteApi: deleteCurso, EditFormComponent: EditCursoForm, InsertFormComponent: NewCursoForm, getId: (i: any) => i.curso_id, fields: ["titulo", "categoria", "academia", "precio"] },
+  cursos: { label: "Cursos", api: getCursos, deleteApi: deleteCurso, EditFormComponent: EditCursoForm, InsertFormComponent: NewCursoForm, getId: (i: any) => i.curso_id, fields: ["titulo", "categoria", "academia", "estado", "precio"] },
   formacion: { label: "Formación", api: getFormaciones, deleteApi: deleteFormacion, EditFormComponent: EditFormacionForm, InsertFormComponent: NewFormacionForm, getId: (i: any) => i.formacion_id, fields: ["titulo", "subtitulo", "descripcion", "centro", "estado", "fecha", "imagen", "categoria", "autor_nombre"] },
   servicios: { label: "Servicios", api: getServicios, deleteApi: deleteServicio, EditFormComponent: EditServicioForm, InsertFormComponent: NewServicioForm, getId: (i: any) => i.servicio_id, fields: ["nombre", "descripcion", "tipo", "precio", "caracteristicas", "icono"] },
   trabajos: { label: "Trabajos", api: getTrabajos, deleteApi: deleteTrabajo, EditFormComponent: EditTrabajoForm, InsertFormComponent: NewTrabajoForm, getId: (i: any) => i.trabajo_id, fields: ["titulo", "descripcion", "empresa", "fecha", "tecnologias", "enlace", "imagen"] },
